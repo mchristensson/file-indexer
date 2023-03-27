@@ -1,0 +1,38 @@
+# HOW-TO:
+#
+# docker compose  create
+# docker compose run -d uraxapp
+# docker compose stop uraxapp
+#
+services:
+  fileindexer:
+    build: ./urax-app
+    depends_on:
+      - cassandra
+    links:
+      - cassandra
+    ports:
+      - "8080:8080"
+    networks:
+      - fileindexer-network
+
+  uraxreverseproxy:
+    build: ./urax-reverse-proxy
+    networks:
+      - urax-network
+    ports:
+      - "8081:80"
+
+  cassandra:
+    image: cassandra:4.0.7
+      healthcheck:
+      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:  
+  uraxdbdata:
+
+networks:
+  fileindexer-network: {}
