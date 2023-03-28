@@ -12,10 +12,16 @@ public class LogicalFileData {
     @PrimaryKey
     private UUID id;
 
+    private String devicePath;
+
+    private UUID deviceId;
+
     private Map<String, String> properties;
 
-    public LogicalFileData(UUID id, Map<String, String> properties) {
+    public LogicalFileData(UUID id, UUID deviceId, String devicePath, Map<String, String> properties) {
         this.id = id;
+        this.deviceId = deviceId;
+        this.devicePath = devicePath;
         this.properties = properties;
     }
 
@@ -33,5 +39,13 @@ public class LogicalFileData {
 
     public void setProperties(Map<String, String> properties) {
         this.properties = properties;
+    }
+
+    public String getDevicePath() {
+        return devicePath;
+    }
+
+    public UUID getDeviceId() {
+        return deviceId;
     }
 }

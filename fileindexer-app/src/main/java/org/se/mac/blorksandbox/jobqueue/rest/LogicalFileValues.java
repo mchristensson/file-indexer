@@ -4,13 +4,30 @@ import java.util.List;
 
 public class LogicalFileValues {
 
-    private List<String> names;
+    private List<LogicalFileValue> names;
 
-    public List<String> getNames() {
+
+
+    public List<LogicalFileValue> getNames() {
         return names;
     }
 
-    public void setNames(List<String> names) {
+    public void setNames(List<LogicalFileValue> names) {
         this.names = names;
+    }
+
+    public void add(LogicalFileValue value) {
+        this.names.add(value);
+    }
+    public static class LogicalFileValue {
+        private String name;
+
+        public LogicalFileValue(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

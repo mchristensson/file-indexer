@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.UUID;
 
 public interface LogicalFileRepository extends CrudRepository<LogicalFileData, UUID> {
-    LogicalFileData findBySuffix(String suffix);
+
 }

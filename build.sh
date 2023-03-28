@@ -2,17 +2,20 @@
 echo "Taking down composition"
 docker compose down
 echo "Removing images..."
-docker image rm urax-uraxapp
-docker image rm urax-uraxdb
-docker image rm urax-reverseproxy
+docker image rm fileindexer-app
+docker image rm fileindexer-index
+docker image rm fileindexer-reverseproxy
 
-echo "Running script"
+echo "Running script that builds the fileindexer-app"
 CUR_DIR=$(pwd)
-pushd urax-app > /dev/null
-./gradlew assemble
-echo "Gradle assemble complete ..."
+echo "(1) In directory $(pwd)"
+pushd fileindexer-app > /dev/null
+echo "(2) In directory $(pwd)"
+mvn package
+echo "Mvn packaging complete ..."
+echo "(3) In directory $(pwd)"
 
 popd > /dev/null
 
 echo "Rebuild composition..."
-docker compose up --detach
+docker compose --verbose up --detach 

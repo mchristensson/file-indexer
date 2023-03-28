@@ -18,8 +18,8 @@ public class LogicalFileIndexService {
         return result;
     }
 
-    public void add(String path, Map<String, String> properties) {
-        LogicalFileData d = new LogicalFileData(UUID.randomUUID(), properties);
+    public void add(UUID deviceId, String devicePath, Map<String, String> properties) {
+        LogicalFileData d = new LogicalFileData(UUID.randomUUID(), deviceId, devicePath, properties);
         repository.save(d);
     }
 }

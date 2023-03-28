@@ -1,6 +1,7 @@
 package org.se.mac.blorksandbox.controller;
 
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
+import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
 import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
 import org.se.mac.blorksandbox.jobqueue.job.FileScannerJob;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api")
@@ -61,12 +65,20 @@ public class BlorkRestController {
     @GetMapping("scan/list")
     public LogicalFileValues listLogicalFiles() {
         logger.debug("Retrieving files from index...");
-        final List<String> names =
+        final LogicalFileValues result = new LogicalFileValues();
+        final List<LogicalFileValues.LogicalFileValue> names =
                 fileIndexService.getAll().stream()
                         .filter(Objects::nonNull)
-                        .map(f -> f.getProperties().getOrDefault("name", "namn saknas bland properties")).toList();
-        final LogicalFileValues result = new LogicalFileValues();
+                        .map(transformProperties()).collect(Collectors.toList());
         result.setNames(names);
         return result;
+    }
+
+    private static Function<LogicalFileData, LogicalFileValues.LogicalFileValue> transformProperties() {
+        return f -> {
+            String someProperty = f.getProperties().entrySet().stream()
+                    .filter(Objects::nonNull).findFirst().map(Map.Entry::getValue).orElse("saknas");
+            return new LogicalFileValues.LogicalFileValue(someProperty);
+        };
     }
 }

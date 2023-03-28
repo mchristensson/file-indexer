@@ -13,9 +13,8 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class ScannerService {
@@ -25,27 +24,40 @@ public class ScannerService {
     @Autowired
     private LogicalFileIndexService logicalFileIndexService;
 
-    public boolean scan(URI uri) throws InterruptedException {
-        logger.debug("Inside ScannerService - launching scan with URI {}", uri);
-        scanFolder(Paths.get(uri), true);
+    /**
+     * Performs meta-data extraction on a directory on a file-device
+     *
+     * @param uri URI targeting the device location to be analyzed
+     * @return true after successful scan
+     * @throws RuntimeException If invalid directory
+     */
+    public boolean scan(URI uri) {
+        UUID deviceId = UUID.randomUUID();
+        logger.debug("Inside ScannerService - launching scan with URI {}, deviceId={}", uri, deviceId);
+        Path path = Paths.get(uri);
+        if (!Files.isDirectory(path)) {
+            throw new RuntimeException("Not a directory");
+        }
+        scanFolder(deviceId, path, true);
         logger.debug("Inside ScannerService, completed.");
         return true;
     }
 
-    private void scanFolder(final Path path, final boolean recursive) {
+    /**
+     * Traverses through the files inside a directory and performs meta-data extraction
+     *
+     * @param deviceId  Unique identifier for the scanned device
+     * @param path      Path known to be a directory
+     * @param recursive Control flag whether to include sub-directories
+     */
+    private void scanFolder(UUID deviceId, final Path path, final boolean recursive) {
         try {
-            logger.debug("Scanning directory... [URI: '{}', recursive={}]", path, recursive);
-            logger.debug("Scanning directory... [file: '{}']", path.toFile().getAbsoluteFile());
-            if (!Files.isDirectory(path)) {
-                throw new IOException("Not a directory");
-            }
+            logger.debug("Scanning directory... [URI: '{}', recursive={}, deviceId='{}']", path, recursive, deviceId);
             Files.list(path).forEach(path1 -> {
                 if (Files.isDirectory(path1) && recursive) {
-                    logger.debug("Processing path (directory): {}", path1);
-                    scanFolder(path1, recursive);
+                    scanFolder(deviceId, path1, recursive);
                 } else {
-                    logger.debug("Processing path (file): {}", path1);
-                    scanFile(path1);
+                    scanFile(deviceId, path1);
                 }
             });
         } catch (IOException e) {
@@ -54,21 +66,23 @@ public class ScannerService {
         }
     }
 
-    private void scanFile(Path path)  {
+    /**
+     * Extracts meta-data from a single file
+     *
+     * @param deviceId Unique identifier for the scanned device
+     * @param path     path representing a file (not a directory/folder)
+     */
+    private void scanFile(UUID deviceId, Path path) {
         logger.debug("Scanning file... [URI: '{}']", path);
         DummyAnalyzerTask task = new DummyAnalyzerTask();
-        Map<String, String> data = null;
         try {
-            data = task.apply(path);
+            Map<String, String> data = task.apply(path);
+            logger.debug("Adding data to index... [properties={}]", data);
+            logicalFileIndexService.add(deviceId, path.toString(), data);
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);
             }
-        }
-
-        //Store the result in Index
-        if (Objects.nonNull(data)) {
-            logicalFileIndexService.add(path.toString(), data);
         }
     }
 

@@ -43,9 +43,9 @@ public class FileScannerJob implements QueuedJob {
                 }
                 service.scan(URI.create(path));
                 return QueuedJob.JOB_STATUS_DONE;
-            } catch (InterruptedException e) {
+            } catch (RuntimeException e) {
                 logger.error("Something went wrong", e);
-                throw new RejectedExecutionException("An error occurred when executing scanner task", e);
+                return QueuedJob.JOB_STATUS_ERROR;
             } finally {
                 logger.debug("Scanner job is all done!");
             }

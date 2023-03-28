@@ -1,0 +1,1 @@
+CREATE TABLE logicalfilerepository ( id UUID PRIMARY KEY, properties map<text,text> );
