@@ -18,6 +18,10 @@ import java.util.List;
 
 @Configuration
 public class CreateKeySpaces extends AbstractCassandraConfiguration implements BeanClassLoaderAware {
+    @Override
+    protected String getContactPoints() {
+        return "localhost";
+    }
 
     @Override
     public SchemaAction getSchemaAction() {

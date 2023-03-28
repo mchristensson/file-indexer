@@ -5806,3 +5806,905 @@ com.datastax.oss.driver.api.core.servererrors.InvalidQueryException: table logic
 2023-03-28 15:59:29,413 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
 2023-03-28 15:59:39,409 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
 2023-03-28 15:59:39,410 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 15:59:49,412 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 15:59:49,412 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 15:59:59,402 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 15:59:59,402 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:09,410 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:09,412 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:19,409 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:19,410 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:29,406 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:29,407 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:39,408 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:39,409 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:49,414 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:49,416 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:00:59,412 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:00:59,413 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:09,408 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:09,410 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:13,331 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|id: 0x0177e86f, L:/127.0.0.1:64583 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:13,331 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|id: 0x53d1935a, L:/127.0.0.1:64584 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:15,089 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|id: 0xd7b19a58, L:/127.0.0.1:64586 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:15,509 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|id: 0xc7162fd0, L:/127.0.0.1:64587 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:18,942 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|connecting...] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): failed to send request (io.netty.channel.StacklessClosedChannelException))
+2023-03-28 16:01:19,160 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|connecting...] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): failed to send request (io.netty.channel.StacklessClosedChannelException))
+2023-03-28 16:01:19,403 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:19,403 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:26,052 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|connecting...] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): failed to send request (io.netty.channel.StacklessClosedChannelException))
+2023-03-28 16:01:26,154 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|connecting...] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): failed to send request (io.netty.channel.StacklessClosedChannelException))
+2023-03-28 16:01:29,403 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:29,403 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:39,400 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:39,402 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:42,701 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|id: 0xd3cea93f, L:/127.0.0.1:64597 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:43,615 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|id: 0x62651e2a, L:/127.0.0.1:64598 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:01:49,406 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:49,408 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:01:59,410 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:01:59,411 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:02:09,401 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:02:09,402 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 5
+2023-03-28 16:02:15,031 WARN c.d.o.d.i.c.u.Loggers [s1-admin-0] [s1|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s1|id: 0x6c51749e, L:/127.0.0.1:64600 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=ee1f1ec6-66e6-409c-b862-957923e5913f}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:02:16,585 WARN c.d.o.d.i.c.u.Loggers [s0-admin-0] [s0|localhost/<unresolved>:9042]  Error while opening new channel (ConnectionInitException: [s0|id: 0xc10c6fd9, L:/127.0.0.1:64601 - R:localhost/127.0.0.1:9042] Protocol initialization request, step 1 (STARTUP {CQL_VERSION=3.0.0, DRIVER_NAME=DataStax Java driver for Apache Cassandra(R), DRIVER_VERSION=4.15.0, CLIENT_ID=fa42c138-5d27-4283-8c21-ee7aefc5def7}): unexpected failure (com.datastax.oss.driver.api.core.connection.ClosedConnectionException: Lost connection to remote peer))
+2023-03-28 16:02:16,955 WARN o.s.b.f.s.DisposableBeanAdapter [SpringApplicationShutdownHook] Invocation of destroy method failed on bean with name 'cassandraSessionFactory': org.springframework.data.cassandra.core.cql.session.init.ScriptStatementFailedException: Failed to execute CQL script statement #1 of class path resource [org/se/mac/fileindexer/schema/drop-create-schema.cql]: DROP TABLE logicalfilerepository
+2023-03-28 16:02:16,956 INFO o.s.d.c.c.CqlSessionFactoryBean [SpringApplicationShutdownHook] Executing CQL [DROP KEYSPACE fileindexer_cassandra;]
+2023-03-28 16:02:16,957 WARN o.s.b.f.s.DisposableBeanAdapter [SpringApplicationShutdownHook] Invocation of destroy method failed on bean with name 'cassandraSession': com.datastax.oss.driver.api.core.NoNodeAvailableException: No node was available to execute the query
+2023-03-28 16:12:26,702 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 13596 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:12:26,704 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:12:26,705 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:12:27,493 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 1.037 seconds (process running for 2.184)
+2023-03-28 16:12:27,664 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 13596 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:12:27,664 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:12:27,664 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:12:27,721 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.116 seconds (process running for 2.413)
+2023-03-28 16:12:27,795 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=74e255d1-e126-40b0-a650-2928939f8631
+2023-03-28 16:12:27,803 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=646f20e1-11de-499a-a7b7-36a5311b62d3
+2023-03-28 16:12:27,807 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=42c3a845-b61b-4607-b13b-97a8e02848ee
+2023-03-28 16:12:27,812 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=2db5ed58-e9cd-40ee-8dc7-ac7e8497105c
+2023-03-28 16:12:27,813 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='2db5ed58-e9cd-40ee-8dc7-ac7e8497105c']
+2023-03-28 16:12:27,814 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='2db5ed58-e9cd-40ee-8dc7-ac7e8497105c']
+2023-03-28 16:12:27,815 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:12:27,853 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:12:27,857 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:12:27,857 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:12:27,858 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:12:27,860 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:12:27,861 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:12:27,862 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='2db5ed58-e9cd-40ee-8dc7-ac7e8497105c']
+2023-03-28 16:12:27,862 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:12:27,863 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:12:27,864 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='2db5ed58-e9cd-40ee-8dc7-ac7e8497105c']
+2023-03-28 16:12:27,864 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:12:27,905 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:12:27,905 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:12:27,913 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=7413dff8-b5fd-4a37-a17c-ea5f73be5aaa
+2023-03-28 16:12:27,918 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=45b525fd-a63d-418e-8f71-cf091e2259c5
+2023-03-28 16:12:27,919 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='45b525fd-a63d-418e-8f71-cf091e2259c5']
+2023-03-28 16:12:27,919 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:12:27,920 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:12:27,921 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:13:51,148 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 19688 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:13:51,151 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:13:51,152 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:13:51,785 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.894 seconds (process running for 1.89)
+2023-03-28 16:13:51,924 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 19688 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:13:51,924 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:13:51,925 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:13:51,974 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.095 seconds (process running for 2.078)
+2023-03-28 16:13:52,027 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=c8f39d9d-9057-4df7-a4c9-b04eb254277e
+2023-03-28 16:13:52,034 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=a99c7998-d4cd-403b-b409-e66d033f45e8
+2023-03-28 16:13:52,038 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=6ce83231-a406-4f0d-a229-d5a606cb1d71
+2023-03-28 16:13:52,043 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=302854ac-0fd1-41ea-854c-d5f7c50a6f73
+2023-03-28 16:13:52,044 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='302854ac-0fd1-41ea-854c-d5f7c50a6f73']
+2023-03-28 16:13:52,046 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='302854ac-0fd1-41ea-854c-d5f7c50a6f73']
+2023-03-28 16:13:52,046 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:13:52,084 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:13:52,086 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:13:52,087 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:13:52,089 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:13:52,089 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:13:52,092 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:13:52,092 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='302854ac-0fd1-41ea-854c-d5f7c50a6f73']
+2023-03-28 16:13:52,093 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:13:52,094 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:13:52,094 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='302854ac-0fd1-41ea-854c-d5f7c50a6f73']
+2023-03-28 16:13:52,095 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:13:52,122 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:13:52,123 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:13:52,129 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=f71283e0-bd9a-4810-8fc7-a72929694971
+2023-03-28 16:13:52,134 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=962a8b3a-d715-4e29-9524-cd07ba43971e
+2023-03-28 16:13:52,135 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='962a8b3a-d715-4e29-9524-cd07ba43971e']
+2023-03-28 16:13:52,135 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:13:52,137 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:13:52,137 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:15:30,624 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 12584 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:15:30,626 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:15:30,627 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:15:31,332 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.979 seconds (process running for 2.041)
+2023-03-28 16:15:31,472 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 12584 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:15:31,473 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:15:31,473 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:15:31,521 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.097 seconds (process running for 2.229)
+2023-03-28 16:15:31,578 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=c9503aa5-eeba-4986-9647-a984db8b9d2a
+2023-03-28 16:15:31,588 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=d18ddb4f-2ecc-4241-b139-2414bb062536
+2023-03-28 16:15:31,595 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=37ff969a-9593-4891-b3bc-3b03e2251439
+2023-03-28 16:15:31,600 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=a8727b90-9f92-4a2e-9d73-46cd96131e82
+2023-03-28 16:15:31,601 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='a8727b90-9f92-4a2e-9d73-46cd96131e82']
+2023-03-28 16:15:31,604 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='a8727b90-9f92-4a2e-9d73-46cd96131e82']
+2023-03-28 16:15:31,605 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:15:31,648 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:15:31,651 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:15:31,652 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:15:31,654 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:15:31,655 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:15:31,657 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:15:31,657 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='a8727b90-9f92-4a2e-9d73-46cd96131e82']
+2023-03-28 16:15:31,658 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:15:31,659 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:15:31,660 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='a8727b90-9f92-4a2e-9d73-46cd96131e82']
+2023-03-28 16:15:31,660 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:15:31,688 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:15:31,689 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:15:31,695 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=7fbf9f6d-c884-4588-9c12-4a4b7bd0f357
+2023-03-28 16:15:31,699 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=d2f1a395-7e70-43b7-a183-46da9a957f3b
+2023-03-28 16:15:31,700 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='d2f1a395-7e70-43b7-a183-46da9a957f3b']
+2023-03-28 16:15:31,701 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:15:31,702 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:15:31,702 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:15:45,169 INFO o.s.b.StartupInfoLogger [main] Starting BlorksandboxApplication using Java 19.0.2 with PID 19380 (C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\target\classes started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:15:45,172 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:15:45,173 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:15:45,743 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2023-03-28 16:15:45,775 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 28 ms. Found 0 Reactive Cassandra repository interfaces.
+2023-03-28 16:15:45,780 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2023-03-28 16:15:45,802 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 21 ms. Found 1 Cassandra repository interfaces.
+2023-03-28 16:15:47,618 INFO o.s.d.c.c.CqlSessionFactoryBean [main] Executing CQL [CREATE KEYSPACE fileindexer_cassandra WITH durable_writes = true AND replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };]
+2023-03-28 16:15:51,763 DEBUG o.s.m.b.j.QueueService [main] Init cleanup activity...
+2023-03-28 16:15:52,335 INFO o.s.b.StartupInfoLogger [main] Started BlorksandboxApplication in 7.574 seconds (process running for 8.282)
+2023-03-28 16:15:56,775 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:15:56,776 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 0
+2023-03-28 16:16:06,773 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:16:06,774 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 0
+2023-03-28 16:16:07,849 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-4] Retrieving files from index...
+2023-03-28 16:16:14,990 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-5] Enqueuing job...
+2023-03-28 16:16:15,667 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-6] Enqueuing job...
+2023-03-28 16:16:16,212 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-7] Enqueuing job...
+2023-03-28 16:16:16,764 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:16:16,765 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 3
+2023-03-28 16:16:18,347 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-8] Retrieving files from index...
+2023-03-28 16:16:20,000 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=f59265b0-b5f5-4368-9f8a-d0cc1b101959
+2023-03-28 16:16:20,001 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='f59265b0-b5f5-4368-9f8a-d0cc1b101959']
+2023-03-28 16:16:20,004 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='f59265b0-b5f5-4368-9f8a-d0cc1b101959']
+2023-03-28 16:16:20,004 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='f59265b0-b5f5-4368-9f8a-d0cc1b101959']
+2023-03-28 16:16:20,005 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:16:20,083 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:16:20,121 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:16:20,122 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:16:20,127 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:16:20,129 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:16:20,135 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:16:20,136 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:16:20,137 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Scanner job is all done!
+2023-03-28 16:16:20,464 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-9] Retrieving files from index...
+2023-03-28 16:16:20,671 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=aee7385f-5b95-4bbd-804f-1e293de891a3
+2023-03-28 16:16:20,672 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='aee7385f-5b95-4bbd-804f-1e293de891a3']
+2023-03-28 16:16:20,672 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='aee7385f-5b95-4bbd-804f-1e293de891a3']
+2023-03-28 16:16:20,673 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='aee7385f-5b95-4bbd-804f-1e293de891a3']
+2023-03-28 16:16:20,673 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:16:20,676 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:16:20,687 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:16:20,689 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:16:20,700 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:16:20,701 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:16:20,710 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:16:20,711 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:16:20,711 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Scanner job is all done!
+2023-03-28 16:16:21,212 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=9304474e-c92b-45c6-9710-71fa0a0eb13e
+2023-03-28 16:16:21,212 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='9304474e-c92b-45c6-9710-71fa0a0eb13e']
+2023-03-28 16:16:21,213 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='9304474e-c92b-45c6-9710-71fa0a0eb13e']
+2023-03-28 16:16:21,213 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='9304474e-c92b-45c6-9710-71fa0a0eb13e']
+2023-03-28 16:16:21,214 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:16:21,215 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:16:21,222 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:16:21,223 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:16:21,230 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:16:21,231 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:16:21,236 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:16:21,237 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:16:21,237 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Scanner job is all done!
+2023-03-28 16:16:26,764 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:16:26,764 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 3
+2023-03-28 16:16:36,751 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:16:36,752 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 3
+2023-03-28 16:16:40,707 INFO o.s.d.c.c.CqlSessionFactoryBean [SpringApplicationShutdownHook] Executing CQL [DROP KEYSPACE fileindexer_cassandra;]
+2023-03-28 16:17:12,858 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 10456 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:17:12,861 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:17:12,862 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:17:13,484 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.9 seconds (process running for 1.994)
+2023-03-28 16:17:13,625 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 10456 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:17:13,626 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:17:13,627 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:17:13,671 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.089 seconds (process running for 2.182)
+2023-03-28 16:17:13,724 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=690b2227-742d-4e90-86f1-e110c8c930de
+2023-03-28 16:17:13,731 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=05a132a6-8b6d-4161-92e5-dc1864fb715a
+2023-03-28 16:17:13,736 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=2bf06f8c-aa81-48ad-a60c-117bb412b9cc
+2023-03-28 16:17:13,742 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=19ae1f6c-de6e-4e19-be9a-676b6378ee36
+2023-03-28 16:17:13,743 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='19ae1f6c-de6e-4e19-be9a-676b6378ee36']
+2023-03-28 16:17:13,744 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='19ae1f6c-de6e-4e19-be9a-676b6378ee36']
+2023-03-28 16:17:13,745 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:17:13,784 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:17:13,787 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:17:13,788 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:17:13,789 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:17:13,790 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:17:13,792 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:17:13,793 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='19ae1f6c-de6e-4e19-be9a-676b6378ee36']
+2023-03-28 16:17:13,794 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:17:13,795 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:17:13,796 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='19ae1f6c-de6e-4e19-be9a-676b6378ee36']
+2023-03-28 16:17:13,796 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:17:13,830 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:17:13,831 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:17:13,839 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=f9505885-af23-4b66-b033-3826c2f6e79b
+2023-03-28 16:17:13,846 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=0eb34081-3a0e-49d5-bec4-28b9c6a6f69f
+2023-03-28 16:17:13,847 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='0eb34081-3a0e-49d5-bec4-28b9c6a6f69f']
+2023-03-28 16:17:13,847 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:17:13,849 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:17:13,849 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:29:10,506 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 20088 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:29:10,508 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:29:10,509 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:29:11,192 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.935 seconds (process running for 1.931)
+2023-03-28 16:29:11,320 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 20088 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:29:11,320 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:29:11,321 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:29:11,358 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.078 seconds (process running for 2.097)
+2023-03-28 16:29:11,410 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=2005762d-03d7-48b5-8e2a-371031fbe304
+2023-03-28 16:29:11,416 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=b51ca4ba-2b95-4631-b358-ce9b08160882
+2023-03-28 16:29:11,422 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=ada44030-760d-4f4b-b4c5-82477e45b7b7
+2023-03-28 16:29:11,426 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=953e76c5-2525-4c03-bd26-acee9181305b
+2023-03-28 16:29:11,426 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='953e76c5-2525-4c03-bd26-acee9181305b']
+2023-03-28 16:29:11,428 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='953e76c5-2525-4c03-bd26-acee9181305b']
+2023-03-28 16:29:11,428 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:29:11,462 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:29:11,465 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:29:11,466 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:29:11,467 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:29:11,467 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:29:11,469 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:29:11,470 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='953e76c5-2525-4c03-bd26-acee9181305b']
+2023-03-28 16:29:11,471 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:29:11,471 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:29:11,472 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='953e76c5-2525-4c03-bd26-acee9181305b']
+2023-03-28 16:29:11,472 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:29:11,500 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:29:11,501 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:29:11,507 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=89bcb60b-d83e-4305-9d21-bd9780ec0933
+2023-03-28 16:29:11,511 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=78a9cec9-9960-40d6-89a2-536beff43424
+2023-03-28 16:29:11,512 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='78a9cec9-9960-40d6-89a2-536beff43424']
+2023-03-28 16:29:11,512 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:29:11,513 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:29:11,514 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:45:59,824 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 11200 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:45:59,826 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:45:59,827 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:46:00,491 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.906 seconds (process running for 1.971)
+2023-03-28 16:46:00,625 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 11200 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:46:00,626 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:46:00,627 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:46:00,672 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.086 seconds (process running for 2.152)
+2023-03-28 16:46:00,725 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=5749639f-5be8-4c2d-8962-f89c39ef2ca5
+2023-03-28 16:46:00,734 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=d1477c31-31cb-4de7-af56-63924c08a826
+2023-03-28 16:46:00,737 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=62ae8181-beb4-4959-9811-6aa624c0767f
+2023-03-28 16:46:00,741 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=d5a083ad-d0ac-41f4-b221-c80565597b8d
+2023-03-28 16:46:00,741 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='d5a083ad-d0ac-41f4-b221-c80565597b8d']
+2023-03-28 16:46:00,743 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='d5a083ad-d0ac-41f4-b221-c80565597b8d']
+2023-03-28 16:46:00,743 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:46:00,779 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:46:00,783 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:46:00,784 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:46:00,785 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:46:00,786 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:46:00,789 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:46:00,789 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='d5a083ad-d0ac-41f4-b221-c80565597b8d']
+2023-03-28 16:46:00,790 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:46:00,790 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:46:00,791 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='d5a083ad-d0ac-41f4-b221-c80565597b8d']
+2023-03-28 16:46:00,792 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:46:00,819 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:46:00,819 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:46:00,824 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=63582572-bf56-4066-adce-42c58856e94f
+2023-03-28 16:46:00,829 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=2d3d8c4e-7c4c-42af-abd3-5ff151896f46
+2023-03-28 16:46:00,830 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='2d3d8c4e-7c4c-42af-abd3-5ff151896f46']
+2023-03-28 16:46:00,830 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:46:00,831 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:46:00,832 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:48:58,563 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 17804 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:48:58,567 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:48:58,568 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:48:59,253 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.997 seconds (process running for 2.008)
+2023-03-28 16:48:59,400 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 17804 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:48:59,401 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:48:59,401 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:48:59,448 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.092 seconds (process running for 2.202)
+2023-03-28 16:48:59,501 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=627a1703-bb50-4151-95cb-967ceb31412e
+2023-03-28 16:48:59,508 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=00b6e531-f533-410f-970c-3eb708300787
+2023-03-28 16:48:59,513 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=193ad659-04b9-4b7c-9ecd-28d3aa5ff239
+2023-03-28 16:48:59,517 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=56c4364e-10e8-4411-8f10-d181d2f6f999
+2023-03-28 16:48:59,518 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='56c4364e-10e8-4411-8f10-d181d2f6f999']
+2023-03-28 16:48:59,520 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='56c4364e-10e8-4411-8f10-d181d2f6f999']
+2023-03-28 16:48:59,521 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:48:59,565 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:48:59,569 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:48:59,570 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:48:59,572 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:48:59,573 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:48:59,575 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:48:59,576 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='56c4364e-10e8-4411-8f10-d181d2f6f999']
+2023-03-28 16:48:59,577 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:48:59,578 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:48:59,579 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='56c4364e-10e8-4411-8f10-d181d2f6f999']
+2023-03-28 16:48:59,579 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:48:59,610 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:48:59,611 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:48:59,617 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=876fc7cd-24a9-46d2-8564-53aff4faf1c1
+2023-03-28 16:48:59,624 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=e2df9413-2157-4a4c-b9fe-541c5517d23e
+2023-03-28 16:48:59,624 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='e2df9413-2157-4a4c-b9fe-541c5517d23e']
+2023-03-28 16:48:59,625 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:48:59,626 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:48:59,627 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:50:18,498 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 9844 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:50:18,501 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:50:18,503 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:50:19,171 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.905 seconds (process running for 1.973)
+2023-03-28 16:50:19,298 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 9844 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:50:19,299 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:50:19,299 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:50:19,344 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.086 seconds (process running for 2.147)
+2023-03-28 16:50:19,401 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=76a807f3-66b4-451f-919c-bd4a726f2040
+2023-03-28 16:50:19,407 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=0610aeed-bcc6-4f20-b0ba-75bd7750ff51
+2023-03-28 16:50:19,411 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=8268c51c-8a07-4873-ab83-b25c9ffdfae5
+2023-03-28 16:50:19,414 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=efc10f0a-0d24-4eaf-8d84-a0a2f867f56f
+2023-03-28 16:50:19,415 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='efc10f0a-0d24-4eaf-8d84-a0a2f867f56f']
+2023-03-28 16:50:19,416 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='efc10f0a-0d24-4eaf-8d84-a0a2f867f56f']
+2023-03-28 16:50:19,417 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 16:50:19,454 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:50:19,456 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 16:50:19,457 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 16:50:19,459 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:50:19,459 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 16:50:19,461 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:50:19,461 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='efc10f0a-0d24-4eaf-8d84-a0a2f867f56f']
+2023-03-28 16:50:19,462 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:50:19,462 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:50:19,463 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='efc10f0a-0d24-4eaf-8d84-a0a2f867f56f']
+2023-03-28 16:50:19,463 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 16:50:19,492 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 16:50:19,493 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:50:19,500 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=768f2a59-166c-4aa7-9d40-e007f3038c55
+2023-03-28 16:50:19,507 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=865a6fe9-0476-4184-b6b0-d4fdceecb545
+2023-03-28 16:50:19,508 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='865a6fe9-0476-4184-b6b0-d4fdceecb545']
+2023-03-28 16:50:19,509 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 16:50:19,510 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:50:19,511 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 16:54:38,202 INFO o.s.b.StartupInfoLogger [main] Starting BlorksandboxApplication using Java 19.0.2 with PID 7636 (C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\target\classes started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:54:38,204 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:54:38,205 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:54:38,887 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2023-03-28 16:54:38,924 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 32 ms. Found 0 Reactive Cassandra repository interfaces.
+2023-03-28 16:54:38,928 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2023-03-28 16:54:38,949 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 20 ms. Found 1 Cassandra repository interfaces.
+2023-03-28 16:54:41,449 WARN c.d.o.d.i.c.u.Loggers [s0-admin-1] [s0] Error connecting to Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00), trying next node (UnknownHostException: No such host is known (fileindexerindex))
+2023-03-28 16:54:43,553 WARN o.s.c.s.AbstractApplicationContext [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'logicalFileIndexService': Unsatisfied dependency expressed through field 'repository': Error creating bean with name 'logicalFileRepository' defined in org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository defined in @EnableCassandraRepositories declared on CassandraRepositoriesRegistrar.EnableCassandraRepositoriesConfiguration: Cannot resolve reference to bean 'cassandraTemplate' while setting bean property 'cassandraTemplate'
+2023-03-28 16:54:43,589 ERROR o.s.b.SpringApplication [main] Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'logicalFileIndexService': Unsatisfied dependency expressed through field 'repository': Error creating bean with name 'logicalFileRepository' defined in org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository defined in @EnableCassandraRepositories declared on CassandraRepositoriesRegistrar.EnableCassandraRepositoriesConfiguration: Cannot resolve reference to bean 'cassandraTemplate' while setting bean property 'cassandraTemplate'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:133)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:482)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1416)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:917)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
+	at org.se.mac.blorksandbox.BlorksandboxApplication.main(BlorksandboxApplication.java:10)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'logicalFileRepository' defined in org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository defined in @EnableCassandraRepositories declared on CassandraRepositoriesRegistrar.EnableCassandraRepositoriesConfiguration: Cannot resolve reference to bean 'cassandraTemplate' while setting bean property 'cassandraTemplate'
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1682)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710)
+	... 20 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cassandraTemplate' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Failed to instantiate [org.springframework.data.cassandra.core.CassandraAdminTemplate]: Factory method 'cassandraTemplate' threw exception with message: Error creating bean with name 'cassandraSessionFactory' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Unsatisfied dependency expressed through method 'cassandraSessionFactory' parameter 0: Error creating bean with name 'cassandraSession' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Could not reach any contact point, make sure you've provided valid addresses (showing first 1 nodes, use getAllErrors() for more): Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00): [java.net.UnknownHostException: No such host is known (fileindexerindex)]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:491)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365)
+	... 33 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.data.cassandra.core.CassandraAdminTemplate]: Factory method 'cassandraTemplate' threw exception with message: Error creating bean with name 'cassandraSessionFactory' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Unsatisfied dependency expressed through method 'cassandraSessionFactory' parameter 0: Error creating bean with name 'cassandraSession' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Could not reach any contact point, make sure you've provided valid addresses (showing first 1 nodes, use getAllErrors() for more): Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00): [java.net.UnknownHostException: No such host is known (fileindexerindex)]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 43 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cassandraSessionFactory' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Unsatisfied dependency expressed through method 'cassandraSessionFactory' parameter 0: Error creating bean with name 'cassandraSession' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Could not reach any contact point, make sure you've provided valid addresses (showing first 1 nodes, use getAllErrors() for more): Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00): [java.net.UnknownHostException: No such host is known (fileindexerindex)]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:548)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1310)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1271)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:332)
+	at org.springframework.data.cassandra.config.AbstractSessionConfiguration.requireBeanOfType(AbstractSessionConfiguration.java:103)
+	at org.springframework.data.cassandra.config.AbstractCassandraConfiguration.getRequiredSessionFactory(AbstractCassandraConfiguration.java:245)
+	at org.springframework.data.cassandra.config.AbstractCassandraConfiguration.cassandraTemplate(AbstractCassandraConfiguration.java:171)
+	at org.se.mac.blorksandbox.analyzer.CreateKeySpaces$$SpringCGLIB$$0.CGLIB$cassandraTemplate$10(<generated>)
+	at org.se.mac.blorksandbox.analyzer.CreateKeySpaces$$SpringCGLIB$$1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at org.se.mac.blorksandbox.analyzer.CreateKeySpaces$$SpringCGLIB$$0.cassandraTemplate(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	... 44 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cassandraSession' defined in class path resource [org/se/mac/blorksandbox/analyzer/CreateKeySpaces.class]: Could not reach any contact point, make sure you've provided valid addresses (showing first 1 nodes, use getAllErrors() for more): Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00): [java.net.UnknownHostException: No such host is known (fileindexerindex)]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789)
+	... 69 common frames omitted
+Caused by: com.datastax.oss.driver.api.core.AllNodesFailedException: Could not reach any contact point, make sure you've provided valid addresses (showing first 1 nodes, use getAllErrors() for more): Node(endPoint=fileindexerindex/<unresolved>:9042, hostId=null, hashCode=5258bc00): [java.net.UnknownHostException: No such host is known (fileindexerindex)]
+	at com.datastax.oss.driver.api.core.AllNodesFailedException.copy(AllNodesFailedException.java:141)
+	at com.datastax.oss.driver.internal.core.util.concurrent.CompletableFutures.getUninterruptibly(CompletableFutures.java:149)
+	at com.datastax.oss.driver.api.core.session.SessionBuilder.build(SessionBuilder.java:835)
+	at org.springframework.data.cassandra.config.CqlSessionFactoryBean.buildSystemSession(CqlSessionFactoryBean.java:535)
+	at org.springframework.data.cassandra.config.CqlSessionFactoryBean.afterPropertiesSet(CqlSessionFactoryBean.java:469)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 80 common frames omitted
+	Suppressed: java.net.UnknownHostException: No such host is known (fileindexerindex)
+		at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+		at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52)
+		at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1059)
+		at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1673)
+		at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1003)
+		at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1663)
+		at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1528)
+		at java.base/java.net.InetAddress.getByName(InetAddress.java:1413)
+		at io.netty.util.internal.SocketUtils$8.run(SocketUtils.java:156)
+		at io.netty.util.internal.SocketUtils$8.run(SocketUtils.java:153)
+		at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+		at io.netty.util.internal.SocketUtils.addressByName(SocketUtils.java:153)
+		at io.netty.resolver.DefaultNameResolver.doResolve(DefaultNameResolver.java:41)
+		at io.netty.resolver.SimpleNameResolver.resolve(SimpleNameResolver.java:61)
+		at io.netty.resolver.SimpleNameResolver.resolve(SimpleNameResolver.java:53)
+		at io.netty.resolver.InetSocketAddressResolver.doResolve(InetSocketAddressResolver.java:55)
+		at io.netty.resolver.InetSocketAddressResolver.doResolve(InetSocketAddressResolver.java:31)
+		at io.netty.resolver.AbstractAddressResolver.resolve(AbstractAddressResolver.java:106)
+		at io.netty.bootstrap.Bootstrap.doResolveAndConnect0(Bootstrap.java:206)
+		at io.netty.bootstrap.Bootstrap.access$000(Bootstrap.java:46)
+		at io.netty.bootstrap.Bootstrap$1.operationComplete(Bootstrap.java:180)
+		at io.netty.bootstrap.Bootstrap$1.operationComplete(Bootstrap.java:166)
+		at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+		at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:557)
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+		at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+		at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+		at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+		at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe.safeSetSuccess(AbstractChannel.java:990)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:516)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:429)
+		at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:486)
+		at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:174)
+		at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:167)
+		at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:1589)
+2023-03-28 16:55:27,668 INFO o.s.b.StartupInfoLogger [main] Starting BlorksandboxApplication using Java 19.0.2 with PID 8208 (C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\target\classes started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 16:55:27,670 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 16:55:27,671 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 16:55:28,397 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2023-03-28 16:55:28,434 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 31 ms. Found 0 Reactive Cassandra repository interfaces.
+2023-03-28 16:55:28,438 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2023-03-28 16:55:28,461 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 22 ms. Found 1 Cassandra repository interfaces.
+2023-03-28 16:55:30,262 INFO o.s.d.c.c.CqlSessionFactoryBean [main] Executing CQL [CREATE KEYSPACE fileindexer_cassandra WITH durable_writes = true AND replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };]
+2023-03-28 16:55:34,387 DEBUG o.s.m.b.j.QueueService [main] Init cleanup activity...
+2023-03-28 16:55:34,924 INFO o.s.b.StartupInfoLogger [main] Started BlorksandboxApplication in 7.823 seconds (process running for 8.51)
+2023-03-28 16:55:39,392 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:55:39,397 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 0
+2023-03-28 16:55:49,390 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:55:49,391 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 0
+2023-03-28 16:55:52,172 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-4] Retrieving files from index...
+2023-03-28 16:55:55,387 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-5] Enqueuing job...
+2023-03-28 16:55:55,926 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-6] Enqueuing job...
+2023-03-28 16:55:56,386 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-7] Enqueuing job...
+2023-03-28 16:55:56,791 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-9] Enqueuing job...
+2023-03-28 16:55:58,909 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-8] Retrieving files from index...
+2023-03-28 16:55:59,389 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Executing cleanup job...
+2023-03-28 16:55:59,391 INFO o.s.m.b.j.QueueService [pool-1-thread-1] Cleaned up 0 of 4
+2023-03-28 16:56:00,185 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-10] Retrieving files from index...
+2023-03-28 16:56:00,400 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=317a8736-726c-4bab-8269-8fc906fb11ca
+2023-03-28 16:56:00,400 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='317a8736-726c-4bab-8269-8fc906fb11ca']
+2023-03-28 16:56:00,402 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='317a8736-726c-4bab-8269-8fc906fb11ca']
+2023-03-28 16:56:00,402 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='317a8736-726c-4bab-8269-8fc906fb11ca']
+2023-03-28 16:56:00,402 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:56:00,457 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:56:00,510 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:56:00,511 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:56:00,517 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:56:00,518 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:56:00,523 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:56:00,523 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:56:00,525 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Scanner job is all done!
+2023-03-28 16:56:00,870 DEBUG o.s.m.b.c.BlorkRestController [http-nio-8080-exec-1] Retrieving files from index...
+2023-03-28 16:56:00,928 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=7ce39846-f8f0-49f2-8822-55371877d036
+2023-03-28 16:56:00,929 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='7ce39846-f8f0-49f2-8822-55371877d036']
+2023-03-28 16:56:00,930 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='7ce39846-f8f0-49f2-8822-55371877d036']
+2023-03-28 16:56:00,930 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='7ce39846-f8f0-49f2-8822-55371877d036']
+2023-03-28 16:56:00,930 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:56:00,932 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:56:00,942 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:56:00,945 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:56:00,952 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:56:00,952 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:56:00,958 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:56:00,959 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:56:00,959 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Scanner job is all done!
+2023-03-28 16:56:01,393 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=bd740021-dab6-49d1-a34d-8106bbe3c0d4
+2023-03-28 16:56:01,395 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='bd740021-dab6-49d1-a34d-8106bbe3c0d4']
+2023-03-28 16:56:01,396 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='bd740021-dab6-49d1-a34d-8106bbe3c0d4']
+2023-03-28 16:56:01,398 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='bd740021-dab6-49d1-a34d-8106bbe3c0d4']
+2023-03-28 16:56:01,399 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:56:01,404 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:56:01,425 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:56:01,428 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:56:01,438 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:56:01,440 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:56:01,448 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-2] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:56:01,448 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:56:01,449 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-2] Scanner job is all done!
+2023-03-28 16:56:01,798 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Inside ScannerService - launching scan with URI file:///c:/temp, deviceId=80d4874d-f2df-472f-90c8-d0e391c51547
+2023-03-28 16:56:01,800 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp', recursive=true, deviceId='80d4874d-f2df-472f-90c8-d0e391c51547']
+2023-03-28 16:56:01,802 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins', recursive=true, deviceId='80d4874d-f2df-472f-90c8-d0e391c51547']
+2023-03-28 16:56:01,804 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning directory... [URI: 'c:\temp\plugins\temp_bilder', recursive=true, deviceId='80d4874d-f2df-472f-90c8-d0e391c51547']
+2023-03-28 16:56:01,805 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\nikon-e950.jpg']
+2023-03-28 16:56:01,810 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 16:56:01,827 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-d700.jpg']
+2023-03-28 16:56:01,829 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 16:56:01,838 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\temp_bilder\sony-powershota5.jpg']
+2023-03-28 16:56:01,839 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 16:56:01,846 DEBUG o.s.m.b.s.ScannerService [pool-1-thread-1] Scanning file... [URI: 'c:\temp\plugins\zone-patch-canvas']
+2023-03-28 16:56:01,847 ERROR o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Something went wrong
+java.lang.RuntimeException: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:84)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:60)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.lambda$scanFolder$0(ScannerService.java:58)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1921)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFolder(ScannerService.java:56)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scan(ScannerService.java:41)
+	at org.se.mac.blorksandbox.jobqueue.job.FileScannerJob.lambda$getTask$0(FileScannerJob.java:44)
+	at org.se.mac.blorksandbox.jobqueue.QueueService.lambda$enqueue$2(QueueService.java:57)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.FileNotFoundException: c:\temp\plugins\zone-patch-canvas (Access is denied)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:158)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaData(DummyAnalyzerTask.java:77)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.getMetaDataMap(DummyAnalyzerTask.java:43)
+	at org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask.apply(DummyAnalyzerTask.java:39)
+	at org.se.mac.blorksandbox.scanner.ScannerService.scanFile(ScannerService.java:79)
+	... 19 common frames omitted
+2023-03-28 16:56:01,847 DEBUG o.s.m.b.j.j.FileScannerJob [pool-1-thread-1] Scanner job is all done!
+2023-03-28 16:56:09,389 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Executing cleanup job...
+2023-03-28 16:56:09,390 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Cleaned up 0 of 4
+2023-03-28 16:56:19,389 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Executing cleanup job...
+2023-03-28 16:56:19,389 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Cleaned up 0 of 4
+2023-03-28 16:56:28,181 INFO o.s.d.c.c.CqlSessionFactoryBean [SpringApplicationShutdownHook] Executing CQL [DROP KEYSPACE fileindexer_cassandra;]
+2023-03-28 16:56:29,394 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Executing cleanup job...
+2023-03-28 16:56:29,395 INFO o.s.m.b.j.QueueService [pool-1-thread-2] Cleaned up 0 of 4
+2023-03-28 17:01:26,353 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 11512 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 17:01:26,356 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 17:01:26,357 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 17:01:26,997 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.883 seconds (process running for 1.896)
+2023-03-28 17:01:27,130 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 11512 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 17:01:27,130 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 17:01:27,131 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 17:01:27,195 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.112 seconds (process running for 2.094)
+2023-03-28 17:01:27,261 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=f04b7c23-ea47-4c5c-bae7-67d076a1183b
+2023-03-28 17:01:27,269 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=40697d49-8985-4b9b-a274-62e1f8fc0eb5
+2023-03-28 17:01:27,275 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=8bb359c7-9137-407c-8492-40a3cb7539ad
+2023-03-28 17:01:27,280 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=caa76f2e-d766-4ec1-8558-0be4fb33ed53
+2023-03-28 17:01:27,281 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='caa76f2e-d766-4ec1-8558-0be4fb33ed53']
+2023-03-28 17:01:27,283 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='caa76f2e-d766-4ec1-8558-0be4fb33ed53']
+2023-03-28 17:01:27,284 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 17:01:27,327 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 17:01:27,330 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 17:01:27,331 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 17:01:27,332 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 17:01:27,333 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 17:01:27,335 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:01:27,337 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='caa76f2e-d766-4ec1-8558-0be4fb33ed53']
+2023-03-28 17:01:27,338 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 17:01:27,339 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:01:27,340 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='caa76f2e-d766-4ec1-8558-0be4fb33ed53']
+2023-03-28 17:01:27,341 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 17:01:27,377 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 17:01:27,377 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 17:01:27,387 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=227bfc6d-4e7b-4e91-bc2e-c1fa9c74da27
+2023-03-28 17:01:27,391 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=9541a315-21c3-464f-9375-830af80c345e
+2023-03-28 17:01:27,392 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='9541a315-21c3-464f-9375-830af80c345e']
+2023-03-28 17:01:27,392 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 17:01:27,394 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:01:27,395 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 17:07:09,945 INFO o.s.b.StartupInfoLogger [main] Starting LogicalFileRepositoryTests using Java 19.0.2 with PID 13824 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 17:07:09,948 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 17:07:09,948 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 17:07:10,574 INFO o.s.b.StartupInfoLogger [main] Started LogicalFileRepositoryTests in 0.864 seconds (process running for 1.887)
+2023-03-28 17:07:10,710 INFO o.s.b.StartupInfoLogger [main] Starting ScannerServiceTest using Java 19.0.2 with PID 13824 (started by MagnusCh in C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app)
+2023-03-28 17:07:10,711 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.5, Spring v6.0.7
+2023-03-28 17:07:10,711 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "prod"
+2023-03-28 17:07:10,758 INFO o.s.b.StartupInfoLogger [main] Started ScannerServiceTest in 0.086 seconds (process running for 2.071)
+2023-03-28 17:07:10,811 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/exif-org/nikon-e950.jpg, deviceId=804c47c4-c0eb-4b89-b69d-5c810f7578ce
+2023-03-28 17:07:10,819 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:///apa, deviceId=ca7b42b3-6dcf-42d8-8a97-f66847552e6b
+2023-03-28 17:07:10,823 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI , deviceId=6b258927-365f-4953-9859-34bdff2abcde
+2023-03-28 17:07:10,827 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/, deviceId=6fe4ae05-92ca-4b3a-abff-44b471c8a01a
+2023-03-28 17:07:10,827 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure', recursive=true, deviceId='6fe4ae05-92ca-4b3a-abff-44b471c8a01a']
+2023-03-28 17:07:10,829 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org', recursive=true, deviceId='6fe4ae05-92ca-4b3a-abff-44b471c8a01a']
+2023-03-28 17:07:10,829 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\nikon-e950.jpg']
+2023-03-28 17:07:10,865 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=164151, Image-width=Quantization table 0, Sampling factors 1 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2001:04:06 11:51:40, Model=E950, Software=v981-79, Make=NIKON, File Name=nikon-e950.jpg}]
+2023-03-28 17:07:10,868 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\README']
+2023-03-28 17:07:10,869 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-d700.jpg']
+2023-03-28 17:07:10,870 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=79446, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=1998:12:01 14:22:36, Model=DSC-D700, Make=SONY, File Name=sony-d700.jpg}]
+2023-03-28 17:07:10,871 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\exif-org\sony-powershota5.jpg']
+2023-03-28 17:07:10,873 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:07:10,874 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='6fe4ae05-92ca-4b3a-abff-44b471c8a01a']
+2023-03-28 17:07:10,874 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 17:07:10,875 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:07:10,876 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp', recursive=true, deviceId='6fe4ae05-92ca-4b3a-abff-44b471c8a01a']
+2023-03-28 17:07:10,876 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\xmp\BlueSquare.jpg']
+2023-03-28 17:07:10,905 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=24205, Image-width=Quantization table 0, Sampling factors 2 horiz/2 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, Date/Time=2005:09:07 15:09:51, Software=Adobe Photoshop CS2 Macintosh, File Name=BlueSquare.jpg}]
+2023-03-28 17:07:10,906 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.
+2023-03-28 17:07:10,914 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI null, deviceId=9327adf9-6dc3-41a2-9d13-a32448aa594f
+2023-03-28 17:07:10,922 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService - launching scan with URI file:/C:/Users/MagnusCh/dev/usr-test-repos/fileindexer/fileindexer-app/./test-filestructure/single-exif-org/, deviceId=5eddf698-38ed-4768-b8c3-8ebb878fed38
+2023-03-28 17:07:10,922 DEBUG o.s.m.b.s.ScannerService [main] Scanning directory... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org', recursive=true, deviceId='5eddf698-38ed-4768-b8c3-8ebb878fed38']
+2023-03-28 17:07:10,923 DEBUG o.s.m.b.s.ScannerService [main] Scanning file... [URI: 'C:\Users\MagnusCh\dev\usr-test-repos\fileindexer\fileindexer-app\.\test-filestructure\single-exif-org\sony-powershota5.jpg']
+2023-03-28 17:07:10,924 DEBUG o.s.m.b.s.ScannerService [main] Adding data to index... [properties={File Size=58405, Image-width=Quantization table 0, Sampling factors 2 horiz/1 vert, Image-height=Quantization table 1, Sampling factors 1 horiz/1 vert, File Name=sony-powershota5.jpg}]
+2023-03-28 17:07:10,925 DEBUG o.s.m.b.s.ScannerService [main] Inside ScannerService, completed.

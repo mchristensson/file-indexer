@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -56,8 +57,6 @@ class ScannerServiceTest {
         try {
             scannerService.scan(new URI(""));
             fail("Exception expected");
-        } catch (InterruptedException e) {
-            fail("Unexpected Exception");
         } catch (URISyntaxException e) {
             fail("Unexpected Exception");
         } catch (IllegalArgumentException e) {
@@ -80,7 +79,7 @@ class ScannerServiceTest {
         File f = new File("./test-filestructure");
         boolean result = scannerService.scan(f.getAbsoluteFile().toURI());
         assertTrue(result);
-        verify(logicalFileIndexService, times(5)).add(anyString(), anyMap());
+        verify(logicalFileIndexService, times(5)).add(any(UUID.class), anyString(), anyMap());
 
     }
 
@@ -104,7 +103,7 @@ class ScannerServiceTest {
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
         //noinspection unchecked
         verify(logicalFileIndexService)
-                .add(ArgumentMatchers.contains("sony-powershota5.jpg"), argumentsCaptured.capture());
+                .add(any(UUID.class), ArgumentMatchers.contains("sony-powershota5.jpg"), argumentsCaptured.capture());
         var foo = argumentsCaptured.getValue();
         assert argumentsCaptured.getValue().containsKey("File Size");
         assert argumentsCaptured.getValue().containsKey("File Name");

@@ -10,10 +10,6 @@ import java.util.UUID;
  * Replaces Cassandrarepo when in Junit5 tests
  */
 public class LogicalFileRepositoryImpl implements LogicalFileRepository {
-    @Override
-    public LogicalFileData findBySuffix(String suffix) {
-        return null;
-    }
 
     @Override
     public <S extends LogicalFileData> S save(S entity) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UraxapiserviceService } from '../../services/uraxapiservice.service';
+import { UraxapiserviceService } from '../../services/fileindexerapiservice.service';
 
 @Component({
   selector: 'app-product-list',

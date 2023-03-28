@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UraxapiserviceService {
+export class FileIndexerApiserviceService {
 
   constructor(private _client: HttpClient) { }
 
@@ -18,6 +18,6 @@ export class UraxapiserviceService {
         'Authorization' : 'Basic ' + btoa('bob:bob')
       })
     }
-    return this._client.get("http://localhost:8081/api/products", httpOpts);
+    return this._client.get("http://localhost:8081/api/scan/list", httpOpts);
   }
 }

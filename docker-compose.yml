@@ -7,6 +7,8 @@
 services:
   fileindexerapp:
     build: ./fileindexer-app
+    container_name: fileindexerapp
+    hostname: fileindexerapp
     depends_on:
       - fileindexerindex
     links:
@@ -18,17 +20,25 @@ services:
 
   fileindexerreverseproxy:
     build: ./fileindexer-reverse-proxy
-    networks:
-      - fileindexer-network
+    container_name: fileindexerreverseproxy
+    hostname: fileindexerreverseproxy
     ports:
       - "8081:80"
-
-  fileindexerindex:
-    image: cassandra:4.1.1
     networks:
       - fileindexer-network
+  
+  fileindexerindex:
+    image: cassandra:4.1.1
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "1"
+    container_name: fileindexerindex
+    hostname: fileindexerindex
     ports:
       - "9042:9042"
+    networks:
+      - fileindexer-network
 
 networks:
   fileindexer-network: {}
