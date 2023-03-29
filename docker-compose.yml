@@ -36,9 +36,16 @@ services:
     container_name: fileindexerindex
     hostname: fileindexerindex
     ports:
-      - "9042:9042"
+      - "127.0.0.1:9042:9042"
+    expose:
+      - "9042"
     networks:
       - fileindexer-network
+    volumes:
+      - fileindexerindex_node_data:/temp/fileindexerindex/container-volume/
+
+volumes:
+  fileindexerindex_node_data:
 
 networks:
   fileindexer-network: {}

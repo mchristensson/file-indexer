@@ -2,18 +2,15 @@
 echo "Taking down composition"
 docker compose down
 echo "Removing images..."
-docker image rm fileindexer-app
-docker image rm fileindexer-index
-docker image rm fileindexer-reverseproxy
+docker image rm fileindexerapp
+docker image rm fileindexerreverseproxy
+docker image rm fileindexerindex
 
 echo "Running script that builds the fileindexer-app"
 CUR_DIR=$(pwd)
-echo "(1) In directory $(pwd)"
 pushd fileindexer-app > /dev/null
-echo "(2) In directory $(pwd)"
-mvn package
+./mvnw package
 echo "Mvn packaging complete ..."
-echo "(3) In directory $(pwd)"
 
 popd > /dev/null
 
