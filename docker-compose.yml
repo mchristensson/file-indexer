@@ -28,15 +28,10 @@ services:
       - fileindexer-network
   
   fileindexerindex:
-    image: cassandra:4.1.1
-    logging:
-      options:
-        max-size: "5m"
-        max-file: "1"
+    build: ./fileindexer-index
     container_name: fileindexerindex
-    hostname: fileindexerindex
     ports:
-      - "127.0.0.1:9042:9042"
+      - "9042:9042"
     expose:
       - "9042"
     networks:
