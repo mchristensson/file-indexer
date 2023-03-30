@@ -1,12 +1,10 @@
-package org.se.mac.blorksandbox.jobqueue.rest;
+package org.se.mac.blorksandbox.scanner.rest;
 
 import java.util.List;
 
 public class LogicalFileValues {
 
     private List<LogicalFileValue> names;
-
-
 
     public List<LogicalFileValue> getNames() {
         return names;
@@ -19,6 +17,7 @@ public class LogicalFileValues {
     public void add(LogicalFileValue value) {
         this.names.add(value);
     }
+
     public static class LogicalFileValue {
         private String name;
 

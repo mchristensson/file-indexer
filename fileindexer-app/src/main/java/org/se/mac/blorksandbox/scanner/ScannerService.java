@@ -28,12 +28,12 @@ public class ScannerService {
      * Performs meta-data extraction on a directory on a file-device
      *
      * @param uri URI targeting the device location to be analyzed
+     * @param deviceId
      * @return true after successful scan
      * @throws RuntimeException If invalid directory
      */
-    public boolean scan(URI uri) {
-        UUID deviceId = UUID.randomUUID();
-        logger.debug("Inside ScannerService - launching scan with URI {}, deviceId={}", uri, deviceId);
+    public boolean scan(URI uri, UUID deviceId) {
+        logger.debug("Inside ScannerService - launching scan with URI '{}', deviceId='{}'", uri, deviceId);
         Path path = Paths.get(uri);
         if (!Files.isDirectory(path)) {
             throw new RuntimeException("Not a directory");

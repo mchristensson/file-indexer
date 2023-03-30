@@ -4,8 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +12,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.NoSuchFileException;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -45,7 +40,7 @@ class ScannerServiceTest {
     @Test
     void scan_whenNullArg_expectException() {
         try {
-            scannerService.scan(null);
+            scannerService.scan(null, UUID.randomUUID());
             fail("Exception expected");
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("\"uri\" is null"));
@@ -55,7 +50,7 @@ class ScannerServiceTest {
     @Test
     void scan_whenEmptyArg_expectException() {
         try {
-            scannerService.scan(new URI(""));
+            scannerService.scan(new URI(""), UUID.randomUUID());
             fail("Exception expected");
         } catch (URISyntaxException e) {
             fail("Unexpected Exception");
@@ -67,7 +62,7 @@ class ScannerServiceTest {
     @Test
     void scan_whenNonexistingFileArg_expectException() throws URISyntaxException, InterruptedException {
         try {
-            scannerService.scan(new URI("file:///apa"));
+            scannerService.scan(new URI("file:///apa"), UUID.randomUUID());
             fail("Exception expected");
         } catch (RuntimeException e) {
             assertTrue(e.getMessage().contains("Not a directory"));
@@ -77,7 +72,7 @@ class ScannerServiceTest {
     @Test
     void scan_whenTestDirectoryArg_expectOk() throws InterruptedException {
         File f = new File("./test-filestructure");
-        boolean result = scannerService.scan(f.getAbsoluteFile().toURI());
+        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
         assertTrue(result);
         verify(logicalFileIndexService, times(5)).add(any(UUID.class), anyString(), anyMap());
 
@@ -87,7 +82,7 @@ class ScannerServiceTest {
     void scan_whenSingleExifFileArg_expectException() throws InterruptedException {
         try {
             File f = new File("./test-filestructure/exif-org/nikon-e950.jpg");
-            scannerService.scan(f.getAbsoluteFile().toURI());
+            scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
             fail("Exception expected");
         } catch (RuntimeException e) {
             assertTrue(e.getMessage().contains("Not a directory"));
@@ -97,7 +92,7 @@ class ScannerServiceTest {
     @Test
     void scan_whenExifDriectoryArg_expectOk() throws InterruptedException {
         File f = new File("./test-filestructure/single-exif-org");
-        boolean result = scannerService.scan(f.getAbsoluteFile().toURI());
+        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
         assertTrue(result);
 
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);

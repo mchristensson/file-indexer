@@ -4,29 +4,29 @@ import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
 import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
-import org.se.mac.blorksandbox.jobqueue.job.FileScannerJob;
+import org.se.mac.blorksandbox.scanner.job.FileScannerJob;
 import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
-import org.se.mac.blorksandbox.jobqueue.rest.LogicalFileValues;
+import org.se.mac.blorksandbox.scanner.rest.LogicalFileValues;
 import org.se.mac.blorksandbox.jobqueue.rest.QueueJobStatus;
-import org.se.mac.blorksandbox.jobqueue.rest.ScanRequestReceipt;
+import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueReceipt;
+import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueRequest;
 import org.se.mac.blorksandbox.scanner.ScannerService;
-import org.se.mac.blorksandbox.scanner.UrlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping(value = "api", method = {RequestMethod.GET, RequestMethod.POST})
 public class BlorkRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(BlorkRestController.class);
@@ -41,11 +41,11 @@ public class BlorkRestController {
     private LogicalFileIndexService fileIndexService;
 
     @GetMapping("queue/enqueue")
-    public ScanRequestReceipt enqueueDummyJob() {
+    public ScanEnqueueReceipt enqueueDummyJob() {
         logger.debug("Enqueuing dummyjob...");
         QueuedJob scanJob = new DummyJob();
         queueService.enqueue(scanJob);
-        return new ScanRequestReceipt(scanJob.getId(), "Job was enqueued");
+        return new ScanEnqueueReceipt(scanJob.getId(), "Job was enqueued");
     }
 
     @GetMapping(value = "queue/status", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,12 +54,14 @@ public class BlorkRestController {
         return new QueueJobStatus(queueService.getResult());
     }
 
-    @GetMapping("scan/enqueue")
-    public ScanRequestReceipt pollScan() {
+    @PostMapping(value = "scan/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ScanEnqueueReceipt pollScan(@RequestBody ScanEnqueueRequest scanEnqueueRequest) {
         logger.debug("Enqueuing job...");
-        QueuedJob scanJob = new FileScannerJob("file:///c:/temp", UrlType.WIN_DRIVE_LETTER, scannerService);
+        QueuedJob scanJob = new FileScannerJob(scanEnqueueRequest.getDeviceIdAsUUID(), scanEnqueueRequest.getPath(), scanEnqueueRequest.getUrlType(), scannerService);
+        //QueuedJob scanJob = new FileScannerJob("file:///opt/app/test-filestructure", UrlType.UNIX, scannerService);
+        //QueuedJob scanJob = new FileScannerJob("file:///c:/temp", UrlType.WIN_DRIVE_LETTER, scannerService);
         queueService.enqueue(scanJob);
-        return new ScanRequestReceipt(scanJob.getId(), "Scanner job was enqueued");
+        return new ScanEnqueueReceipt(scanJob.getId(), "Scanner job was enqueued");
     }
 
     @GetMapping("scan/list")

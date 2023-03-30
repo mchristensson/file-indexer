@@ -1,32 +1,39 @@
-package org.se.mac.blorksandbox.jobqueue.job;
+package org.se.mac.blorksandbox.scanner.job;
 
+import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
 import org.se.mac.blorksandbox.scanner.ScannerService;
-import org.se.mac.blorksandbox.scanner.UrlType;
+import org.se.mac.blorksandbox.scanner.function.UriBuilder;
+import org.se.mac.blorksandbox.scanner.model.UrlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.Callable;
-import java.util.concurrent.RejectedExecutionException;
 
 public class FileScannerJob implements QueuedJob {
     private static final Logger logger = LoggerFactory.getLogger(FileScannerJob.class);
 
     private final long created;
     private final Long id;
-    private String path;
+    private String devicePath;
+
+    private UUID deviceId;
+
     private UrlType urlType;
 
     private ScannerService service;
 
-    public FileScannerJob(String path, UrlType urlType, ScannerService service) {
-        this.path = path;
+    private UriBuilder uriBuilder = new UriBuilder();
+
+    public FileScannerJob(UUID deviceId, String devicePath, UrlType urlType, ScannerService service) {
+        this.devicePath = devicePath;
         this.urlType = urlType;
         this.created = LocalDate.now().toEpochDay();
         this.id = generateId();
         this.service = service;
+        this.deviceId = deviceId;
     }
 
     @Override
@@ -38,10 +45,10 @@ public class FileScannerJob implements QueuedJob {
     public Callable<Integer> getTask() {
         return () -> {
             try {
-                if (Objects.isNull(path) || "".equals(path)) {
+                if (Objects.isNull(devicePath) || "".equals(devicePath)) {
                     throw new NullPointerException("Invalid path to scan");
                 }
-                service.scan(URI.create(path));
+                service.scan(uriBuilder.apply(this.devicePath, this.urlType), this.deviceId);
                 return QueuedJob.JOB_STATUS_DONE;
             } catch (RuntimeException e) {
                 logger.error("Something went wrong", e);

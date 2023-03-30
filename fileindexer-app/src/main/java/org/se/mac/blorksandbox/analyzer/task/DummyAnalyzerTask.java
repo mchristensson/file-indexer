@@ -36,7 +36,11 @@ public class DummyAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
 
     @Override
     public Map<String, String> apply(Path path) throws Exception {
-        return getMetaDataMap(path.toFile());
+        File f = path.toFile();
+        if (!f.canRead()) {
+            throw new IOException("Not granted read access to file");
+        }
+        return getMetaDataMap(f);
     }
 
     private Map<String, String> getMetaDataMap(File file) throws ImageProcessingException, IOException {

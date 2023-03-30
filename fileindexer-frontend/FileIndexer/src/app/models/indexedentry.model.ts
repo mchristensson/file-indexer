@@ -1,7 +1,14 @@
 export class Indexedentry {
 }
 
-export class ScanJobStatusData {
-    data:any
-    timestamp:Date
+export class ScanJobStatusDataEntry {
+    id:string;
+    value:number;
 }
+
+export class ScanJobStatusData  {
+    data = new Map<string, number>();
+    timestamp: Date
+}
+
+

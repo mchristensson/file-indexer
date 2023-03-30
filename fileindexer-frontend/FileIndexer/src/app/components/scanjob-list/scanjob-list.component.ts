@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs';
-import { ScanJobStatusData } from 'src/app/models/indexedentry.model';
+import { map, timestamp } from 'rxjs';
+import { ScanJobStatusDataEntry } from 'src/app/models/indexedentry.model';
 import { DefaultapiserviceService } from '../../services/defaultapiservice.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { DefaultapiserviceService } from '../../services/defaultapiservice.servi
 })
 export class ScanjobListComponent {
   
-  scanJobStatusData:ScanJobStatusData
+  scanJobStatusData: ScanJobStatusDataEntry[];
+  scanJobStatusDataTs: Date;
   
   constructor(private apiService: DefaultapiserviceService) {}
   
@@ -18,8 +19,11 @@ export class ScanjobListComponent {
     console.log("ngoninit fetch from service...")
     this.apiService.getQueueJobStatus()
     .subscribe(scanJobsData => {
-      this.scanJobStatusData = scanJobsData;
-      console.log("QueueJobStatus: ", this.scanJobStatusData)
+      this.scanJobStatusData = scanJobsData.result;
+      this.scanJobStatusDataTs = scanJobsData.timestamp;
+      console.log("QueueJobStatus: ", scanJobsData.result);
+      console.log("QueueJobStatus: ", this.scanJobStatusData);
+      console.log("QueueJobStatus: ", this.scanJobStatusDataTs);
     });
   }
   

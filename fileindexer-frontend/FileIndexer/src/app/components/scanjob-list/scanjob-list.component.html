@@ -2,17 +2,13 @@
     <thead>
         <tr>
             <th data-type="numeric">#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Weight</th>
+            <th data-type="numeric">Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of scanJobStatusData">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.weight }}</td>
+        <tr *ngFor="let job of scanJobStatusData">
+            <td>{{ job.id }}</td>
+            <td>{{ job.value }}</td>
         </tr>
     </tbody>
 </table>
