@@ -44,7 +44,6 @@ public class CreateKeySpaces extends AbstractCassandraConfiguration implements B
 
     @Override
     protected String getKeyspaceName() {
-
         logger.debug("Returning property ['keyspace-name'={}]", this.keyspaceName);
         return keyspaceName;
     }
@@ -52,6 +51,7 @@ public class CreateKeySpaces extends AbstractCassandraConfiguration implements B
     @Override
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
         CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(getKeyspaceName())
+                .ifNotExists()
                 .with(KeyspaceOption.DURABLE_WRITES, true)
                 .withSimpleReplication(1);
         return List.of(specification);
