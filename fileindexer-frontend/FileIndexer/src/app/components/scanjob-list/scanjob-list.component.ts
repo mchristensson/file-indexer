@@ -16,14 +16,12 @@ export class ScanjobListComponent {
   constructor(private apiService: DefaultapiserviceService) {}
   
   ngOnInit() {
-    console.log("ngoninit fetch from service...")
     this.apiService.getQueueJobStatus()
     .subscribe(scanJobsData => {
-      this.scanJobStatusData = scanJobsData.result;
-      this.scanJobStatusDataTs = scanJobsData.timestamp;
-      console.log("QueueJobStatus: ", scanJobsData.result);
-      console.log("QueueJobStatus: ", this.scanJobStatusData);
-      console.log("QueueJobStatus: ", this.scanJobStatusDataTs);
+      this.scanJobStatusData = scanJobsData.data;
+      var d = new Date(0);
+      d.setUTCSeconds(scanJobsData.timestamp);
+      this.scanJobStatusDataTs = d;
     });
   }
   

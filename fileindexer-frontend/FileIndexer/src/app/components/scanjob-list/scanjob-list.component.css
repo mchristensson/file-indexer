@@ -3,10 +3,8 @@ table {
     border-collapse: collapse;
     min-width: 100%;
     grid-template-columns: 
-    minmax(80px, 1fr)
-    minmax(200px, 1.67fr)
-    minmax(150px, 1.67fr)
-    minmax(80px, 1.67fr)
+    minmax(20px,  1.67fr)
+    minmax(400px, 3fr)
 }
   
 thead,

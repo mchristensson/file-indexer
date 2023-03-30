@@ -3,7 +3,7 @@ export class Indexedentry {
 
 export class ScanJobStatusDataEntry {
     id:string;
-    value:number;
+    status:number;
 }
 
 export class ScanJobStatusData  {
