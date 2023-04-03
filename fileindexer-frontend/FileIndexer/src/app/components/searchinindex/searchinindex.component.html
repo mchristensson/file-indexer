@@ -1,1 +1,15 @@
 <p>searchinindex works!</p>
+<table>
+    <thead>
+        <tr>
+            <th data-type="numeric">#</th>
+            <th data-type="numeric">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let scanData of scannedData">
+            <td>-</td>
+            <td>{{ scanData.name }}</td>
+        </tr>
+    </tbody>
+</table>

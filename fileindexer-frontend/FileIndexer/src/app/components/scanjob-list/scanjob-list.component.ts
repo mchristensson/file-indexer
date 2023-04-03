@@ -16,6 +16,26 @@ export class ScanjobListComponent {
   constructor(private apiService: DefaultapiserviceService) {}
   
   ngOnInit() {
+    this.refreshJobData();
+  }
+  
+  enqueueScanJob() {
+    var requestData = {
+      "path": "opt/app/test-filestructure",
+      "type": "UNIX",
+      "deviceId" : "7f800e14-47f0-4ca3-8010-499bd70cd569"
+    }
+
+    console.log("TODO: Implement enqueueScanJob");
+    this.apiService.scanEnqueue(requestData)
+    .subscribe(scanEnqueueReceipt => {
+      console.log("Result: ", scanEnqueueReceipt.id);
+      this.refreshJobData();
+    });
+    
+  }
+
+  private refreshJobData() {
     this.apiService.getQueueJobStatus()
     .subscribe(scanJobsData => {
       this.scanJobStatusData = scanJobsData.data;
@@ -24,5 +44,4 @@ export class ScanjobListComponent {
       this.scanJobStatusDataTs = d;
     });
   }
-  
 }
