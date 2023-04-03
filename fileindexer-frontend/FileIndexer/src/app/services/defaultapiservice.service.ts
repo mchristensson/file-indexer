@@ -8,7 +8,9 @@ import { ScanJobStatusDataEntry, EqueueJobReceipt, ScannedDataEntry } from '../m
   providedIn: 'root'
 })
 export class DefaultapiserviceService {
-  
+
+  constructor(private _client: HttpClient) { }
+
   scanEnqueue(requestData): Observable<EqueueJobReceipt> {
 
     var httpOpts = {
@@ -18,12 +20,9 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .post<EqueueJobReceipt>("http://localhost:8081/api/scan/enqueue", requestData, httpOpts);
+    .post<EqueueJobReceipt>("http://localhost:8080/api/scan/enqueue", requestData, httpOpts);
 
   }
-
-  constructor(private _client: HttpClient) { }
-
 
   getQueueJobStatus(): Observable<{data:ScanJobStatusDataEntry[], timestamp: number}> {
     var httpOpts = {
@@ -33,7 +32,7 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .get<{data:ScanJobStatusDataEntry[], timestamp: number}>("http://localhost:8081/api/queue/status", httpOpts);
+    .get<{data:ScanJobStatusDataEntry[], timestamp: number}>("http://localhost:8080/api/queue/status", httpOpts);
       
   }
 
@@ -45,7 +44,7 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .get<{names: ScannedDataEntry[]}>("http://localhost:8081/api/scan/list", httpOpts);
+    .get<{names: ScannedDataEntry[]}>("http://localhost:8080/api/scan/list", httpOpts);
       
   }
 

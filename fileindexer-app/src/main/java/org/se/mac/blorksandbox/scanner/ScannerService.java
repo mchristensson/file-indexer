@@ -2,7 +2,9 @@ package org.se.mac.blorksandbox.scanner;
 
 import com.drew.imaging.ImageProcessingException;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
-import org.se.mac.blorksandbox.analyzer.task.DummyAnalyzerTask;
+import org.se.mac.blorksandbox.analyzer.task.ImageAnalyzerTask;
+import org.se.mac.blorksandbox.analyzer.task.FileAnalyzerTask;
+import org.se.mac.blorksandbox.analyzer.task.ImageHashGeneratorTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 
@@ -39,6 +42,25 @@ public class ScannerService {
             throw new RuntimeException("Not a directory");
         }
         scanFolder(deviceId, path, true);
+        logger.debug("Inside ScannerService, completed.");
+        return true;
+    }
+
+    /**
+     * Performs hash analysis on a file
+     *
+     * @param uri URI targeting the device location to be analyzed
+     * @param deviceId
+     * @return true after successful scan
+     * @throws RuntimeException If invalid directory
+     */
+    public boolean generateImageHash(URI uri, UUID deviceId) {
+        logger.debug("Inside ScannerService - launching generateHash job with URI '{}', deviceId='{}'", uri, deviceId);
+        Path path = Paths.get(uri);
+        if (Files.isDirectory(path)) {
+            throw new RuntimeException("Is a directory");
+        }
+        generateHashForFile(path);
         logger.debug("Inside ScannerService, completed.");
         return true;
     }
@@ -74,11 +96,36 @@ public class ScannerService {
      */
     private void scanFile(UUID deviceId, Path path) {
         logger.debug("Scanning file... [URI: '{}']", path);
-        DummyAnalyzerTask task = new DummyAnalyzerTask();
+        FileAnalyzerTask<Map<String, String>> task = new ImageAnalyzerTask();
         try {
-            Map<String, String> data = task.apply(path);
+            long t0 = System.currentTimeMillis();
+            final Map<String, String> data = task.apply(path);
+            long t1 = System.currentTimeMillis();
+            Instant.ofEpochMilli(t1);
+
             logger.debug("Adding data to index... [properties={}]", data);
-            logicalFileIndexService.add(deviceId, path.toString(), data);
+            logicalFileIndexService.add(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
+        } catch (Exception e) {
+            if (!(e instanceof ImageProcessingException)) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Generates hash for image
+     *
+     * @param path     path representing a file (not a directory/folder)
+     */
+    private void generateHashForFile(Path path) {
+        logger.debug("Generating has for file... [URI: '{}']", path);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask();
+        try {
+            long t0 = System.currentTimeMillis();
+            final String output = task.apply(path);
+            long t1 = System.currentTimeMillis();
+            logger.debug("Output hash [output={}, duration={}]", output, t1-t0);
+
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);

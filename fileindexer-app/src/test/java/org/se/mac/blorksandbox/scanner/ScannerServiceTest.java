@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 
@@ -74,8 +75,14 @@ class ScannerServiceTest {
         File f = new File("./test-filestructure");
         boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
         assertTrue(result);
-        verify(logicalFileIndexService, times(5)).add(any(UUID.class), anyString(), anyMap());
-
+        verify(logicalFileIndexService, times(12))
+                .add(
+                        any(UUID.class),
+                        any(Instant.class),
+                        anyString(),
+                        anyMap(),
+                        anyLong()
+                );
     }
 
     @Test
@@ -98,7 +105,20 @@ class ScannerServiceTest {
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
         //noinspection unchecked
         verify(logicalFileIndexService)
-                .add(any(UUID.class), ArgumentMatchers.contains("sony-powershota5.jpg"), argumentsCaptured.capture());
+                .add(
+                        any(UUID.class),
+                        any(Instant.class),
+                        ArgumentMatchers.contains("sony-powershota5.jpg"),
+                        argumentsCaptured.capture(),
+                        anyLong()
+                        /*
+                        any(UUID.class),
+                        any(Instant.class),
+                        anyString(),
+                        anyMap(),
+                        anyLong()
+                         */
+                );
         var foo = argumentsCaptured.getValue();
         assert argumentsCaptured.getValue().containsKey("File Size");
         assert argumentsCaptured.getValue().containsKey("File Name");

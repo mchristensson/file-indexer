@@ -4,9 +4,11 @@ import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
 import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
+import org.se.mac.blorksandbox.rest.LogicalFilesSearchResult;
+import org.se.mac.blorksandbox.scanner.job.FileHashAnalyzerJob;
 import org.se.mac.blorksandbox.scanner.job.FileScannerJob;
 import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
-import org.se.mac.blorksandbox.scanner.rest.LogicalFileValues;
+import org.se.mac.blorksandbox.scanner.rest.LogicalFileValue;
 import org.se.mac.blorksandbox.jobqueue.rest.QueueJobStatus;
 import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueReceipt;
 import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueRequest;
@@ -15,13 +17,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.directory.SearchResult;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -58,29 +61,39 @@ public class BlorkRestController {
     public ScanEnqueueReceipt pollScan(@RequestBody ScanEnqueueRequest scanEnqueueRequest) {
         logger.debug("Enqueuing job...");
         QueuedJob scanJob = new FileScannerJob(scanEnqueueRequest.getDeviceIdAsUUID(), scanEnqueueRequest.getPath(), scanEnqueueRequest.getUrlType(), scannerService);
-        //QueuedJob scanJob = new FileScannerJob("file:///opt/app/test-filestructure", UrlType.UNIX, scannerService);
-        //QueuedJob scanJob = new FileScannerJob("file:///c:/temp", UrlType.WIN_DRIVE_LETTER, scannerService);
+        queueService.enqueue(scanJob);
+        return new ScanEnqueueReceipt(scanJob.getId(), "Scanner job was enqueued");
+    }
+
+    @PostMapping(value = "imgash/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ScanEnqueueReceipt pollImageHashGeneration(@RequestBody ScanEnqueueRequest scanEnqueueRequest) {
+        logger.debug("Enqueuing job...");
+        QueuedJob scanJob = new FileHashAnalyzerJob(scanEnqueueRequest.getDeviceIdAsUUID(), scanEnqueueRequest.getPath(), scanEnqueueRequest.getUrlType(), scannerService);
         queueService.enqueue(scanJob);
         return new ScanEnqueueReceipt(scanJob.getId(), "Scanner job was enqueued");
     }
 
     @GetMapping("scan/list")
-    public LogicalFileValues listLogicalFiles() {
+    public LogicalFilesSearchResult listLogicalFiles() {
         logger.debug("Retrieving files from index...");
-        final LogicalFileValues result = new LogicalFileValues();
-        final List<LogicalFileValues.LogicalFileValue> names =
+        final List<LogicalFileValue> names =
                 fileIndexService.getAll().stream()
                         .filter(Objects::nonNull)
-                        .map(transformProperties()).collect(Collectors.toList());
-        result.setNames(names);
-        return result;
+                        .map(transformProperties()).toList();
+        return new LogicalFilesSearchResult(names.toArray(new LogicalFileValue[0]));
     }
 
-    private static Function<LogicalFileData, LogicalFileValues.LogicalFileValue> transformProperties() {
+    private static Function<LogicalFileData, LogicalFileValue> transformProperties() {
+
         return f -> {
-            String someProperty = f.getProperties().entrySet().stream()
-                    .filter(Objects::nonNull).findFirst().map(Map.Entry::getValue).orElse("saknas");
-            return new LogicalFileValues.LogicalFileValue(someProperty);
+            return new LogicalFileValue(
+                    f.getId().toString(), // String id,
+                    f.getDevicePath(), // String devicePath,
+                    f.getUpdated_date(), // Date date,
+                    f.getScanTime(), // long scanTime,
+                    f.getDeviceId().toString(), // String deviceId,
+                    f.getProperties()); // Map<String, String> properties
         };
+
     }
 }

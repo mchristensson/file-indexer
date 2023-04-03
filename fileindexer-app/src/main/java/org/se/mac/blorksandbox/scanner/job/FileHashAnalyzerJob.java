@@ -12,30 +12,11 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-public class FileScannerJob implements QueuedJob {
-    private static final Logger logger = LoggerFactory.getLogger(FileScannerJob.class);
+public class FileHashAnalyzerJob extends FileScannerJob {
+    private static final Logger logger = LoggerFactory.getLogger(FileHashAnalyzerJob.class);
 
-    private final long created;
-    private final Long id;
-    protected String devicePath;
-    protected UUID deviceId;
-    protected UrlType urlType;
-    protected ScannerService service;
-
-    protected UriBuilder uriBuilder = new UriBuilder();
-
-    public FileScannerJob(UUID deviceId, String devicePath, UrlType urlType, ScannerService service) {
-        this.devicePath = devicePath;
-        this.urlType = urlType;
-        this.created = LocalDate.now().toEpochDay();
-        this.id = generateId();
-        this.service = service;
-        this.deviceId = deviceId;
-    }
-
-    @Override
-    public long getCreated() {
-        return created;
+    public FileHashAnalyzerJob(UUID deviceId, String devicePath, UrlType urlType, ScannerService service) {
+        super(deviceId, devicePath, urlType, service);
     }
 
     @Override
@@ -45,7 +26,7 @@ public class FileScannerJob implements QueuedJob {
                 if (Objects.isNull(devicePath) || "".equals(devicePath)) {
                     throw new NullPointerException("Invalid path to scan");
                 }
-                service.scan(uriBuilder.apply(this.devicePath, this.urlType), this.deviceId);
+                service.generateImageHash(uriBuilder.apply(this.devicePath, this.urlType), this.deviceId);
                 return QueuedJob.JOB_STATUS_DONE;
             } catch (RuntimeException e) {
                 logger.error("Something went wrong", e);
@@ -56,8 +37,4 @@ public class FileScannerJob implements QueuedJob {
         };
     }
 
-    @Override
-    public Long getId() {
-        return this.id;
-    }
 }

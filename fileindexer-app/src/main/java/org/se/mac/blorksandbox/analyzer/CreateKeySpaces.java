@@ -39,7 +39,15 @@ public class CreateKeySpaces extends AbstractCassandraConfiguration implements B
     @Override
     public SchemaAction getSchemaAction() {
         logger.debug("Returning property ['keyspace-action'={}]", this.keyspaceAction);
-        return Objects.requireNonNullElse( SchemaAction.valueOf(this.keyspaceAction), SchemaAction.CREATE_IF_NOT_EXISTS);
+        if (this.keyspaceAction != null) {
+            try {
+                return SchemaAction.valueOf(this.keyspaceAction);
+            } catch (IllegalArgumentException e) {
+                logger.error("Unable to interpret configuration value for 'keyspace-action'", e);
+                return SchemaAction.NONE;
+            }
+        }
+        return SchemaAction.CREATE_IF_NOT_EXISTS;
     }
 
     @Override
