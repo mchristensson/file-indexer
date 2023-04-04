@@ -119,7 +119,7 @@ public class ScannerService {
      */
     private void generateHashForFile(Path path) {
         logger.debug("Generating has for file... [URI: '{}']", path);
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask();
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 128, true, 8);
         try {
             long t0 = System.currentTimeMillis();
             final String output = task.apply(path);

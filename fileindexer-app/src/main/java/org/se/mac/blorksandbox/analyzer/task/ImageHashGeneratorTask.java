@@ -1,117 +1,60 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
+import com.drew.lang.annotations.NotNull;
+import org.se.mac.blorksandbox.analyzer.image.ContrastFunction;
+import org.se.mac.blorksandbox.analyzer.image.GenerateChecksumFunction;
+import org.se.mac.blorksandbox.analyzer.image.SaveFileFunction;
+import org.se.mac.blorksandbox.analyzer.image.ScaleFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.*;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
+
+/**
+ * Testing functionality mentioned in https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
+ */
 public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageHashGeneratorTask.class);
+    private final String outputFileFormat;
+    private final int checksumThreshold;
+    private final boolean grayscale;
 
-    @Override
-    public String apply(Path t) throws Exception {
-        int maxPixels = 8;
-        reduceSize(t, maxPixels, true);
-        return "hello world";
+    private final int maxPixels;
+
+    public ImageHashGeneratorTask(@NotNull String outputFileFormat, int checksumThreshold, boolean grayscale, int maxPixels) {
+        this.outputFileFormat = outputFileFormat;
+        this.checksumThreshold = checksumThreshold;
+        this.grayscale = grayscale;
+        this.maxPixels = maxPixels;
     }
 
-    //AVERAGE HASH
-
-    /**
-     * Reduce size. Like Average Hash, pHash starts with a small image. However, the image is
-     * larger than 8x8; 32x32 is a good size. This is really done to simplify the DCT computation
-     * and not because it is needed to reduce the high frequencies.
-     */
-    public static void reduceSize(Path p, int maxPixels, boolean grayscale) throws IOException {
+    @Override
+    public String apply(Path p) throws Exception {
         logger.debug("Reading from file... {}", p);
         BufferedImage image = ImageIO.read(p.toFile());
 
-        int h = image.getHeight();
-        int w = image.getWidth();
-        logger.info("Original Size [width={}, height={}, type={}, grayscale={}]", h, w, image.getType(), grayscale);
-        if (h >= w) {
-            //Limit Height primarily
-            h = h * maxPixels / h;
-            w = w * maxPixels / h;
-        } else {
-            // Limit width
-            h = h * maxPixels / w;
-            w = w * maxPixels / w;
-        }
-        logger.debug("     New Size [width={}, height={}]", h, w);
+        String[] formatNames = ImageIO.getReaderFormatNames();
 
-
-        BufferedImage scaled = new BufferedImage(w, h, grayscale ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = scaled.createGraphics();
-        graphics2D.drawImage(image, 0, 0, w, h, null);
-
-        int[] rgbArray = new int[w * h];
-        Integer avg = getRGB(scaled.getColorModel(), scaled.getRaster(), w, h, rgbArray);
-        for (int i = 0; i < rgbArray.length; i++) {
-//TODO: https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
-        }
-
-
-        graphics2D.dispose();
-
-        File f = new File("./target/output_" + System.currentTimeMillis() + p.getFileName());
-        logger.debug("Saving to file... {}", f.getAbsolutePath());
-        ImageIO.write(scaled, "JPG", f);
+        GenerateChecksumFunction generateChecksumFunction = new GenerateChecksumFunction(checksumThreshold);
+        SaveFileFunction saveFileFunction = new SaveFileFunction(p.getFileName().toString(), outputFileFormat);
+        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, grayscale);
+        ContrastFunction contrastFunction = new ContrastFunction();
+        String checksum = contrastFunction
+                .andThen(scaleFunction)
+                .andThen(saveFileFunction)
+                .andThen(generateChecksumFunction)
+                .apply(image);
+        logger.debug("Saved to file... [outputfile={}, checksum={}]", saveFileFunction.getOutputFile(), checksum);
+        return checksum;
     }
 
 
-    public static Integer getRGB(ColorModel colorModel, WritableRaster raster, int w, int h, final int[] rgbArray) {
-        int off;
-        Object data;
-        int nbands = raster.getNumBands();
-        int dataType = raster.getDataBuffer().getDataType();
-        switch (dataType) {
-            case DataBuffer.TYPE_BYTE:
-                data = new byte[nbands];
-                break;
-            case DataBuffer.TYPE_USHORT:
-                data = new short[nbands];
-                break;
-            case DataBuffer.TYPE_INT:
-                data = new int[nbands];
-                break;
-            case DataBuffer.TYPE_FLOAT:
-                data = new float[nbands];
-                break;
-            case DataBuffer.TYPE_DOUBLE:
-                data = new double[nbands];
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown data buffer type: " +
-                        dataType);
-        }
 
-        int sum = 0;
-        for (int y = 0; y < h; y++) {
-            off = y * w;
-            for (int x = 0; x < w; x++) {
-                int val =
-                        colorModel.getRGB(raster.getDataElements(x,
-                                y,
-                                data)) & 0xff;
-                rgbArray[off++] = val;
-                sum += val;
-            }
-        }
-        return sum / (w * h);
-
-    }
 
     /*
     Reduce color. The image is reduced to a grayscale just to further simplify the number of computations.
@@ -139,7 +82,19 @@ As with the Average Hash, pHash values can be compared using the same Hamming di
      * @param b Hash from image B
      * @return number of bit positions that are different
      */
-    public static float hammingDistance(String a, String b) {
-        return 0.0f;
+    public static int hammingDistance(long a, long b) {
+
+
+        int dist = 0;
+
+        // The ^ operators sets to 1 only the bits that are different
+        for (long val = a ^ b; val > 0; ++dist) {
+            // We then count the bit set to 1 using the Peter Wegner way
+            val = val & (val - 1); // Set to zero val's lowest-order 1
+        }
+
+        // Return the number of differing bits
+        logger.debug("Hammin distance... [a={}, b={}, distance={}]", a,b,dist);
+        return dist;
     }
 }
