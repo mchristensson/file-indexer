@@ -52,6 +52,7 @@ class ImageHashGeneratorTaskTest {
         int output = ContrastFunction.posterize(input,nColors);
         assertEquals(0, output);
     }
+
     @Test
     void posterize_when8ColorsExpectedColor_expectColor() {
         int input = 60;
@@ -59,6 +60,7 @@ class ImageHashGeneratorTaskTest {
         int output = ContrastFunction.posterize(input,nColors);
         assertEquals(32, output);
     }
+
     @Test
     void posterize_when16ColorsExpectedColor_expectColor() {
         int input = 60;
@@ -144,8 +146,6 @@ class ImageHashGeneratorTaskTest {
         int[] output = IntStream.of(data)
                 .map(input -> ContrastFunction.bandPassFilter(input, fc, 0, 1f, true, -1))
                 .toArray();
-        System.out.println("f(" + fc + ")  input = " + Arrays.toString(data));
-        System.out.println("f(" + fc + ") output = " + Arrays.toString(output));
 
         assertEquals(0, output[0]);
         assertEquals(0, output[1]);
@@ -160,7 +160,6 @@ class ImageHashGeneratorTaskTest {
         assertEquals(200, output[10]);
         assertEquals(0, output[11]);
         assertEquals(0, output[12]);
-
     }
 
 
@@ -173,9 +172,6 @@ class ImageHashGeneratorTaskTest {
 
         int[] output = IntStream.of(data)
                 .map(input -> ContrastFunction.bandPassFilter(input, fc, dfc, 1f, true, -1)).toArray();
-
-        System.out.println("f(" + fc + ")  input = " + Arrays.toString(data));
-        System.out.println("f(" + fc + ") output = " + Arrays.toString(output));
 
         assertEquals(0, output[0]);
         assertEquals(0, output[1]);
@@ -190,7 +186,6 @@ class ImageHashGeneratorTaskTest {
         assertEquals(0, output[10]);
         assertEquals(0, output[11]);
         assertEquals(0, output[12]);
-
     }
 
 }

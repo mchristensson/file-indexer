@@ -76,7 +76,7 @@ class ScannerServiceTest {
         boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
         assertTrue(result);
         verify(logicalFileIndexService, times(12))
-                .add(
+                .addFile(
                         any(UUID.class),
                         any(Instant.class),
                         anyString(),
@@ -105,7 +105,7 @@ class ScannerServiceTest {
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
         //noinspection unchecked
         verify(logicalFileIndexService)
-                .add(
+                .addFile(
                         any(UUID.class),
                         any(Instant.class),
                         ArgumentMatchers.contains("sony-powershota5.jpg"),

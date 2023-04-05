@@ -60,7 +60,7 @@ public class ScannerService {
         if (Files.isDirectory(path)) {
             throw new RuntimeException("Is a directory");
         }
-        generateHashForFile(path);
+        generateHashForFile(deviceId, path);
         logger.debug("Inside ScannerService, completed.");
         return true;
     }
@@ -104,7 +104,7 @@ public class ScannerService {
             Instant.ofEpochMilli(t1);
 
             logger.debug("Adding data to index... [properties={}]", data);
-            logicalFileIndexService.add(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
+            logicalFileIndexService.addFile(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);
@@ -117,7 +117,7 @@ public class ScannerService {
      *
      * @param path     path representing a file (not a directory/folder)
      */
-    private void generateHashForFile(Path path) {
+    private void generateHashForFile(UUID deviceId, Path path) {
         logger.debug("Generating has for file... [URI: '{}']", path);
         FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 128, true, 8);
         try {
@@ -125,7 +125,7 @@ public class ScannerService {
             final String output = task.apply(path);
             long t1 = System.currentTimeMillis();
             logger.debug("Output hash [output={}, duration={}]", output, t1-t0);
-
+            logicalFileIndexService.addFileHash(deviceId, Instant.ofEpochMilli(t1), path.toString(), output, t1 - t0);
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);

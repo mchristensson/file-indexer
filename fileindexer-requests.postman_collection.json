@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "d591cfc7-1df3-4cc3-a1d2-22d91ea49236",
+		"name": "fileindexer-requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26267427"
+	},
+	"item": [
+		{
+			"name": "queue-status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/queue/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"queue",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queue-enqueue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/queue/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"queue",
+						"enqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "scan-enqueue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"path\": \"opt/app/test-filestructure/misc\",\r\n    \"type\": \"UNIX\",\r\n    \"deviceId\" : \"7f800e14-47f0-4ca3-8010-499bd70cd569\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/scan/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"scan",
+						"enqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "scan-list",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/scan/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"scan",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-scan-list",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/scan/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"scan",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-queue-enqueue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/queue/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"queue",
+						"enqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-scan-enqueue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"path\": \"c:/temp/misc\",\r\n    \"type\": \"WIN_DRIVE_LETTER\",\r\n    \"deviceId\" : \"7f800e14-47f0-4ca3-8010-499bd70cd569\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/scan/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"scan",
+						"enqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-imgash-enqueue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"path\": \"c:/temp/test-hashing/cats.jpg\",\r\n    \"type\": \"WIN_DRIVE_LETTER\",\r\n    \"deviceId\" : \"7f800e14-47f0-4ca3-8010-499bd70cd569\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/imgash/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"imgash",
+						"enqueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-imgash-compare",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idA\": \"d1116925-641f-4454-b1d9-dc9ee71c30ca\",\r\n    \"idB\": \"9d00aa50-d8c5-4f47-a141-16ef7d3261ff\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/imgash/compare",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"imgash",
+						"compare"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-imgash-list",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/imgash/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"imgash",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV-queue-status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bob",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/queue/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"queue",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

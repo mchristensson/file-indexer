@@ -67,10 +67,12 @@ class ImageAnalyzerTaskTest {
     @Test
     void apply_whenTestFile1_expecteRead() throws Exception {
         ImageAnalyzerTask task = Mockito.mock(ImageAnalyzerTask.class);
-
         when(task.apply(any(Path.class))).thenCallRealMethod();
+
         Path testFile1 = Path.of("src/test/resources/images/misc/Projekt_20220216_0002.png");
+
         Map<String, String> result = task.apply(testFile1);
+
         assertEquals(6, result.size());
         assertEquals("Projekt_20220216_0002.png", result.get(ImageAnalyzerTask.FILE_NAME), "Invalid file name");
         assertEquals("256", result.get(ImageAnalyzerTask.IMAGE_WIDTH), "Invalid width");
@@ -89,10 +91,12 @@ class ImageAnalyzerTaskTest {
     @Test
     void apply_whenTestFile2_expecteRead() throws Exception {
         ImageAnalyzerTask task = Mockito.mock(ImageAnalyzerTask.class);
-
         when(task.apply(any(Path.class))).thenCallRealMethod();
+
         Path testFile1 = Path.of("src/test/resources/images/misc/Projekt_20220605_0003.jpeg");
+
         Map<String, String> result = task.apply(testFile1);
+
         assertEquals(10, result.size());
         assertEquals("Projekt_20220605_0003.jpeg", result.get(ImageAnalyzerTask.FILE_NAME), "Invalid file name");
         assertEquals("256", result.get(ImageAnalyzerTask.IMAGE_WIDTH), "Invalid width");
@@ -111,10 +115,12 @@ class ImageAnalyzerTaskTest {
     @Test
     void apply_whenTestFile3_expecteRead() throws Exception {
         ImageAnalyzerTask task = Mockito.mock(ImageAnalyzerTask.class);
-
         when(task.apply(any(Path.class))).thenCallRealMethod();
+
         Path testFile1 = Path.of("src/test/resources/images/misc/Projekt_20220622_0004.jpeg");
+
         Map<String, String> result = task.apply(testFile1);
+
         assertEquals(8, result.size());
         assertNull(result.get(ImageAnalyzerTask.MODEL));
         assertNull(result.get(ImageAnalyzerTask.MAKE));
@@ -134,9 +140,14 @@ class ImageAnalyzerTaskTest {
         Directory dic = mock(IptcDirectory.class);
         when(dic.getString(IptcDirectory.TAG_DATE_CREATED)).thenReturn("20220605");
         when(dic.getString(IptcDirectory.TAG_TIME_CREATED)).thenReturn("153654+0200");
+
         Function<String, String> transferFunction = ImageAnalyzerTask.computeItpcDateTime(dic);
+
         String result = transferFunction.apply(null);
+
         assertEquals("2022-06-05T15:36:54+02:00", result);
+
+        verifyNoMoreInteractions(dic);
     }
 
     @Test
@@ -144,9 +155,14 @@ class ImageAnalyzerTaskTest {
         Directory dic = mock(IptcDirectory.class);
         when(dic.getString(IptcDirectory.TAG_DATE_CREATED)).thenReturn("20220605");
         when(dic.getString(IptcDirectory.TAG_TIME_CREATED)).thenReturn(null);
+
         Function<String, String> transferFunction = ImageAnalyzerTask.computeItpcDateTime(dic);
+
         String result = transferFunction.apply(null);
+
         assertEquals("2022-06-05", result);
+
+        verifyNoMoreInteractions(dic);
     }
 
     @Test
@@ -154,9 +170,14 @@ class ImageAnalyzerTaskTest {
         Directory dic = mock(IptcDirectory.class);
         when(dic.getString(IptcDirectory.TAG_DATE_CREATED)).thenReturn("20220605");
         when(dic.getString(IptcDirectory.TAG_TIME_CREATED)).thenReturn("");
+
         Function<String, String> transferFunction = ImageAnalyzerTask.computeItpcDateTime(dic);
+
         String result = transferFunction.apply(null);
+
         assertEquals("2022-06-05", result);
+
+        verifyNoMoreInteractions(dic);
     }
 
     @Test
@@ -164,9 +185,14 @@ class ImageAnalyzerTaskTest {
         Directory dic = mock(IptcDirectory.class);
         when(dic.getString(IptcDirectory.TAG_DATE_CREATED)).thenReturn(null);
         when(dic.getString(IptcDirectory.TAG_TIME_CREATED)).thenReturn("153654+0200");
+
         Function<String, String> transferFunction = ImageAnalyzerTask.computeItpcDateTime(dic);
+
         String result = transferFunction.apply(null);
+
         assertEquals("15:36:54", result);
+
+        verifyNoMoreInteractions(dic);
     }
 
     @Test
@@ -174,11 +200,22 @@ class ImageAnalyzerTaskTest {
         Directory dic = mock(IptcDirectory.class);
         when(dic.getString(IptcDirectory.TAG_DATE_CREATED)).thenReturn("");
         when(dic.getString(IptcDirectory.TAG_TIME_CREATED)).thenReturn("153654+0200");
+
         Function<String, String> transferFunction = ImageAnalyzerTask.computeItpcDateTime(dic);
+
         String result = transferFunction.apply(null);
+
         assertEquals("15:36:54", result);
+
+        verifyNoMoreInteractions(dic);
     }
 
+    /**
+     * Utility function
+     *
+     * @param strNum Value to test
+     * @return true if value is numeric
+     */
     private static boolean isNumeric(String strNum) {
         try {
             if (strNum != null) {

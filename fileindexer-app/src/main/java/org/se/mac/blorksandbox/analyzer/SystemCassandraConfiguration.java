@@ -14,15 +14,13 @@ import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 import org.springframework.data.cassandra.core.cql.session.init.KeyspacePopulator;
 import org.springframework.data.cassandra.core.cql.session.init.ResourceKeyspacePopulator;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Objects;
 
 @Configuration
-public class CreateKeySpaces extends AbstractCassandraConfiguration implements BeanClassLoaderAware {
+public class SystemCassandraConfiguration extends AbstractCassandraConfiguration implements BeanClassLoaderAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(CreateKeySpaces.class);
+    private static final Logger logger = LoggerFactory.getLogger(SystemCassandraConfiguration.class);
     @Value("${spring.data.cassandra.keyspace-name}")
     private String keyspaceName;
     @Value("${spring.data.cassandra.contact-points}")

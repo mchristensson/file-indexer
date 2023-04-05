@@ -2,11 +2,9 @@ package org.se.mac.blorksandbox.analyzer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
-import org.se.mac.blorksandbox.scanner.ScannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,8 +34,8 @@ class LogicalFileIndexServiceTest {
     @Test
     void getAll_whenNoDataPresent_expectResult() {
         Collection<LogicalFileData> mockResult =  new ArrayList<>();
-        when(logicalFileIndexService.getAll()).thenReturn(mockResult);
-        Collection<LogicalFileData> searchResult = logicalFileIndexService.getAll();
+        when(logicalFileIndexService.getAllFiles()).thenReturn(mockResult);
+        Collection<LogicalFileData> searchResult = logicalFileIndexService.getAllFiles();
         assertEquals(0, searchResult.size());
         verify(repository).findAll();
     }
@@ -49,8 +47,8 @@ class LogicalFileIndexServiceTest {
         LogicalFileData mock2 = mock(LogicalFileData.class);
         mockResult.add(mock1);
         mockResult.add(mock2);
-        when(logicalFileIndexService.getAll()).thenReturn(mockResult);
-        Collection<LogicalFileData> searchResult = logicalFileIndexService.getAll();
+        when(logicalFileIndexService.getAllFiles()).thenReturn(mockResult);
+        Collection<LogicalFileData> searchResult = logicalFileIndexService.getAllFiles();
         assertEquals(2, searchResult.size());
         verify(repository).findAll();
         verifyNoMoreInteractions(mock1, mock2);
@@ -59,7 +57,7 @@ class LogicalFileIndexServiceTest {
     @Test
     void add_whenNullDeviceId_expectAdded() {
         Instant timestamp = Instant.now();
-        logicalFileIndexService.add(null, timestamp, "c:/abc/def/ghi.pcx", null, 100L);
+        logicalFileIndexService.addFile(null, timestamp, "c:/abc/def/ghi.pcx", null, 100L);
         verify(repository).save(any(LogicalFileData.class));
     }
 
@@ -67,7 +65,7 @@ class LogicalFileIndexServiceTest {
     void add_whenNullMap_expectAdded() {
         UUID uuid = UUID.randomUUID();
         Instant timestamp = Instant.now();
-        logicalFileIndexService.add(uuid, timestamp, "c:/abc/def/ghi.pcx", null, 100L);
+        logicalFileIndexService.addFile(uuid, timestamp, "c:/abc/def/ghi.pcx", null, 100L);
         verify(repository).save(any(LogicalFileData.class));
     }
 
@@ -76,7 +74,7 @@ class LogicalFileIndexServiceTest {
         UUID uuid = UUID.randomUUID();
         Map<String, String> data = new HashMap<>();
         Instant timestamp = Instant.now();
-        logicalFileIndexService.add(uuid,timestamp, "c:/abc/def/ghi.pcx", data, 100L);
+        logicalFileIndexService.addFile(uuid,timestamp, "c:/abc/def/ghi.pcx", data, 100L);
         verify(repository).save(any(LogicalFileData.class));
     }
 }

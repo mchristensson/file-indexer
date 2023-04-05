@@ -9,15 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UriBuilderTest {
 
-    /*
-
-    public static URI buildURI() {
-        //QueuedJob scanJob = new FileScannerJob("file:///opt/app/test-filestructure", UrlType.UNIX, scannerService);
-        //QueuedJob scanJob = new FileScannerJob("file:///c:/temp", UrlType.WIN_DRIVE_LETTER, scannerService);
-        return URI.create(path);
-    }
-     */
-
     private UriBuilder uriBuilder = new UriBuilder();
 
     @Test

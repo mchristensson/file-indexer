@@ -7,6 +7,15 @@ CREATE TABLE IF NOT EXISTS logicalfilerepository (
     properties map<text,text>
     );
 
+CREATE TABLE IF NOT EXISTS filehashrepository (
+    id UUID PRIMARY KEY,
+    updated_date date,
+    scanTime bigint,
+    deviceId UUID,
+    devicePath text,
+    hash text,
+    );
+
 CREATE TABLE IF NOT EXISTS logicaldevice (
     deviceId UUID PRIMARY KEY,
     title text,

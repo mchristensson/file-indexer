@@ -26,9 +26,7 @@ class LogicalFileRepositoryTests {
         when(service.count()).thenReturn(34L);
         long count = service.count();
         assertEquals(34L, count);
-
         verify(service).count();
     }
-
 
 }
