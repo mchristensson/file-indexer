@@ -1,10 +1,7 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
 import com.drew.lang.annotations.NotNull;
-import org.se.mac.blorksandbox.analyzer.image.ContrastFunction;
-import org.se.mac.blorksandbox.analyzer.image.GenerateChecksumFunction;
-import org.se.mac.blorksandbox.analyzer.image.SaveFileFunction;
-import org.se.mac.blorksandbox.analyzer.image.ScaleFunction;
+import org.se.mac.blorksandbox.analyzer.image.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,9 +39,11 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
 
         GenerateChecksumFunction generateChecksumFunction = new GenerateChecksumFunction(checksumThreshold);
         SaveFileFunction saveFileFunction = new SaveFileFunction(p.getFileName().toString(), outputFileFormat);
-        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, grayscale);
+        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false);
         ContrastFunction contrastFunction = new ContrastFunction();
-        String checksum = contrastFunction
+        ColormodeFunction colormodeFunction = new ColormodeFunction();
+        String checksum = colormodeFunction
+                .andThen(contrastFunction)
                 .andThen(scaleFunction)
                 .andThen(saveFileFunction)
                 .andThen(generateChecksumFunction)

@@ -1,5 +1,6 @@
 package org.se.mac.blorksandbox.jobqueue;
 
+import jakarta.annotation.PreDestroy;
 import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +21,29 @@ import java.util.concurrent.TimeUnit;
 public class QueueService {
 
     private static final Logger logger = LoggerFactory.getLogger(QueueService.class);
+    public static final int EXECUTOR_DELAY = 5;
+    public static final int CLEANUP_DELAY = 5;
+    public static final int CLEANUP_PERIOD = 10;
 
-    private final Map<Long, Integer> result = new HashMap<>();
+    private final Map<Long, Integer> result;
 
-    private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
+    private ScheduledExecutorService executorService;
 
     public QueueService() {
+        this(Executors.newScheduledThreadPool(2));
+    }
+
+    QueueService(ScheduledExecutorService executorService) {
+        this.executorService = executorService;
+        this.result = new HashMap<>();
         initCleanupActivity();
+    }
+
+
+    @PreDestroy
+    public void destroy() {
+        logger.info("Shutting down executor service...");
+        executorService.shutdown();
     }
 
     private void initCleanupActivity() {
@@ -41,7 +58,7 @@ public class QueueService {
             keys.forEach(result::remove);
             logger.info("Cleaned up {} of {}", dt, t);
         };
-        executorService.scheduleAtFixedRate(cleanup, 5, 10, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(cleanup, CLEANUP_DELAY, CLEANUP_PERIOD, TimeUnit.SECONDS);
     }
 
     /**
@@ -59,7 +76,7 @@ public class QueueService {
                     throw new RuntimeException(e);
                 }
             };
-            executorService.schedule(wrapperAction, 5, TimeUnit.SECONDS);
+            executorService.schedule(wrapperAction, EXECUTOR_DELAY, TimeUnit.SECONDS);
 
         } catch (RejectedExecutionException e) {
             result.put(job.getId(), QueuedJob.JOB_STATUS_ERROR);
@@ -67,10 +84,9 @@ public class QueueService {
         }
     }
 
-    public int getStatus(final long id) {
-        return result.getOrDefault(id, -1);
+    public boolean isRunning() {
+        return !executorService.isShutdown();
     }
-
     public Map<Long, Integer> getResult() {
         return new HashMap<>(this.result);
     }

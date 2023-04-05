@@ -24,9 +24,13 @@ public class GenerateChecksumFunction implements Function<BufferedImage, String>
     public String apply(BufferedImage bufferedImage) {
         int h = bufferedImage.getHeight();
         int w = bufferedImage.getWidth();
+        if (h > 128 || w > 128) {
+            logger.error("Image is too large. Checksum will not be generated [w={}, h={}]", w, h);
+            return null;
+        }
         int[] rgbArray = new int[w * h];
         logger.debug("Generating checksum... [w={}, h={}, wxh={}]", w, h, rgbArray.length);
-        Integer avg = getRGB(bufferedImage.getColorModel(), bufferedImage.getRaster(), w, h, rgbArray);
+        int avg = getRGB(bufferedImage.getColorModel(), bufferedImage.getRaster(), w, h, rgbArray);
         return createChecksum(rgbArray, avg);
     }
 

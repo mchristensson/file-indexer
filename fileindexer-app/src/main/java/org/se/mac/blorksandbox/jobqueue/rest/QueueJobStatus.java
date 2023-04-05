@@ -2,29 +2,30 @@ package org.se.mac.blorksandbox.jobqueue.rest;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.Map;
 
 public class QueueJobStatus {
 
-    private Long timestamp;
+    private final Long timestamp;
 
     public QueueJobStatusEntry[] getData() {
         return data;
     }
 
     static public class QueueJobStatusEntry {
-        private long id;
-        private int status;
+        private final long id;
+        private final int status;
 
         public QueueJobStatusEntry(Long key, Integer value) {
-            this.id = id;
+            this.id = key;
             this.status = value;
         }
 
         public long getId() {
             return id;
         }
+
         public int getStatus() {
             return status;
         }
@@ -36,7 +37,7 @@ public class QueueJobStatus {
         this.timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Collection<QueueJobStatusEntry> d = data.entrySet().stream()
                 .map(element -> new QueueJobStatusEntry(element.getKey(), element.getValue()))
-                .collect(Collectors.toList());
+                .toList();
         this.data = new QueueJobStatusEntry[d.size()];
         d.toArray(this.data);
     }
@@ -44,6 +45,5 @@ public class QueueJobStatus {
     public Long getTimestamp() {
         return timestamp;
     }
-
 
 }
