@@ -22,6 +22,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 
@@ -46,6 +47,11 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
             throw new IOException("Not granted read access to file");
         }
         return getMetaDataMap(f);
+    }
+
+    @Override
+    public void doAfter(Consumer<String> filePathConsumer) {
+        //Nothing to clean up
     }
 
     private Map<String, String> getMetaDataMap(File file) throws ImageProcessingException, IOException {

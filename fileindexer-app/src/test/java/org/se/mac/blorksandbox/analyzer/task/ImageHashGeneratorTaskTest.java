@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.se.mac.blorksandbox.analyzer.image.ContrastFunction;
 
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,8 +17,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class ImageHashGeneratorTaskTest {
 
     @Test
-    void apply() {
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 128, true, 8);
+    void apply_whenNullArg_expectException() {
+        String procId = UUID.randomUUID().toString();
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
+        try {
+            task.apply(null);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertEquals(e.getClass(), NullPointerException.class);
+        }
+    }
+
+    @Test
+    void apply_whenNullProcId_expectException() {
+        String procId = null;
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
         try {
             task.apply(null);
             fail("Exception expected");
@@ -29,7 +42,8 @@ class ImageHashGeneratorTaskTest {
 
     @Test
     void apply_whenTestFile1_expecteRead() throws Exception {
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 128, true, 8);
+        String procId = UUID.randomUUID().toString();
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
         Path testFile1 = Path.of("./src/test/resources/images/misc/cats.jpg");
         String result = task.apply(testFile1);
 
@@ -71,7 +85,8 @@ class ImageHashGeneratorTaskTest {
 
     @Test
     void apply_whenTestFilesDices_expectHammingDistance() throws Exception {
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 16, true, 8);
+        String procId = UUID.randomUUID().toString();
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, true, 8);
 
         Path testFile1 = Path.of("./src/test/resources/images/misc/dice-2.png");
         String result1 = task.apply(testFile1);
@@ -97,7 +112,8 @@ class ImageHashGeneratorTaskTest {
 
     @Test
     void apply_whenTestFilesCoins_expectHammingDistance() throws Exception {
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 16, true, 8);
+        String procId = UUID.randomUUID().toString();
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, true, 8);
 
         Path testFile1 = Path.of("./src/test/resources/images/misc/1-krona.png");
         String result1 = task.apply(testFile1);

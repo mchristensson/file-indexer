@@ -1,8 +1,7 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 public interface FileAnalyzerTask<R> {
 
@@ -14,4 +13,5 @@ public interface FileAnalyzerTask<R> {
      */
     R apply(Path t) throws Exception;
 
+    void doAfter(Consumer<String> filePathConsumer);
 }

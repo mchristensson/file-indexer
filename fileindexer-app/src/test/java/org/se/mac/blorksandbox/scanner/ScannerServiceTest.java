@@ -12,8 +12,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
@@ -76,7 +81,7 @@ class ScannerServiceTest {
         boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
         assertTrue(result);
         verify(logicalFileIndexService, times(12))
-                .addFile(
+                .createFileMetaData(
                         any(UUID.class),
                         any(Instant.class),
                         anyString(),
@@ -105,23 +110,92 @@ class ScannerServiceTest {
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
         //noinspection unchecked
         verify(logicalFileIndexService)
-                .addFile(
+                .createFileMetaData(
                         any(UUID.class),
                         any(Instant.class),
                         ArgumentMatchers.contains("sony-powershota5.jpg"),
                         argumentsCaptured.capture(),
                         anyLong()
-                        /*
-                        any(UUID.class),
-                        any(Instant.class),
-                        anyString(),
-                        anyMap(),
-                        anyLong()
-                         */
                 );
         var foo = argumentsCaptured.getValue();
         assert argumentsCaptured.getValue().containsKey("File Size");
         assert argumentsCaptured.getValue().containsKey("File Name");
 
     }
+
+    @Test
+    void generateImageHash_whenNullArgs_expectException() {
+        URI uri = null;
+        UUID deviceId = null;
+        try {
+            scannerService.generateImageHash(uri, deviceId);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertEquals(NullPointerException.class, e.getClass());
+        }
+    }
+
+    @Test
+    void generateImageHash_whenNullUri_expectException() {
+        URI uri = null;
+        UUID deviceId = UUID.randomUUID();
+        try {
+            scannerService.generateImageHash(uri, deviceId);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertEquals(NullPointerException.class, e.getClass());
+            assertTrue(e.getMessage().contains("\"uri\" is null"));
+        }
+    }
+
+    @Test
+    void generateImageHash_whenNullDeviceId_expectException() throws IOException {
+        File f = File.createTempFile("test", "tmp");
+        f.deleteOnExit();
+        URI uri = f.toURI();
+        UUID deviceId = null;
+        try {
+            scannerService.generateImageHash(uri, deviceId);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertEquals(RuntimeException.class, e.getClass());
+        }
+    }
+
+    @Test
+    void generateImageHash_whenImageInvalid_expectException() throws IOException {
+        File f = File.createTempFile("test", "tmp");
+        f.deleteOnExit();
+        URI uri = f.toURI();
+        UUID deviceId = UUID.randomUUID();
+        try {
+            scannerService.generateImageHash(uri, deviceId);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertEquals(RuntimeException.class, e.getClass());
+        }
+    }
+
+    @Test
+    void generateImageHash_whenArgs_expect() throws IOException {
+        File tmpdir = new File(System.getProperty("java.io.tmpdir"));
+        Path targetPath = Path.of(tmpdir.getPath(), "foo.png");
+        File targetFile = targetPath.toFile();
+        targetFile.deleteOnExit();
+        try (InputStream is = getClass().getResourceAsStream("/images/misc/dice-2.png")) {
+            System.out.println("Copy file to " + targetPath);
+            Files.copy(is, targetPath);
+        }
+        URI uri = targetFile.toURI();
+        UUID deviceId = UUID.randomUUID();
+
+        boolean result = scannerService.generateImageHash(uri, deviceId);
+
+        assertTrue(result);
+        verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class),
+                anyString(), anyString(), anyLong());
+        verify(logicalFileIndexService).createSmallFile(eq(deviceId), any(Instant.class),
+               anyString(), any(ByteBuffer.class), eq("JPG"));
+    }
+
 }

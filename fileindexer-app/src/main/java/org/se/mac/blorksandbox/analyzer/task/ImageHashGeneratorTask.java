@@ -1,14 +1,17 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
-import com.drew.lang.annotations.NotNull;
 import org.se.mac.blorksandbox.analyzer.image.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 
 /**
@@ -19,26 +22,48 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
     private static final Logger logger = LoggerFactory.getLogger(ImageHashGeneratorTask.class);
     private final String outputFileFormat;
     private final int checksumThreshold;
-    private final boolean grayscale;
-
     private final int maxPixels;
+    private String outputFileName;
+    private String procId;
+    private boolean debugMode;
 
-    public ImageHashGeneratorTask(@NotNull String outputFileFormat, int checksumThreshold, boolean grayscale, int maxPixels) {
+    public ImageHashGeneratorTask(String procId, String outputFileFormat, int checksumThreshold, boolean grayscale, int maxPixels) {
+        this.procId = procId == null? UUID.randomUUID().toString() : procId;
         this.outputFileFormat = outputFileFormat;
         this.checksumThreshold = checksumThreshold;
-        this.grayscale = grayscale;
         this.maxPixels = maxPixels;
     }
+
+    private Supplier<String> outputFileUrlSupplier = () -> {
+        if (debugMode) {
+            return ("./target/output_" + procId + "_" + this.outputFileName);
+        } else {
+            String tmpDir = System.getProperty("java.io.tmpdir");
+            tmpDir += tmpDir.endsWith("/") ? "" : "/";
+            return (tmpDir + procId + "/" + this.outputFileName);
+        }
+    };
 
     @Override
     public String apply(Path p) throws Exception {
         logger.debug("Reading from file... {}", p);
-        BufferedImage image = ImageIO.read(p.toFile());
+        this.outputFileName = p.getFileName().toString();
+        File f = p.toFile();
+        if (!f.exists()) {
+            throw new IOException("File does not exist");
+        } else if (!f.canRead()) {
+            throw new IOException("Cannot read from file");
+        }
+        BufferedImage image = ImageIO.read(f);
+        if (image == null) {
+            throw new IOException("Invalid file content");
+        }
 
         String[] formatNames = ImageIO.getReaderFormatNames();
+        logger.debug("Available format names: {}", formatNames);
 
         GenerateChecksumFunction generateChecksumFunction = new GenerateChecksumFunction(checksumThreshold);
-        SaveFileFunction saveFileFunction = new SaveFileFunction(p.getFileName().toString(), outputFileFormat);
+        SaveFileFunction saveFileFunction = new SaveFileFunction(outputFileUrlSupplier, outputFileFormat);
         ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false);
         ContrastFunction contrastFunction = new ContrastFunction();
         ColormodeFunction colormodeFunction = new ColormodeFunction();
@@ -48,11 +73,29 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
                 .andThen(saveFileFunction)
                 .andThen(generateChecksumFunction)
                 .apply(image);
-        logger.debug("Saved to file... [outputfile={}, checksum={}]", saveFileFunction.getOutputFile(), checksum);
+        logger.debug("Saved to file... [outputfile={}, checksum={}]", outputFileUrlSupplier.get(), checksum);
         return checksum;
     }
 
+    @Override
+    public void doAfter(Consumer<String> filePathConsumer) {
+        filePathConsumer.accept(this.outputFileUrlSupplier.get());
+        this.deleteFile(this.outputFileUrlSupplier);
+    }
 
+    private void deleteFile(Supplier<String> outputFileUrlSupplier ) {
+        logger.debug("Try to delete the file");
+        File f = new File(outputFileUrlSupplier.get());
+        if (!f.exists()) {
+            logger.warn("File does not exist");
+        } else if (f.isDirectory()) {
+            logger.warn("File is a directory");
+        } else if (f.delete()) {
+            logger.info("File deleted");
+        } else {
+            logger.error("File could not be deleted");
+        }
+    }
 
 
     /*
@@ -74,6 +117,7 @@ As with the Average Hash, pHash values can be compared using the same Hamming di
 
     //MEDIAN HASH
 
+
     /**
      * Hash from each image and count the number of bit positions that are different.
      *
@@ -82,8 +126,6 @@ As with the Average Hash, pHash values can be compared using the same Hamming di
      * @return number of bit positions that are different
      */
     public static int hammingDistance(long a, long b) {
-
-
         int dist = 0;
 
         // The ^ operators sets to 1 only the bits that are different
@@ -93,7 +135,25 @@ As with the Average Hash, pHash values can be compared using the same Hamming di
         }
 
         // Return the number of differing bits
-        logger.debug("Hammin distance... [a={}, b={}, distance={}]", a,b,dist);
+        logger.debug("Hammin distance... [a={}, b={}, distance={}]", a, b, dist);
         return dist;
+    }
+
+    /**
+     * Hash from two String with null check
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated hamming distance
+     * @see #hammingDistance(long, long)
+     */
+    public static int hammingDistance(String a, String b) {
+        if (a != null && b != null) {
+            long r1 = Long.parseUnsignedLong(a, 16);
+            long r2 = Long.parseUnsignedLong(b, 16);
+            return hammingDistance(r1, r2);
+        } else {
+            return -1;
+        }
     }
 }

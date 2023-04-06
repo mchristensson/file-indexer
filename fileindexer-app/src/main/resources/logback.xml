@@ -40,6 +40,7 @@
     <logger name="org.springframework.data" level="info" />
     <logger name="org.apache.cassandra" level="error" />
     <logger name="com.datastax.driver.core" level="error" />
+    <logger name="org.springframework.web" level="debug" />
 
     <logger name="org.se.mac" level="info" additivity="false">
         <appender-ref ref="RollingFile" />

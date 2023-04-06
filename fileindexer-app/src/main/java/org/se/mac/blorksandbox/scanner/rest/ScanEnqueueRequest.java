@@ -5,6 +5,7 @@ import org.se.mac.blorksandbox.scanner.model.UrlType;
 
 import java.util.UUID;
 
+//TODO: Make this a record instead
 public class ScanEnqueueRequest implements EnqueueJobRequest {
     private String path;
     private String type;

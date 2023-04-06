@@ -1,6 +1,5 @@
 package org.se.mac.blorksandbox.analyzer.image;
 
-import com.drew.lang.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +33,7 @@ public class GenerateChecksumFunction implements Function<BufferedImage, String>
         return createChecksum(rgbArray, avg);
     }
 
-    public String createChecksum(@NotNull final int[] vals, final int threshold) {
+    public String createChecksum(final int[] vals, final int threshold) {
         byte[] output = new byte[(vals.length - (vals.length % 8)) / 8];
         for (int b = 0; b < output.length; b++) {
             byte bNext = 0;

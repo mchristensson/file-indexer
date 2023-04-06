@@ -21,6 +21,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ImageAnalyzerTaskTest {
 
+    @AfterEach
+    public void verifyMocksAfter() {
+    }
+
     @Test
     void apply_whenNullPath_expectException() {
         ImageAnalyzerTask task = new ImageAnalyzerTask();
@@ -30,10 +34,6 @@ class ImageAnalyzerTaskTest {
         } catch (Exception e) {
             assertEquals(e.getClass(), NullPointerException.class);
         }
-    }
-
-    @AfterEach
-    public void verifyMocksAfter() {
     }
 
     @Test

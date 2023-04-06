@@ -16,6 +16,16 @@ CREATE TABLE IF NOT EXISTS filehashrepository (
     hash text,
     );
 
+
+CREATE TABLE IF NOT EXISTS filedatarepository (
+    id UUID PRIMARY KEY,
+    updated_date date,
+    deviceId UUID,
+    devicePath text,
+    data blob,
+    contentType text,
+    );
+
 CREATE TABLE IF NOT EXISTS logicaldevice (
     deviceId UUID PRIMARY KEY,
     title text,

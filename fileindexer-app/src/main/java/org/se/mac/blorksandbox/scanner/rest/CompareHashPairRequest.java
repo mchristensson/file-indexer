@@ -1,6 +1,8 @@
 package org.se.mac.blorksandbox.scanner.rest;
 
+//TODO: Make this a record instead
 public class CompareHashPairRequest {
+
     private String idA;
     private String idB;
 

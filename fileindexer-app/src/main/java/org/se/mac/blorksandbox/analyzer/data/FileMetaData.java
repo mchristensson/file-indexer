@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Table
-public class LogicalFileData {
+public class FileMetaData {
 
     @PrimaryKey
     private UUID id;
@@ -18,7 +18,7 @@ public class LogicalFileData {
     private long scanTime;
     private Map<String, String> properties;
 
-    public LogicalFileData(UUID id, Instant updated_date, UUID deviceId, String devicePath, Map<String, String> properties, long scanTime) {
+    public FileMetaData(UUID id, Instant updated_date, UUID deviceId, String devicePath, Map<String, String> properties, long scanTime) {
         this.id = id;
         this.updated_date = updated_date;
         this.scanTime = scanTime;

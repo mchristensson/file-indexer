@@ -1,7 +1,6 @@
 package org.se.mac.blorksandbox.analyzer.repository;
 
-import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -12,17 +11,17 @@ import java.util.UUID;
 public class LogicalFileRepositoryImpl implements LogicalFileRepository {
 
     @Override
-    public <S extends LogicalFileData> S save(S entity) {
+    public <S extends FileMetaData> S save(S entity) {
         return null;
     }
 
     @Override
-    public <S extends LogicalFileData> Iterable<S> saveAll(Iterable<S> entities) {
+    public <S extends FileMetaData> Iterable<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional<LogicalFileData> findById(UUID uuid) {
+    public Optional<FileMetaData> findById(UUID uuid) {
         return Optional.empty();
     }
 
@@ -32,12 +31,12 @@ public class LogicalFileRepositoryImpl implements LogicalFileRepository {
     }
 
     @Override
-    public Iterable<LogicalFileData> findAll() {
+    public Iterable<FileMetaData> findAll() {
         return null;
     }
 
     @Override
-    public Iterable<LogicalFileData> findAllById(Iterable<UUID> uuids) {
+    public Iterable<FileMetaData> findAllById(Iterable<UUID> uuids) {
         return null;
     }
 
@@ -52,7 +51,7 @@ public class LogicalFileRepositoryImpl implements LogicalFileRepository {
     }
 
     @Override
-    public void delete(LogicalFileData entity) {
+    public void delete(FileMetaData entity) {
 
     }
 
@@ -62,7 +61,7 @@ public class LogicalFileRepositoryImpl implements LogicalFileRepository {
     }
 
     @Override
-    public void deleteAll(Iterable<? extends LogicalFileData> entities) {
+    public void deleteAll(Iterable<? extends FileMetaData> entities) {
 
     }
 

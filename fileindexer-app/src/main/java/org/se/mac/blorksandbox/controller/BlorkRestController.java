@@ -2,7 +2,8 @@ package org.se.mac.blorksandbox.controller;
 
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
-import org.se.mac.blorksandbox.analyzer.data.LogicalFileData;
+import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
+import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
 import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
 import org.se.mac.blorksandbox.rest.LogicalFilesSearchResult;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
@@ -91,6 +91,14 @@ public class BlorkRestController {
         return new LogicalFilesSearchResult(names.toArray(new LogicalFileValue[0]));
     }
 
+    @GetMapping(value = "imgash/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] imageById(@RequestParam(name = "id") String id) {
+        logger.debug("Retrieving image from id... [id={}]", id);
+        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(id));
+
+        return image.map(smallFileData -> smallFileData.getBlob().array()).orElse(null);
+    }
+
     @PostMapping(value = "imgash/compare", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
         logger.debug("Retrieving hashes from index...");
@@ -98,11 +106,11 @@ public class BlorkRestController {
         Iterable<UUID> ids=
         Stream.of(compareHashPairRequest.getIdA(), compareHashPairRequest.getIdB()).map(UUID::fromString).toList();
 
-        int result = fileIndexService.compareFileHashes(ids);
+        int result = fileIndexService.getFileHashComparison(ids);
         return String.valueOf(result);
     }
 
-    private static Function<LogicalFileData, LogicalFileValue> transformLogicalFile() {
+    private static Function<FileMetaData, LogicalFileValue> transformLogicalFile() {
         return f -> {
             return new LogicalFileValue(
                     f.getId().toString(), // String id,
@@ -127,6 +135,5 @@ public class BlorkRestController {
         };
 
     }
-
 
 }

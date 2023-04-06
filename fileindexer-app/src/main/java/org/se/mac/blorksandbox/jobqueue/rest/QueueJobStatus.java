@@ -5,6 +5,7 @@ import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.Map;
 
+//TODO: Can this be a record instead?
 public class QueueJobStatus {
 
     private final Long timestamp;

@@ -1,5 +1,6 @@
 package org.se.mac.blorksandbox.jobqueue.rest;
 
+//TODO: Makes this a record instead
 public class QueuedJobRequestReceipt {
 
     private final long id;

@@ -8,32 +8,35 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class SaveFileFunction implements Function<BufferedImage, BufferedImage> {
     private static final Logger logger = LoggerFactory.getLogger(SaveFileFunction.class);
-    private final String outputFileName;
+    private Supplier<String> outputPathSupplier;
     private final String outputFileFormat;
-    private String outputFile;
 
-    public SaveFileFunction(String outputFileName, String outputFileFormat) {
-        this.outputFileName = outputFileName;
+    public SaveFileFunction(Supplier<String> outputPathSupplier, String outputFileFormat) {
         this.outputFileFormat = outputFileFormat;
+        this.outputPathSupplier = outputPathSupplier;
     }
 
     @Override
     public BufferedImage apply(BufferedImage bufferedImage) {
-        File f = new File("./target/output_" + System.currentTimeMillis() + this.outputFileName);
-        logger.debug("Saving to file... [path={}]", f.getAbsolutePath());
-        try {
-            ImageIO.write(bufferedImage, outputFileFormat, f);
-            this.outputFile = f.getAbsolutePath();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        saveToLocalDisk(bufferedImage, outputPathSupplier.get());
         return bufferedImage;
     }
 
-    public String getOutputFile() {
-        return outputFile;
+    private void saveToLocalDisk(BufferedImage bufferedImage, final String location) {
+        File f = new File(location);
+        if (!f.mkdirs()) {
+            logger.debug("Directory was not created");
+        }
+        logger.debug("Saving to file... [path={}]", f.getAbsolutePath());
+        try {
+            ImageIO.write(bufferedImage, outputFileFormat, f);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 }

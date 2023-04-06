@@ -11,9 +11,11 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.random.RandomGenerator;
 
 public class DummyJob implements QueuedJob {
+
     private static final Logger logger = LoggerFactory.getLogger(DummyJob.class);
     private final long created;
     private final Long id;
+
     public DummyJob() {
         this.created = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         this.id = generateId();

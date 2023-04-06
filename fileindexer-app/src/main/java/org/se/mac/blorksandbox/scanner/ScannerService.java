@@ -2,16 +2,19 @@ package org.se.mac.blorksandbox.scanner;
 
 import com.drew.imaging.ImageProcessingException;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
-import org.se.mac.blorksandbox.analyzer.task.ImageAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.FileAnalyzerTask;
+import org.se.mac.blorksandbox.analyzer.task.ImageAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.ImageHashGeneratorTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,7 +33,7 @@ public class ScannerService {
     /**
      * Performs meta-data extraction on a directory on a file-device
      *
-     * @param uri URI targeting the device location to be analyzed
+     * @param uri      URI targeting the device location to be analyzed
      * @param deviceId
      * @return true after successful scan
      * @throws RuntimeException If invalid directory
@@ -49,7 +52,7 @@ public class ScannerService {
     /**
      * Performs hash analysis on a file
      *
-     * @param uri URI targeting the device location to be analyzed
+     * @param uri      URI targeting the device location to be analyzed
      * @param deviceId
      * @return true after successful scan
      * @throws RuntimeException If invalid directory
@@ -104,7 +107,7 @@ public class ScannerService {
             Instant.ofEpochMilli(t1);
 
             logger.debug("Adding data to index... [properties={}]", data);
-            logicalFileIndexService.addFile(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
+            logicalFileIndexService.createFileMetaData(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);
@@ -115,17 +118,41 @@ public class ScannerService {
     /**
      * Generates hash for image
      *
-     * @param path     path representing a file (not a directory/folder)
+     * @param path path representing a file (not a directory/folder)
      */
     private void generateHashForFile(UUID deviceId, Path path) {
         logger.debug("Generating has for file... [URI: '{}']", path);
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask("JPG", 128, true, 8);
+        String procId = UUID.randomUUID().toString();
+        String outputFileFormat = "JPG";
+        ImageHashGeneratorTask task = new ImageHashGeneratorTask(procId, outputFileFormat, 128, true, 8);
         try {
             long t0 = System.currentTimeMillis();
             final String output = task.apply(path);
             long t1 = System.currentTimeMillis();
-            logger.debug("Output hash [output={}, duration={}]", output, t1-t0);
-            logicalFileIndexService.addFileHash(deviceId, Instant.ofEpochMilli(t1), path.toString(), output, t1 - t0);
+            logger.debug("Output hash [output={}, duration={}]", output, t1 - t0);
+
+            logicalFileIndexService.createFileHash(deviceId, Instant.ofEpochMilli(t1), path.toString(), output, t1 - t0);
+
+            task.doAfter((filePath) -> {
+                InputStream in = null;
+
+                try {
+                    in = new FileInputStream(filePath);
+                    ByteBuffer byteBuffer = ByteBuffer.wrap(in.readAllBytes());
+                    logicalFileIndexService.createSmallFile(deviceId, Instant.ofEpochMilli(t1), path.toString(), byteBuffer, outputFileFormat);
+                } catch (IOException e) {
+                    logger.error("Could not read from file in order to store it", e);
+                } finally {
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            logger.error("Could not close input-stream", e);
+                        }
+                    }
+                }
+            });
+
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);
