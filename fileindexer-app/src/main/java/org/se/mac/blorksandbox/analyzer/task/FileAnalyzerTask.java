@@ -13,5 +13,5 @@ public interface FileAnalyzerTask<R> {
      */
     R apply(Path t) throws Exception;
 
-    void doAfter(Consumer<String> filePathConsumer);
+    void setDoAfter(Consumer<String> filePathConsumer);
 }

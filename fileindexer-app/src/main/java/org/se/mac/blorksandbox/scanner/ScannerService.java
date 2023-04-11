@@ -2,6 +2,8 @@ package org.se.mac.blorksandbox.scanner;
 
 import com.drew.imaging.ImageProcessingException;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
+import org.se.mac.blorksandbox.analyzer.data.FileHashData;
+import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.analyzer.task.FileAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.ImageAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.ImageHashGeneratorTask;
@@ -20,7 +22,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @Service
 public class ScannerService {
@@ -104,7 +108,6 @@ public class ScannerService {
             long t0 = System.currentTimeMillis();
             final Map<String, String> data = task.apply(path);
             long t1 = System.currentTimeMillis();
-            Instant.ofEpochMilli(t1);
 
             logger.debug("Adding data to index... [properties={}]", data);
             logicalFileIndexService.createFileMetaData(deviceId, Instant.ofEpochMilli(t1), path.toString(), data, t1 - t0);
@@ -114,6 +117,8 @@ public class ScannerService {
             }
         }
     }
+
+    private UUID smallFileDataId;
 
     /**
      * Generates hash for image
@@ -126,20 +131,19 @@ public class ScannerService {
         String outputFileFormat = "JPG";
         ImageHashGeneratorTask task = new ImageHashGeneratorTask(procId, outputFileFormat, 128, true, 8);
         try {
-            long t0 = System.currentTimeMillis();
-            final String output = task.apply(path);
-            long t1 = System.currentTimeMillis();
-            logger.debug("Output hash [output={}, duration={}]", output, t1 - t0);
 
-            logicalFileIndexService.createFileHash(deviceId, Instant.ofEpochMilli(t1), path.toString(), output, t1 - t0);
-
-            task.doAfter((filePath) -> {
+            task.setDoAfter((filePath) -> {
                 InputStream in = null;
 
                 try {
                     in = new FileInputStream(filePath);
                     ByteBuffer byteBuffer = ByteBuffer.wrap(in.readAllBytes());
-                    logicalFileIndexService.createSmallFile(deviceId, Instant.ofEpochMilli(t1), path.toString(), byteBuffer, outputFileFormat);
+                    SmallFileData smallFileData = logicalFileIndexService.createSmallFile(deviceId, Instant.ofEpochMilli(System.currentTimeMillis()), path.toString(), byteBuffer, outputFileFormat);
+                    if (smallFileData == null) {
+                        throw new NullPointerException("Data was not generated");
+                    }
+                    smallFileDataId = smallFileData.getId();
+
                 } catch (IOException e) {
                     logger.error("Could not read from file in order to store it", e);
                 } finally {
@@ -153,6 +157,23 @@ public class ScannerService {
                 }
             });
 
+            long t0 = System.currentTimeMillis();
+            final String output = task.apply(path);
+            long t1 = System.currentTimeMillis();
+            logger.debug("Output hash [output={}, duration={}]", output, t1 - t0);
+
+            FileHashData fileHashData = logicalFileIndexService.createFileHash(deviceId, Instant.ofEpochMilli(t1), path.toString(), output, t1 - t0);
+
+            if (this.smallFileDataId != null) {
+                logger.warn("Updating file hash data...");
+                logicalFileIndexService.updateFileHashData(fileHashData, fileHashData::setSmallFileDataId, smallFileDataId);
+            } else {
+                logger.warn("No file hash data to update!");
+            }
+
+
+
+
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
                 throw new RuntimeException(e);
@@ -160,7 +181,7 @@ public class ScannerService {
         }
     }
 
-}
 
+}
 
 

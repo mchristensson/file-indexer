@@ -17,10 +17,12 @@ public class QueueJobStatus {
     static public class QueueJobStatusEntry {
         private final long id;
         private final int status;
+        private final String message;
 
-        public QueueJobStatusEntry(Long key, Integer value) {
+        public QueueJobStatusEntry(Long key, Integer value, String message) {
             this.id = key;
             this.status = value;
+            this.message = message;
         }
 
         public long getId() {
@@ -37,7 +39,7 @@ public class QueueJobStatus {
     public QueueJobStatus(Map<Long, Integer> data) {
         this.timestamp = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         Collection<QueueJobStatusEntry> d = data.entrySet().stream()
-                .map(element -> new QueueJobStatusEntry(element.getKey(), element.getValue()))
+                .map(element -> new QueueJobStatusEntry(element.getKey(), element.getValue(), "todo"))
                 .toList();
         this.data = new QueueJobStatusEntry[d.size()];
         d.toArray(this.data);

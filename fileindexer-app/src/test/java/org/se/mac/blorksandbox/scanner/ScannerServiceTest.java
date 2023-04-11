@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
+import org.se.mac.blorksandbox.analyzer.data.FileHashData;
+import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,8 @@ import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -178,6 +182,31 @@ class ScannerServiceTest {
 
     @Test
     void generateImageHash_whenArgs_expect() throws IOException {
+
+        /*
+        public SmallFileData createSmallFile(     @Validated UUID deviceId,
+    Instant timestamp,
+    String devicePath,
+    ByteBuffer data,
+    String contentType )
+         */
+        SmallFileData smallFileDataMock = mock(SmallFileData.class);
+        when(smallFileDataMock.getId()).thenReturn(UUID.randomUUID());
+        when(logicalFileIndexService.createSmallFile(
+                any(UUID.class),
+                any(Instant.class),
+                anyString(),
+                any(ByteBuffer.class),
+                anyString()
+        )).thenReturn(smallFileDataMock);
+
+        FileHashData fileHashDataMock = mock(FileHashData.class);
+        when(logicalFileIndexService.createFileHash(
+                any(UUID.class),
+                any(Instant.class),
+                anyString(),
+                anyString(), anyLong())).thenReturn(fileHashDataMock);
+
         File tmpdir = new File(System.getProperty("java.io.tmpdir"));
         Path targetPath = Path.of(tmpdir.getPath(), "foo.png");
         File targetFile = targetPath.toFile();
@@ -195,7 +224,11 @@ class ScannerServiceTest {
         verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class),
                 anyString(), anyString(), anyLong());
         verify(logicalFileIndexService).createSmallFile(eq(deviceId), any(Instant.class),
-               anyString(), any(ByteBuffer.class), eq("JPG"));
+                anyString(), any(ByteBuffer.class), eq("JPG"));
+        verify(logicalFileIndexService).updateFileHashData(eq(fileHashDataMock), any(Consumer.class),
+                any(UUID.class));
+        verify(smallFileDataMock).getId();
+        verifyNoMoreInteractions(smallFileDataMock, fileHashDataMock);
     }
 
 }

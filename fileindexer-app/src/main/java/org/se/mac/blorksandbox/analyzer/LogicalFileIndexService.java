@@ -16,6 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Service
 public class LogicalFileIndexService {
@@ -98,4 +101,8 @@ public class LogicalFileIndexService {
         return smallFileDataRepository.save(d);
     }
 
+    public void updateFileHashData(FileHashData fileHashData, Consumer<UUID> updateFunction, UUID smallFileDataId) {
+        updateFunction.accept(smallFileDataId);
+        fileHashRepository.save(fileHashData);
+    }
 }

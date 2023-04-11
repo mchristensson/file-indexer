@@ -7,6 +7,18 @@ export class ScanJobStatusDataEntry {
     errorMessage:string;
 }
 
+
+
+export class ImgHashData {
+    id: string;
+    deviceId: string;
+    devicePath: string;
+    checksum: string;
+    scanTime: number;
+    date: Date;
+    properties: any;
+    
+}
 /*
 export class ScanJobStatusData  {
     data = new Map<string, number>();
@@ -21,6 +33,5 @@ export class EqueueJobReceipt {
 }
 
 export class ScannedDataEntry {
-name:string;
-
+    name:string;
 }

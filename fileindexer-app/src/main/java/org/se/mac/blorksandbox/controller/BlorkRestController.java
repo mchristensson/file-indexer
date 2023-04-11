@@ -125,13 +125,18 @@ public class BlorkRestController {
 
     private static Function<FileHashData, LogicalFileValue> transformFileHash() {
         return f -> {
+
+            Map<String, String> data = new HashMap<>();
+            data.put("checksum", f.getHash());
+            data.put("smallfiledataid", f.getSmallFileDataId().toString());
+
             return new LogicalFileValue(
                     f.getId().toString(), // String id,
                     f.getDevicePath(), // String devicePath,
                     f.getUpdated_date(), // Date date,
                     f.getScanTime(), // long scanTime,
                     f.getDeviceId().toString(), // String deviceId,
-                    Collections.singletonMap("checksum", f.getHash())); // Map<String, String> properties
+                    data); // Map<String, String> properties
         };
 
     }

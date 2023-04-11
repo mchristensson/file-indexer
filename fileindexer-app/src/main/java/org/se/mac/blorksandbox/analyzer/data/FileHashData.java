@@ -17,6 +17,7 @@ public class FileHashData {
     private Instant updated_date;
     private long scanTime;
     private String hash;
+    private UUID smallFileDataId;
 
     public FileHashData(UUID id, Instant updated_date, UUID deviceId, String devicePath, String hash, long scanTime) {
         this.id = id;
@@ -61,5 +62,13 @@ public class FileHashData {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public UUID getSmallFileDataId() {
+        return smallFileDataId;
+    }
+
+    public void setSmallFileDataId(UUID smallFileDataId) {
+        this.smallFileDataId = smallFileDataId;
     }
 }

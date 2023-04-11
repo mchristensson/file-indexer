@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ScanjobAddComponent } from './components/scanjob-add/scanjob-add.component';
 import { ScanjobListComponent } from './components/scanjob-list/scanjob-list.component';
 import { SearchinindexComponent } from './components/searchinindex/searchinindex.component';
-import { ImgashListComponent } from './imgash-list/imgash-list.component';
+import { ImgashListComponent } from './components/imgash-list/imgash-list.component';
 import { ImgashAddComponent } from './components/imgash-add/imgash-add.component';
 
 @NgModule({

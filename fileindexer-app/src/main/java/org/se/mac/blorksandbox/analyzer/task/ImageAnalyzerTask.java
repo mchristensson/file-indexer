@@ -50,8 +50,8 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
     }
 
     @Override
-    public void doAfter(Consumer<String> filePathConsumer) {
-        //Nothing to clean up
+    public void setDoAfter(Consumer<String> filePathConsumer) {
+
     }
 
     private Map<String, String> getMetaDataMap(File file) throws ImageProcessingException, IOException {

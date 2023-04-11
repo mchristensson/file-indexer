@@ -1,27 +1,18 @@
 <header>
   <div class="toolbar" role="banner">
     <span lang="sv">{{ title }}</span>
-
+    <nav class="toolbar-horizontal-nav">
+      <span><a routerLink="/job-list" routerLinkActive="active" ariaCurrentWhenActive="page">Task list</a></span>
+      <span><a routerLink="/imghash-list" routerLinkActive="active" ariaCurrentWhenActive="page">Image data</a></span>
+      <span><a routerLink="/metadata-index" routerLinkActive="active" ariaCurrentWhenActive="page">File meta-data</a></span>
+    </nav>
+    
   </div>  
 </header>
 
-
-
 <div class="content" role="main">
   <section>
-    <h2>Image analysis</h2>
-    <app-imgash-add></app-imgash-add>
-  </section>
-
-
-  <section>
-    <h2>Indexed data</h2>
-    <app-searchinindex></app-searchinindex>
-  </section>
-
-  <section>
-    <h2>Scan jobs</h2>
-    <app-scanjob-list></app-scanjob-list>
+    <router-outlet></router-outlet>
   </section>
 </div>
 
@@ -30,6 +21,3 @@
     footer
   </div>
 </footer>
-
-
-<router-outlet></router-outlet>

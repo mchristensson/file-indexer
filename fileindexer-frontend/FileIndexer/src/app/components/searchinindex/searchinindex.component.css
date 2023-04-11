@@ -6,7 +6,8 @@ table {
     minmax(20px,  40px)
     minmax(200px, 0.3fr)
     minmax(200px, 1fr)
-    minmax(100px, 0.3fr)
+    minmax(100px, 0.3fr);
+
 }
   
 thead,
@@ -30,18 +31,19 @@ td {
 th {
     position: sticky;
     top: 0;
-    background: #4c4f64;
+    background: #7b7c88;
     text-align: left;
-    font-weight: normal;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: white;
     position: relative;
-    border: 0;
 }
   
 td {
     padding-top: 10px;
     padding-bottom: 10px;
-    color: #808080;
+    color: #7b7c88;
 }
   
+h2 {
+    font-size: 0.9rem;
+}

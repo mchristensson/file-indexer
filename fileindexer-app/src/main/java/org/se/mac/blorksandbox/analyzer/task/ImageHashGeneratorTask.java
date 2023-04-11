@@ -25,6 +25,7 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
     private final int maxPixels;
     private String outputFileName;
     private String procId;
+    private Consumer<String> doAfter;
     private boolean debugMode;
 
     public ImageHashGeneratorTask(String procId, String outputFileFormat, int checksumThreshold, boolean grayscale, int maxPixels) {
@@ -34,7 +35,7 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
         this.maxPixels = maxPixels;
     }
 
-    private Supplier<String> outputFileUrlSupplier = () -> {
+    private final Supplier<String> outputFileUrlSupplier = () -> {
         if (debugMode) {
             return ("./target/output_" + procId + "_" + this.outputFileName);
         } else {
@@ -74,13 +75,18 @@ public class ImageHashGeneratorTask implements FileAnalyzerTask<String> {
                 .andThen(generateChecksumFunction)
                 .apply(image);
         logger.debug("Saved to file... [outputfile={}, checksum={}]", outputFileUrlSupplier.get(), checksum);
+
+        if (doAfter != null) {
+            doAfter.accept(this.outputFileUrlSupplier.get());
+        }
+        this.deleteFile(this.outputFileUrlSupplier);
+
         return checksum;
     }
 
     @Override
-    public void doAfter(Consumer<String> filePathConsumer) {
-        filePathConsumer.accept(this.outputFileUrlSupplier.get());
-        this.deleteFile(this.outputFileUrlSupplier);
+    public void setDoAfter(Consumer<String> filePathConsumer) {
+        this.doAfter = filePathConsumer;
     }
 
     private void deleteFile(Supplier<String> outputFileUrlSupplier ) {
@@ -155,5 +161,10 @@ As with the Average Hash, pHash values can be compared using the same Hamming di
         } else {
             return -1;
         }
+    }
+
+    public ImageHashGeneratorTask setDebugMode(boolean debugMode) {
+        this.debugMode = debugMode;
+        return this;
     }
 }
