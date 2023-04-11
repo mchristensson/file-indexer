@@ -1,17 +1,19 @@
-<div class="pagetooolbar">
-    <button type="button" (click)="enqueueScanJob()">Scan files</button>
-</div>
+
+<app-scanjob-add></app-scanjob-add>
+
 <table>
     <thead>
         <tr>
             <th data-type="numeric">#</th>
             <th data-type="numeric">Status</th>
+            <th data-type="numeric">Errormessage</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let job of scanJobStatusData">
-            <td>{{ job.id }}</td>
+            <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ job.id }}"></i></td>
             <td>{{ job.status }}</td>
+            <td>{{ job.errorMessage }}</td>
         </tr>
     </tbody>
 </table>

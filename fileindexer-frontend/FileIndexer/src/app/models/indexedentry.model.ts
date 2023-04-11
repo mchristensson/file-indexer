@@ -4,6 +4,7 @@ export class Indexedentry {
 export class ScanJobStatusDataEntry {
     id:string;
     status:number;
+    errorMessage:string;
 }
 
 /*
@@ -21,4 +22,5 @@ export class EqueueJobReceipt {
 
 export class ScannedDataEntry {
 name:string;
+
 }

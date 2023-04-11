@@ -20,7 +20,7 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .post<EqueueJobReceipt>("http://localhost:8080/api/scan/enqueue", requestData, httpOpts);
+    .post<EqueueJobReceipt>("http://localhost:8081/api/scan/enqueue", requestData, httpOpts);
 
   }
 
@@ -32,11 +32,11 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .get<{data:ScanJobStatusDataEntry[], timestamp: number}>("http://localhost:8080/api/queue/status", httpOpts);
+    .get<{data:ScanJobStatusDataEntry[], timestamp: number}>("http://localhost:8081/api/queue/status", httpOpts);
       
   }
 
-  getScanData(): Observable<{names: ScannedDataEntry[]}> {
+  getScanData(): Observable<{values: ScannedDataEntry[]}> {
     var httpOpts = {
       headers: new HttpHeaders({
         'Content-Type' : 'application/json',
@@ -44,8 +44,20 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .get<{names: ScannedDataEntry[]}>("http://localhost:8080/api/scan/list", httpOpts);
+    .get<{values: ScannedDataEntry[]}>("http://localhost:8081/api/scan/list", httpOpts);
       
   }
 
+  imgAnalysisEnqueue(requestData): Observable<EqueueJobReceipt> {
+
+    var httpOpts = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Basic ' + btoa('bob:bob')
+      })
+    }
+    return this._client
+    .post<EqueueJobReceipt>("http://localhost:8081/api/imgash/enqueue", requestData, httpOpts);
+
+  }
 }

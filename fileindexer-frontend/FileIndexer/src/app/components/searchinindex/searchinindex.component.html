@@ -1,15 +1,18 @@
-<p>searchinindex works!</p>
 <table>
     <thead>
         <tr>
-            <th data-type="numeric">#</th>
-            <th data-type="numeric">Status</th>
+            <th>#</th>
+            <th data-type="date">Date</th>
+            <th>Device Path</th>
+            <th data-type="numeric">Scan Time</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let scanData of scannedData">
-            <td>-</td>
-            <td>{{ scanData.name }}</td>
+            <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ scanData.id }}"></i></td>
+            <td>{{ scanData.date | date:'fullDate'  }}</td>
+            <td>{{ scanData.devicePath }}</td>
+            <td>{{ scanData.scanTime }}</td>
         </tr>
     </tbody>
 </table>
