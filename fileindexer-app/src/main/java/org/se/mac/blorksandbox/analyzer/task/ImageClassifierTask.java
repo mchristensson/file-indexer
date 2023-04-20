@@ -4,7 +4,6 @@ import org.se.mac.blorksandbox.analyzer.image.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -33,9 +32,11 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
             return (tmpDir + getProcId() + sep + this.outputScaledFileName);
         }
     };
+
     protected void setOutputScaledFileName(String outputFileName) {
         this.outputScaledFileName = outputFileName;
     }
+
     /**
      * @param procId           Process identifier for this task
      * @param outputFileFormat Output file format (the saved file)
@@ -52,18 +53,49 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         logger.debug("Reading from file... {}", p);
         logger.debug("Reading from file... {}", p.toFile().getAbsolutePath());
 
-        setOutputFileName( p.getFileName().toString());
-        setOutputScaledFileName( p.getFileName().toString() + ".scaled." + outputFileFormat);
+        setOutputFileName(p.getFileName().toString());
+        setOutputScaledFileName(p.getFileName().toString() + ".scaled." + outputFileFormat);
 
         //Load image
         BufferedImage image = getImage(p);
 
         //Define masks
         List<int[]> masks = new ArrayList<>();
-        masks.add(new int[]{1, 0, 1, 0});
-        masks.add(new int[]{0, 1, 0, 1});
-        masks.add(new int[]{0, 1, 1, 0});
-        masks.add(new int[]{1, 0, 0, 1});
+        masks.add(new int[]{
+                1, 0,
+                0, 1
+        });
+        masks.add(new int[]{
+                0, 1,
+                1, 1
+        });
+        masks.add(new int[]{
+                1, 0,
+                1, 0
+        });
+        masks.add(new int[]{
+                0, 1,
+                1, 0
+        });
+        /*
+        masks.add(new int[]{
+                1, 0, 1,
+                0, 1, 0,
+                0, 0, 1
+        });
+        masks.add(new int[]{
+                0, 1, 0,
+                1, 0, 1,
+                0, 1, 0});
+        masks.add(new int[]{
+                0, 1, 0,
+                1, 1, 1,
+                0, 0, 0});
+        masks.add(new int[]{
+                0, 0, 0,
+                0, 0, 1,
+                0, 0, 1});
+*/
 
         //Define functions to apply
         GenerateConvValueFunction convValueFunction = new GenerateConvValueFunction(masks);
@@ -73,7 +105,7 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         ContrastFunction contrastFunction = new ContrastFunction();
         ColormodeFunction colormodeFunction = new ColormodeFunction();
         colormodeFunction
-               // .andThen(contrastFunction)
+                .andThen(contrastFunction)
                 .andThen(scaleFunction)
                 .andThen(saveScaledFileFunction)
                 .andThen(convValueFunction)
