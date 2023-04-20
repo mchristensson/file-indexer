@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -18,7 +19,7 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
 
     protected Consumer<String> doAfter;
     private boolean debugMode;
-    protected String outputFileName;
+    private String outputFileName;
     private String procId;
 
     public AbstractImageAnalyzerTask(String procId) {
@@ -49,10 +50,12 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
             return ("./target/output_" + procId + "_" + this.outputFileName);
         } else {
             String tmpDir = System.getProperty("java.io.tmpdir");
-            tmpDir += tmpDir.endsWith("/") ? "" : "/";
-            return (tmpDir + procId + "/" + this.outputFileName);
+            String sep = FileSystems.getDefault().getSeparator();
+            tmpDir += tmpDir.endsWith(sep) ? "" : sep;
+            return (tmpDir + getProcId() + sep + this.outputFileName);
         }
     };
+
 
     protected void deleteFile(Supplier<String> outputFileUrlSupplier) {
         logger.debug("Try to delete the file");
@@ -112,4 +115,15 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
         return this;
     }
 
+    public boolean isDebugMode() {
+        return this.debugMode;
+    }
+
+    public String getProcId() {
+        return this.procId;
+    }
+
+    protected void setOutputFileName(String outputFileName) {
+        this.outputFileName = outputFileName;
+    }
 }

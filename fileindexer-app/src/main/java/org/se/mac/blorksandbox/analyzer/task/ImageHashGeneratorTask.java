@@ -38,7 +38,7 @@ public class ImageHashGeneratorTask extends AbstractImageAnalyzerTask {
     @Override
     public String apply(Path p) throws Exception {
         logger.debug("Reading from file... {}", p);
-        this.outputFileName = p.getFileName().toString();
+        setOutputFileName( p.getFileName().toString() );
         BufferedImage image = getImage(p);
 
         String[] formatNames = ImageIO.getReaderFormatNames();

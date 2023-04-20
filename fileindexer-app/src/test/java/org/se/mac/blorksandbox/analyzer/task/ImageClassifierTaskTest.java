@@ -19,10 +19,10 @@ class ImageClassifierTaskTest {
     @Test
     void apply_whenCurrentPathIsDirectory_expectException() {
 
-        ImageClassifierTask task = new ImageClassifierTask(UUID.randomUUID().toString(), "JPG", 16);
+        ImageClassifierTask task = new ImageClassifierTask(UUID.randomUUID().toString(), "JPG", 32);
         try {
             //when(task.apply(any(Path.class))).thenCallRealMethod();
-            Path testFile = Path.of("target/test-filestructure/copyrighted/catsanddogs/train/cats/cat_3.jpg");
+            Path testFile = Path.of("target/test-filestructure/copyrighted/catsanddogs/train/cats/cat_10.jpg");
             task.apply(testFile);
 
         } catch (Exception e) {

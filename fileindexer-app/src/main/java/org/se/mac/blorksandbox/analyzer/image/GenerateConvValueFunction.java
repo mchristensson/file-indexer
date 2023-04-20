@@ -3,7 +3,10 @@ package org.se.mac.blorksandbox.analyzer.image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 import java.util.Arrays;
 import java.util.function.Function;
 
@@ -15,6 +18,63 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
 
     public GenerateConvValueFunction(Iterable<int[]> masks) {
         this.masks = masks;
+    }
+
+    @Override
+    public BufferedImage apply(BufferedImage bufferedImage) {
+        validateMasks();
+        int h = bufferedImage.getHeight();
+        int w = bufferedImage.getWidth();
+        if (h > 128 || w > 128) {
+            logger.error("Image is too large. Checksum will not be generated [w={}, h={}]", w, h);
+            return null;
+        }
+
+        //Apply masks onto image and produce a probability array
+        for (int[] mask : masks) {
+            logger.debug("Processing mask... [values={}]", Arrays.toString(mask));
+            byte[] maskOutput = getStats(bufferedImage.getColorModel(), bufferedImage.getRaster(), mask);
+            logger.debug("MaxPoolingOutput: [mask={}, max_pooling.output={}]", Arrays.toString(mask),  Arrays.toString(maskOutput));
+
+        }
+
+        return bufferedImage;
+    }
+
+    /**
+     * @param input        Input data to select from
+     * @param x            horizontal coordinate in the 2D data
+     * @param y            vertical coordinate of the 2D data
+     * @param windowWidth  Width of window (mask)
+     * @param windowHeight Height of window (mask)
+     * @param maxX         Max horizontal index
+     * @param maxY         Max vertical index
+     * @return An output array with the selected data (assumed representing 2D data)
+     * @see #getPixels(int[], int, int, int, int, int, int)
+     */
+    public static byte[] getPixelsByte(byte[] input, int x, int y, int windowWidth, int windowHeight, int maxX, int maxY) {
+        if (input.length == 2) {
+            return input;
+        }
+        byte[] output = new byte[windowWidth * windowHeight];
+        int i = 0;
+        for (int maskY = 0; maskY < windowHeight; maskY++) {
+            for (int maskX = 0; maskX < windowWidth; maskX++) {
+                if ((y + maskY) >= maxY) { //overflowY
+                    output[i++] = 0; //set to zero, then...
+                    continue; //continue in next cell
+                }
+                int index = (maxX * maskY) + (y * maxX + x) + maskX;
+                if ((x + windowWidth) > maxX || index >= input.length) { //overflowX
+                    output[i++] = 0; //set to zero, then...
+                    break; //continue with next row
+                }
+
+                output[i++] = input[index]; // assign output value
+
+            }
+        }
+        return output;
     }
 
     /**
@@ -30,7 +90,6 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
      * @return An output array with the selected data (assumed representing 2D data)
      */
     public static int[] getPixels(int[] input, int x, int y, int windowWidth, int windowHeight, int maxX, int maxY) {
-        logger.debug("Windowing pixels... input_data={}, rowIndex={}, colIndex={}", input.length, y, x);
         int[] output = new int[windowWidth * windowHeight];
         int i = 0;
         for (int maskY = 0; maskY < windowHeight; maskY++) {
@@ -51,8 +110,6 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
     }
 
     /**
-     * @see #maxPoolingOnce(int[], int, int, int)
-     *
      * @param input
      * @param w
      * @param h
@@ -60,6 +117,7 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
      * @param minX
      * @param minY
      * @return
+     * @see #maxPoolingOnce(int[], int, int, int)
      */
     public static int[] maxPoolingUntil(int[] input, int w, int h, int maskLength, int minX, int minY) {
         int wi = w;
@@ -72,6 +130,52 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
             hi = h / divisor;
         } while (hi > minY && wi > minX);
         return input;
+    }
+
+    /**
+     * @param input
+     * @param w
+     * @param h
+     * @param maskLength
+     * @param minX
+     * @param minY
+     * @return
+     * @see #maxPoolingOnce(int[], int, int, int)
+     */
+    public static byte[] maxPoolingUntilByte(byte[] input, int w, int h, int maskLength, int minX, int minY) {
+        int wi = w;
+        int hi = h;
+        byte divisor = 1;
+        do {
+            input = maxPoolingOnceByte(input, wi, hi, maskLength);
+            divisor <<= 1;
+            wi = w / divisor;
+            hi = h / divisor;
+        } while (hi > minY && wi > minX);
+        return input;
+    }
+
+    public static byte[] maxPoolingOnceByte(byte[] input, int w, int h, int maskLength) {
+        int s = w * h / maskLength;
+        if (s <= 0 || input.length < 2) {
+            return input;
+        }
+        int bytesPointer = 0;
+        byte[] output = new byte[s];
+        for (int y = 0; y < h; y += maskLength) {
+            for (int x = 0; x < w; x += maskLength) {
+                byte[] data = getPixelsByte(input, x, y, maskLength, maskLength, w, h);
+                //find max
+                byte max = data[0];
+                for (int i = 1; i < data.length; i++) {
+                    if (data[i] > max) {
+                        max = data[i];
+                    }
+                }
+                output[bytesPointer++] = max; // max occurring value
+            }
+        }
+        return output;
     }
 
     /**
@@ -99,33 +203,16 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
         return output;
     }
 
-    @Override
-    public BufferedImage apply(BufferedImage bufferedImage) {
-        validateMasks();
 
-        int h = bufferedImage.getHeight();
-        int w = bufferedImage.getWidth();
-        if (h > 128 || w > 128) {
-            logger.error("Image is too large. Checksum will not be generated [w={}, h={}]", w, h);
-            return null;
-        }
-        int[] rgbArray = new int[w * h];
-        logger.debug("Generating checksum... [w={}, h={}, wxh={}]", w, h, rgbArray.length);
-
-        int x = 0;
-        for (int[] mask : masks) {
-            logger.debug("Processing mask... [values={}]", Arrays.toString(mask));
-            BufferedImage outputImage = getRGB(bufferedImage.getColorModel(), bufferedImage.getRaster(), mask);
-            if (x == 3)
-                return outputImage;
-            x++;
-        }
-
-        return bufferedImage;
+    public byte[] getStats(final ColorModel colorModel, final WritableRaster rasterInput, final int[] mask) {
+        // Filtering -
+        byte[] output = filterRasterRaw((DataBufferByte) rasterInput.getDataBuffer(), rasterInput.getWidth(), rasterInput.getHeight(), mask);
+        //Pooling
+        return maxPoolingUntilByte(output, rasterInput.getWidth(), rasterInput.getHeight(), 2, 1, 1);
     }
 
     public BufferedImage getRGB(final ColorModel colorModel, final WritableRaster rasterInput, final int[] mask) {
-        System.out.println("Image size: [w=" + rasterInput.getWidth() + ", h=" + rasterInput.getHeight() + "]");
+        logger.debug("Input Image size: [w={}, h={}]", rasterInput.getWidth(), +rasterInput.getHeight());
         int maskSize = (int) Math.sqrt(mask.length);
 
         // Filtering -
@@ -135,16 +222,18 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
         WritableRaster rasterFiltered = colorModel.createCompatibleWritableRaster(w1, h1);
         */
         byte[] output = filterRasterRaw((DataBufferByte) rasterInput.getDataBuffer(), rasterInput.getWidth(), rasterInput.getHeight(), mask);
-        byte[] poolingOutput = poolUntil(output, rasterInput.getWidth(), rasterInput.getHeight());
+        //byte[] poolingOutput = poolUntil(output, rasterInput.getWidth(), rasterInput.getHeight());
 
-        maxPoolingUntil(poolingOutput, rasterInput.getWidth(), rasterInput.getHeight(), 2, 1, 1);
+        byte[] maxPoolingOutput = maxPoolingUntilByte(output, rasterInput.getWidth(), rasterInput.getHeight(), 2, 1, 1);
+        logger.debug("MaxPoolingOutput: [input= {}, mask={}, max_pooling.output={}]", Arrays.toString(output), Arrays.toString(mask), Arrays.toString(maxPoolingOutput));
 
 
         return new BufferedImage(colorModel, rasterInput, false, null);
 
     }
 
-    private byte[] poolUntil(byte[] input, final int width, final int height) {
+    /*
+    public static byte[] poolUntil(byte[] input, final int width, final int height) {
         double w = width;
         double h = height;
 
@@ -161,10 +250,10 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
         return data;
     }
 
+     */
 
-    private byte[] maxPoolingOnce(byte[] input, int w, int h, int maskEdgeLength) {
-        logger.debug("maxPoolingOnce... w: {}, h: {}, input.length={}, input={} ", w, h, input.length, input);
 
+    public static byte[] maxPoolingOnce(byte[] input, int w, int h, int maskEdgeLength) {
         byte[] outputBytes = new byte[w * h / maskEdgeLength];
         int bytesPointer = 0;
         for (int row = 0; row < h; row += maskEdgeLength) {
@@ -181,7 +270,6 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
                         pixels[pixelsPointer++] = val;
                     }
                 }
-                logger.debug("maxPoolingOnce.pixels rowOffset={}, pixelsPointer={}, pixels={}", rowOffset, pixelsPointer, Arrays.toString(pixels));
                 int maskingOutput = (Arrays.stream(pixels).max().orElse(0));
                 outputBytes[bytesPointer++] = (byte) maskingOutput;
             }
@@ -191,7 +279,7 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
         return outputBytes;
     }
 
-    private static byte matchMask(int[] output, int[] mask) {
+    public static byte matchMask(int[] output, int[] mask) {
         final int threshold = 100;
 
         float sum = 0;
@@ -200,7 +288,7 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
             int b = mask[i];
             sum += ((a == b) || (a > threshold && b > 0) || (a < threshold && b == 0)) ? 1 : -1;
         }
-        //Negative values can be truncated to ZERO (ReLU
+        //Negative values can be truncated to ZERO (ReLU)
         float avg = sum < 0 ? 0 : sum / mask.length;
         return (byte) (255 * avg);
     }
@@ -229,13 +317,18 @@ public class GenerateConvValueFunction implements Function<BufferedImage, Buffer
                 int pixelsPointer = 0;
                 for (int maskYOffset = 0; maskYOffset < maskEdge; maskYOffset++) {
                     for (int maskXOffset = 0; maskXOffset < maskEdge; maskXOffset++) {
-                        //TODO: Check that images with odd number of rows does not throw exception
                         int p = dataBuffer.getElem(row * (h + maskYOffset) + (col + maskXOffset));
                         pixels[pixelsPointer++] = p;
                     }
                 }
                 byte maskingOutput = matchMask(pixels, mask);
+
+                if (bytesPointer > outputBytes.length - 1){
+                    //Lets truncate this data
+                    return outputBytes;
+                }
                 outputBytes[bytesPointer++] = maskingOutput;
+
             }
         }
         return outputBytes;

@@ -143,4 +143,35 @@ class GenerateConvValueFunctionTest {
         assertEquals(4, outputBottomRight.length);
         assertArrayEquals(new int[]{3, 0, 0, 0}, outputBottomRight);
     }
+
+
+    @Test
+    void getPixelsByte_whenWindowingShifted2_expectCorrectOutputArray() {
+
+        byte[] data = new byte[]{
+                1, 0, 0,
+                0, 2, 0,
+                0, 0, 3
+        };
+
+        //Extract upper-left (first) matrix
+        byte[] outputUpperLeft = getPixelsByte(data, 0, 0, 2, 2, 3, 3);
+        assertEquals(4, outputUpperLeft.length);
+        assertArrayEquals(new byte[]{1, 0, 0, 2}, outputUpperLeft);
+
+        //Extract upper-right (second) matrix
+        byte[] outputUpperRight = getPixelsByte(data, 2, 0, 2, 2, 3, 3);
+        assertEquals(4, outputUpperRight.length);
+        assertArrayEquals(new byte[]{0, 0, 0, 0}, outputUpperRight);
+
+        //Extract bottom-left (first) matrix
+        byte[] outputBottomLeft = getPixelsByte(data, 0, 2, 2, 2, 3, 3);
+        assertEquals(4, outputBottomLeft.length);
+        assertArrayEquals(new byte[]{0, 0, 0, 0}, outputBottomLeft);
+
+        //Extract bottom-right (second) matrix
+        byte[] outputBottomRight = getPixelsByte(data, 2, 2, 2, 2, 3, 3);
+        assertEquals(4, outputBottomRight.length);
+        assertArrayEquals(new byte[]{3, 0, 0, 0}, outputBottomRight);
+    }
 }

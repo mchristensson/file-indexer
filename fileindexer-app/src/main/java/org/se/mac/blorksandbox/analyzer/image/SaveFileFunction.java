@@ -22,6 +22,7 @@ public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
 
     @Override
     public BufferedImage apply(BufferedImage bufferedImage) {
+        logger.debug("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(), outputFileFormat);
         saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
         return bufferedImage;
     }
