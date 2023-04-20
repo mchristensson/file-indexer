@@ -22,9 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 @Service
 public class ScannerService {
@@ -129,7 +127,7 @@ public class ScannerService {
         logger.debug("Generating has for file... [URI: '{}']", path);
         String procId = UUID.randomUUID().toString();
         String outputFileFormat = "JPG";
-        ImageHashGeneratorTask task = new ImageHashGeneratorTask(procId, outputFileFormat, 128, true, 8);
+        ImageHashGeneratorTask task = new ImageHashGeneratorTask(procId, outputFileFormat, 128, 8);
         try {
 
             task.setDoAfter((filePath) -> {

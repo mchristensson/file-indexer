@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class SaveFileFunction implements Function<BufferedImage, BufferedImage> {
+public class SaveFileFunction implements Function<BufferedImage, BufferedImage>, SaveImageToDiskSupport {
     private static final Logger logger = LoggerFactory.getLogger(SaveFileFunction.class);
     private Supplier<String> outputPathSupplier;
     private final String outputFileFormat;
@@ -22,21 +22,8 @@ public class SaveFileFunction implements Function<BufferedImage, BufferedImage> 
 
     @Override
     public BufferedImage apply(BufferedImage bufferedImage) {
-        saveToLocalDisk(bufferedImage, outputPathSupplier.get());
+        saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
         return bufferedImage;
-    }
-
-    private void saveToLocalDisk(BufferedImage bufferedImage, final String location) {
-        File f = new File(location);
-        if (!f.mkdirs()) {
-            logger.debug("Directory was not created");
-        }
-        logger.debug("Saving to file... [path={}]", f.getAbsolutePath());
-        try {
-            ImageIO.write(bufferedImage, outputFileFormat, f);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

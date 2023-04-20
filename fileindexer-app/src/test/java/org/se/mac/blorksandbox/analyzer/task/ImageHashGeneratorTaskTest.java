@@ -19,7 +19,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void apply_whenNullArg_expectException() {
         String procId = UUID.randomUUID().toString();
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, 8);
         try {
             task.apply(null);
             fail("Exception expected");
@@ -31,7 +31,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void apply_whenNullProcId_expectException() {
         String procId = null;
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, 8);
         try {
             task.apply(null);
             fail("Exception expected");
@@ -43,7 +43,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void apply_whenTestFile1_expecteRead() throws Exception {
         String procId = UUID.randomUUID().toString();
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, true, 8);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 128, 8);
         Path testFile1 = Path.of("./src/test/resources/images/misc/cats.jpg");
         String result = task.apply(testFile1);
 
@@ -86,7 +86,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void apply_whenTestFilesDices_expectHammingDistance() throws Exception {
         String procId = UUID.randomUUID().toString();
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, true, 8);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, 8);
 
         Path testFile1 = Path.of("./src/test/resources/images/misc/dice-2.png");
         String result1 = task.apply(testFile1);
@@ -113,7 +113,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void apply_whenTestFilesCoins_expectHammingDistance() throws Exception {
         String procId = UUID.randomUUID().toString();
-        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, true, 8);
+        FileAnalyzerTask<String> task = new ImageHashGeneratorTask(procId, "JPG", 16, 8);
 
         Path testFile1 = Path.of("./src/test/resources/images/misc/1-krona.png");
         String result1 = task.apply(testFile1);

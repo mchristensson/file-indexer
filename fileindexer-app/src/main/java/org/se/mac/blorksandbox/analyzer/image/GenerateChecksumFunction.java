@@ -10,6 +10,9 @@ import java.awt.image.WritableRaster;
 import java.math.BigInteger;
 import java.util.function.Function;
 
+/**
+ * Generates a bhash checksum from an image
+ */
 public class GenerateChecksumFunction implements Function<BufferedImage, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(GenerateChecksumFunction.class);
