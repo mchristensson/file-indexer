@@ -12,7 +12,7 @@ export class ScanjobAddComponent {
   constructor(private apiService: DefaultapiserviceService, private formBuilder: FormBuilder) {}
   
   urlTypes = ["UNIX",  "WIN"];
-  deviceIds = [ "7f800e14-47f0-4ca3-8010-499bd70cd569"];
+  deviceIds: any[];
 
   createScanJobForm = this.formBuilder.group({
     path: '',
@@ -20,13 +20,21 @@ export class ScanjobAddComponent {
     deviceId: ''
   });
 
-
+  ngOnInit() {
+    console.log("Fetching devices... ");
+    this.apiService.getDeviceList()
+    .subscribe(deviceList => {
+      console.log("Devices... ", deviceList);
+      this.deviceIds = deviceList;
+    });
+  }
+  
   enqueueScanJob(): void {
-    console.log("Skickar data... ", this.createScanJobForm.value);
+    console.log("Transferring scan-job data... ", this.createScanJobForm.value);
     this.apiService.scanEnqueue(this.createScanJobForm.value)
     .subscribe(scanEnqueueReceipt => {
       this.createScanJobForm.reset();
-    });
-    
+    });  
   }
+
 }

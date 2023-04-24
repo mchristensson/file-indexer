@@ -1,8 +1,10 @@
 package org.se.mac.blorksandbox.analyzer;
 
+import org.se.mac.blorksandbox.analyzer.data.DeviceData;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
 import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
+import org.se.mac.blorksandbox.analyzer.repository.DeviceRepository;
 import org.se.mac.blorksandbox.analyzer.repository.FileHashRepository;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository;
 import org.se.mac.blorksandbox.analyzer.repository.SmallFileDataRepository;
@@ -13,12 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Service
 public class LogicalFileIndexService {
@@ -34,6 +38,8 @@ public class LogicalFileIndexService {
     @Autowired
     private SmallFileDataRepository smallFileDataRepository;
 
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     public Collection<FileHashData> getAllFileHashes() {
         List<FileHashData> result = new ArrayList<>();
@@ -44,6 +50,12 @@ public class LogicalFileIndexService {
     public Collection<FileMetaData> getAllFiles() {
         List<FileMetaData> result = new ArrayList<>();
         logicalFileRepository.findAll().iterator().forEachRemaining(result::add);
+        return result;
+    }
+
+    public List<DeviceData> getAllDevices() {
+        List<DeviceData> result = new ArrayList<>();
+        deviceRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }
 
@@ -90,19 +102,68 @@ public class LogicalFileIndexService {
      * Creates a File-With-Bytes entity into corresponding keyspace
      *
      * @param deviceId    DeviceId where the file was originally located
-     * @param timestamp   timestamp reflecting creation- or updated time
      * @param devicePath  File path on the device where the file is located
      * @param data        file data
      * @param contentType File content-type
+     * @param timestamp   timestamp reflecting creation- or updated time
      * @return The created instance
      */
-    public SmallFileData createSmallFile(@Validated UUID deviceId, Instant timestamp, String devicePath, ByteBuffer data, String contentType) {
+    public SmallFileData createSmallFile(@Validated UUID deviceId, String devicePath, ByteBuffer data, String contentType, Instant timestamp) {
         SmallFileData d = new SmallFileData(UUID.randomUUID(), timestamp, deviceId, devicePath, data, contentType);
         return smallFileDataRepository.save(d);
+    }
+
+    /**
+     * Read file data from disk a store as new entity with image binary data
+     *
+     * @param deviceId         DeviceId where the file was originally located
+     * @param devicePath       File path on the device where the file is located
+     * @param filePath         Path to read file from
+     * @param outputFileFormat Output file format
+     * @return UUID for the created entity
+     * @throws IOException If source file read operation fail
+     */
+    public UUID createSmallFile(@Validated UUID deviceId, Path devicePath, String filePath, String outputFileFormat) throws IOException {
+        InputStream in = null;
+
+        try {
+            in = new FileInputStream(filePath);
+            ByteBuffer byteBuffer = ByteBuffer.wrap(in.readAllBytes());
+            SmallFileData smallFileData = createSmallFile(deviceId, devicePath.toString(), byteBuffer, outputFileFormat, Instant.ofEpochMilli(System.currentTimeMillis()));
+            if (smallFileData == null) {
+                throw new NullPointerException("Data was not generated");
+            }
+            return smallFileData.getId();
+
+        } catch (IOException e) {
+            logger.error("Could not read from file in order to store it", e);
+            throw e;
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    logger.error("Could not close input-stream", e);
+                }
+            }
+        }
     }
 
     public void updateFileHashData(FileHashData fileHashData, Consumer<UUID> updateFunction, UUID smallFileDataId) {
         updateFunction.accept(smallFileDataId);
         fileHashRepository.save(fileHashData);
+    }
+
+    /**
+     * Creates a new device entity
+     *
+     * @param devicePath Path information about the device
+     * @param title      title for the device
+     * @param properties meta-data about the device
+     * @return The newly created device
+     */
+    public DeviceData createDevice(String devicePath, String title, Map<String, String> properties) {
+        DeviceData d = new DeviceData(UUID.randomUUID(), devicePath, title, Instant.ofEpochMilli(System.currentTimeMillis()), properties);
+        return deviceRepository.save(d);
     }
 }

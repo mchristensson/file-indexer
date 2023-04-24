@@ -27,9 +27,11 @@ CREATE TABLE IF NOT EXISTS filedatarepository (
     );
 
 CREATE TABLE IF NOT EXISTS logicaldevice (
-    deviceId UUID PRIMARY KEY,
+    id UUID PRIMARY KEY,
+    updated_date date,
+    basePath text,
     title text,
-    created_date date
+    properties map<text,text>
     )
     WITH comment = 'Q1. Find devices by deviceId';
 

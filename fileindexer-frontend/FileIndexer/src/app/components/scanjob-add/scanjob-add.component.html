@@ -20,9 +20,9 @@
         </span>
         
         <span>
-            <label for="deviceId">deviceId</label>
+            <label for="deviceId">Device</label>
             <select formControlName="deviceId">
-                <option *ngFor="let deviceIdVal of deviceIds" [ngValue]="deviceIdVal">{{ deviceIdVal }}</option>
+                <option *ngFor="let deviceIdVal of deviceIds" [ngValue]="deviceIdVal.id">{{ deviceIdVal.title }}</option>
             </select>
         </span>
    

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Injectable } from '@angular/core';
 import { Observable, map, switchMap, Subscriber } from 'rxjs';
-import { ScanJobStatusDataEntry, EqueueJobReceipt, ScannedDataEntry, ImgHashData } from '../models/indexedentry.model';
+import { ScanJobStatusDataEntry, EqueueJobReceipt, ScannedDataEntry, ImgHashData, LogicalDevice } from '../models/indexedentry.model';
 
 
 @Injectable({
@@ -22,6 +22,18 @@ export class DefaultapiserviceService {
     return this._client
     .post<EqueueJobReceipt>("http://localhost:8081/api/scan/enqueue", requestData, httpOpts);
 
+  }
+
+  getDeviceList(): Observable<LogicalDevice[]> {
+    var httpOpts = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Basic ' + btoa('bob:bob')
+      })
+    }
+    return this._client
+    .get<LogicalDevice[]>("http://localhost:8081/api/common/device/list", httpOpts);
+    
   }
 
   getQueueJobStatus(): Observable<{data:ScanJobStatusDataEntry[], timestamp: number}> {

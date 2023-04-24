@@ -21,7 +21,7 @@ export class ImgashListComponent {
       startWith(0),
       switchMap(() => this.apiService.getImgHashDataList())
     ).subscribe( result => {
-      console.log("Handling result...", result);
+      console.log("Handling result (getImgHashDataList)...", result);
       this.imgHashData = result.values;
     } )
 
@@ -38,10 +38,6 @@ export class ImgashListComponent {
       console.log("Fetched image: ", result);
       this.selectedImage = result;
     });
-
-    /*
-    http://localhost:8080/api/imgash/image?id=e86e03b8-73bf-46da-a651-e8cb7760ae16
-    */
   }
 
 }

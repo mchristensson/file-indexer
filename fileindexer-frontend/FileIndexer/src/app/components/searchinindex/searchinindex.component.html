@@ -1,19 +1,38 @@
 <h2>Indexed data</h2>
-<table>
-    <thead>
-        <tr>
-            <th>#</th>
-            <th data-type="date">Date</th>
-            <th>Device Path</th>
-            <th data-type="numeric">Scan Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let scanData of scannedData">
-            <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ scanData.id }}"></i></td>
-            <td>{{ scanData.date | date:'fullDate'  }}</td>
-            <td>{{ scanData.devicePath }}</td>
-            <td>{{ scanData.scanTime }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="flex-container">
+    <div class="main">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th data-type="date">Date</th>
+                    <th>Device Path</th>
+                    <th data-type="numeric">Scan Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let scanData of scannedData" (click)="setSelected(scanData)">
+                    <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ scanData.id }}"></i></td>
+                    <td>{{ scanData.date | date:'fullDate'  }}</td>
+                    <td>{{ scanData.devicePath }}</td>
+                    <td>{{ scanData.scanTime }}</td>
+                </tr>
+            </tbody>
+        
+            
+        </table>
+        
+    </div>
+    <div class="sidebar" *ngIf="selectedElement">
+        <div class="imgash-img-details-container">
+            <h1>Details</h1>
+            <ul *ngFor="let entry of selectedElement.properties | keyvalue">
+                <li>
+                    <span class="details-key">{{ entry.key}}:</span>
+                    <span class="details-value">{{entry.value}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

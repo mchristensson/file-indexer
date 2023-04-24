@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 public class ApplicationConfig {
@@ -23,6 +21,7 @@ public class ApplicationConfig {
 
     @Value("${spring.security.csrf-disabled}")
     private boolean csrfDisabled;
+
     /**
      * Custom implementation of the handler for incoming REST-calls.
      * Utilized by the Spring AuthenticationProvider

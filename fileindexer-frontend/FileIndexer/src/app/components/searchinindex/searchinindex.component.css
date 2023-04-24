@@ -14,6 +14,7 @@ thead,
 tbody,
 tr {
     display: contents;
+    cursor: pointer;
 }
 
 tr:nth-child(even) td {
@@ -46,4 +47,44 @@ td {
   
 h2 {
     font-size: 0.9rem;
+}
+
+.flex-container { 
+    display:flex; 
+    margin:auto;
+    justify-content: space-between;
+}
+
+.main { 
+    flex:3 
+}
+
+.sidebar {   
+    flex:1; 
+    min-width: 300px;
+	padding: 5px 12px 10px 20px;
+    border: 1px solid #C2C2C2;
+    border-radius: 3px;
+	box-shadow: 1px 1px 4px #EBEBEB;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    min-height: 250px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li .details-key {
+    font-weight: 700;
+}
+.sidebar li .details-value {
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.sidebar h1 {
+    font-size: 1em;
+    border-bottom: 1px solid #C2C2C2;
+    margin-bottom: 10px;
 }

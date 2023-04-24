@@ -35,3 +35,8 @@ export class EqueueJobReceipt {
 export class ScannedDataEntry {
     name:string;
 }
+
+export class LogicalDevice {
+    title: string;
+    id: string;
+}

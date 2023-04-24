@@ -13,13 +13,14 @@ export class SearchinindexComponent {
   constructor(private apiService: DefaultapiserviceService) {}
   scannedData: ScannedDataEntry[];
   scannedDataSubscriptionTi: Subscription;
- 
+  selectedElement: any;
+
   ngOnInit() {
     this.scannedDataSubscriptionTi = interval(5000).pipe(
       startWith(0),
       switchMap(() => this.apiService.getScanData())
     ).subscribe( result => {
-      console.log("Handling result...", result);
+      console.log("Handling result (getScanData)...", result);
       this.scannedData = result.values;
     } )
 
@@ -29,4 +30,7 @@ export class SearchinindexComponent {
     this.scannedDataSubscriptionTi.unsubscribe();
   }
 
+  setSelected(element) {
+    this.selectedElement = element;
+  }
 }

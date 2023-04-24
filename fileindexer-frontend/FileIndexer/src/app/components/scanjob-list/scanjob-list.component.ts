@@ -22,7 +22,7 @@ export class ScanjobListComponent {
       startWith(0),
       switchMap(() => this.apiService.getQueueJobStatus())
     ).subscribe( result => {
-      console.log("Handling result...", result);
+      console.log("Handling result (getQueueJobStatus)...", result);
       this.scanJobStatusData = result.data;
       var d = new Date(0);
       d.setUTCSeconds(result.timestamp);

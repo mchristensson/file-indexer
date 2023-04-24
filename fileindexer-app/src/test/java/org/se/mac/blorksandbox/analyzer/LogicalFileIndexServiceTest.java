@@ -5,11 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
 import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
-import org.se.mac.blorksandbox.analyzer.repository.FileHashRepository;
-import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepository;
-import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
-import org.se.mac.blorksandbox.analyzer.repository.SmallFileDataRepository;
-import org.se.mac.blorksandbox.scanner.rest.LogicalFileValue;
+import org.se.mac.blorksandbox.analyzer.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -35,6 +31,9 @@ class LogicalFileIndexServiceTest {
 
     @MockBean
     private SmallFileDataRepository smallFileDataRepository;
+
+    @MockBean
+    private DeviceRepository deviceRepository;
 
     @Autowired
     private LogicalFileIndexService logicalFileIndexService;
@@ -269,7 +268,7 @@ class LogicalFileIndexServiceTest {
         SmallFileData mock = mock(SmallFileData.class);
         when(smallFileDataRepository.save(any(SmallFileData.class))).thenReturn(mock);
 
-        SmallFileData result = logicalFileIndexService.createSmallFile(null, timestamp, "c:/abc/def/ghi.pcx", null, "image/pcx");
+        SmallFileData result = logicalFileIndexService.createSmallFile(null, "c:/abc/def/ghi.pcx", null, "image/pcx", timestamp);
         assertNotNull(result);
         verify(smallFileDataRepository).save(any(SmallFileData.class));
     }
@@ -281,7 +280,7 @@ class LogicalFileIndexServiceTest {
         SmallFileData mock = mock(SmallFileData.class);
         when(smallFileDataRepository.save(any(SmallFileData.class))).thenReturn(mock);
 
-        SmallFileData result = logicalFileIndexService.createSmallFile(uuid, timestamp, "c:/abc/def/ghi.pcx", null, "image/pcx");
+        SmallFileData result = logicalFileIndexService.createSmallFile(uuid, "c:/abc/def/ghi.pcx", null, "image/pcx", timestamp);
         assertNotNull(result);
         verify(smallFileDataRepository).save(any(SmallFileData.class));
     }
@@ -294,7 +293,7 @@ class LogicalFileIndexServiceTest {
         when(smallFileDataRepository.save(any(SmallFileData.class))).thenReturn(mock);
         byte[] data = "foo".getBytes(Charset.defaultCharset());
 
-        SmallFileData result =  logicalFileIndexService.createSmallFile(uuid, timestamp, "c:/abc/def/ghi.pcx", ByteBuffer.wrap(data), "iamge/pcx");
+        SmallFileData result =  logicalFileIndexService.createSmallFile(uuid, "c:/abc/def/ghi.pcx", ByteBuffer.wrap(data), "iamge/pcx", timestamp);
         assertNotNull(result);
         verify(smallFileDataRepository).save(any(SmallFileData.class));
     }

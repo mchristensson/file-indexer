@@ -1,29 +1,32 @@
 package org.se.mac.blorksandbox.controller;
 
+import org.se.mac.blorksandbox.analyzer.FileTransformationService;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
+import org.se.mac.blorksandbox.analyzer.data.DeviceData;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
 import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
 import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
+import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
+import org.se.mac.blorksandbox.jobqueue.rest.QueueJobStatus;
 import org.se.mac.blorksandbox.rest.LogicalFilesSearchResult;
+import org.se.mac.blorksandbox.scanner.ScannerService;
 import org.se.mac.blorksandbox.scanner.job.FileHashAnalyzerJob;
 import org.se.mac.blorksandbox.scanner.job.FileScannerJob;
-import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
-import org.se.mac.blorksandbox.scanner.rest.CompareHashPairRequest;
-import org.se.mac.blorksandbox.scanner.rest.LogicalFileValue;
-import org.se.mac.blorksandbox.jobqueue.rest.QueueJobStatus;
-import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueReceipt;
-import org.se.mac.blorksandbox.scanner.rest.ScanEnqueueRequest;
-import org.se.mac.blorksandbox.scanner.ScannerService;
+import org.se.mac.blorksandbox.scanner.rest.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
@@ -40,6 +43,9 @@ public class BlorkRestController {
 
     @Autowired
     private LogicalFileIndexService fileIndexService;
+
+    @Autowired
+    private FileTransformationService fileTransformationService;
 
     @GetMapping("queue/enqueue")
     public ScanEnqueueReceipt enqueueDummyJob() {
@@ -95,19 +101,65 @@ public class BlorkRestController {
     public byte[] imageById(@RequestParam(name = "id") String id) {
         logger.debug("Retrieving image from id... [id={}]", id);
         Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(id));
-
         return image.map(smallFileData -> smallFileData.getBlob().array()).orElse(null);
     }
 
     @PostMapping(value = "imgash/compare", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
         logger.debug("Retrieving hashes from index...");
-
-        Iterable<UUID> ids=
-        Stream.of(compareHashPairRequest.getIdA(), compareHashPairRequest.getIdB()).map(UUID::fromString).toList();
+        Iterable<UUID> ids =
+                Stream.of(compareHashPairRequest.getIdA(), compareHashPairRequest.getIdB()).map(UUID::fromString).toList();
 
         int result = fileIndexService.getFileHashComparison(ids);
         return String.valueOf(result);
+    }
+
+    @GetMapping(value = "common/device/list", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LogicalDeviceInfo>> devices() {
+        logger.debug("Retrieved request for a list of all available devices...");
+        return ResponseEntity.ok(fileIndexService.getAllDevices().stream()
+                .map(deviceData -> transformDeviceData().apply(deviceData))
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Create a new device in the corresponding repository
+     *
+     * @param deviceInfo Data about the device to create
+     * @return Id of the newly created Device
+     */
+    @PostMapping(value = "common/device/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addDevice(@RequestBody LogicalDeviceInfo deviceInfo) {
+        logger.debug("Retrieved request for adding a new device... [deviceInfo={}]", deviceInfo);
+        return Optional.of(fileIndexService.createDevice(deviceInfo.devicePath(), deviceInfo.title(), deviceInfo.properties()))
+                .map(logicalDeviceInfo -> ResponseEntity.ok(logicalDeviceInfo.getId().toString()))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device could not be created"));
+    }
+
+    @PostMapping(value = "imgash/transform", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> transformImage(@RequestBody final TransformImageRequest transformImageRequest) {
+        logger.debug("Retrieved request for tranformation of image... [request={}]", transformImageRequest);
+
+        //Search for image
+        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(transformImageRequest.imageId()));
+        try {
+            if (image.isPresent()) {
+                UUID uuid = this.fileTransformationService.transformImage(
+                        image.get(),
+                        transformImageRequest.transformation(),
+                        transformImageRequest.imageWidth(),
+                        transformImageRequest.imageHeight());
+                return ResponseEntity.ok(uuid.toString());
+            } else {
+                logger.warn("Image could not be found [id={}]", transformImageRequest.imageId());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image could not be found");
+            }
+
+        } catch (IOException e) {
+            logger.error("Unable to transform image");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to transform image");
+        }
+
     }
 
     private static Function<FileMetaData, LogicalFileValue> transformLogicalFile() {
@@ -141,4 +193,12 @@ public class BlorkRestController {
 
     }
 
+    private Function<DeviceData, LogicalDeviceInfo> transformDeviceData() {
+        return f -> new LogicalDeviceInfo(
+                f.getId().toString(),
+                f.getBasePath(),
+                f.getTitle(),
+                f.getUpdated_date(),
+                f.getProperties());
+    }
 }

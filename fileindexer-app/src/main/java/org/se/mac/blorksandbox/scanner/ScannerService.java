@@ -3,7 +3,6 @@ package org.se.mac.blorksandbox.scanner;
 import com.drew.imaging.ImageProcessingException;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
-import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.analyzer.task.FileAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.ImageAnalyzerTask;
 import org.se.mac.blorksandbox.analyzer.task.ImageHashGeneratorTask;
@@ -12,11 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -130,28 +126,11 @@ public class ScannerService {
         ImageHashGeneratorTask task = new ImageHashGeneratorTask(procId, outputFileFormat, 128, 8);
         try {
 
-            task.setDoAfter((filePath) -> {
-                InputStream in = null;
-
+            task.setDoAfter((byteBuffer) -> {
                 try {
-                    in = new FileInputStream(filePath);
-                    ByteBuffer byteBuffer = ByteBuffer.wrap(in.readAllBytes());
-                    SmallFileData smallFileData = logicalFileIndexService.createSmallFile(deviceId, Instant.ofEpochMilli(System.currentTimeMillis()), path.toString(), byteBuffer, outputFileFormat);
-                    if (smallFileData == null) {
-                        throw new NullPointerException("Data was not generated");
-                    }
-                    smallFileDataId = smallFileData.getId();
-
+                    smallFileDataId = logicalFileIndexService.createSmallFile(deviceId, path, byteBuffer, outputFileFormat);
                 } catch (IOException e) {
-                    logger.error("Could not read from file in order to store it", e);
-                } finally {
-                    if (in != null) {
-                        try {
-                            in.close();
-                        } catch (IOException e) {
-                            logger.error("Could not close input-stream", e);
-                        }
-                    }
+                    logger.error("Unable to save file", e);
                 }
             });
 
@@ -168,9 +147,6 @@ public class ScannerService {
             } else {
                 logger.warn("No file hash data to update!");
             }
-
-
-
 
         } catch (Exception e) {
             if (!(e instanceof ImageProcessingException)) {
