@@ -44,5 +44,8 @@
 
     <logger name="org.springframework.security.test" level="trace" />
 
+    <logger name="org.springframework.cache" level="fatal">
+        <appender-ref ref="Console" />
+    </logger>
 
 </configuration>

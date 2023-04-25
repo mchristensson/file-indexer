@@ -1,18 +1,25 @@
 package org.se.mac.blorksandbox.jobqueue.job;
 
+import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.random.RandomGenerator;
 
+/**
+ * Job that does not do anything other than sleeping for a short while
+ */
+@EnqueableJob(title = "DevNull job")
 public class DummyJob implements QueuedJob {
 
     private static final Logger logger = LoggerFactory.getLogger(DummyJob.class);
+
     private final long created;
     private final Long id;
 
@@ -45,4 +52,9 @@ public class DummyJob implements QueuedJob {
     public Long getId() {
         return this.id;
     }
+
+    @Override
+    public void setProperties(ApplicationContext ctx, Map<String, String> properties) {
+    }
+
 }

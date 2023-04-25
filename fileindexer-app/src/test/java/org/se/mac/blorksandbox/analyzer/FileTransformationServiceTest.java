@@ -40,7 +40,7 @@ class FileTransformationServiceTest {
     @Test
     void transformImage_whenNoData_expectException() {
         SmallFileData imageData = mock(SmallFileData.class);
-        ImageTransformDefinition transformDefinition = mock(ImageTransformDefinition.class);
+        ImageTransformDefinition transformDefinition = new ImageTransformDefinition("foo", 1L);
 
         try {
             fileTransformationService.transformImage(imageData, transformDefinition, 128, 128);
@@ -50,7 +50,7 @@ class FileTransformationServiceTest {
         }
         verify(imageData).getId();
         verify(imageData).getBlob();
-        verifyNoMoreInteractions(transformDefinition, imageData);
+        verifyNoMoreInteractions(imageData);
     }
 
 
@@ -59,7 +59,7 @@ class FileTransformationServiceTest {
         SmallFileData imageData = mock(SmallFileData.class);
         ByteBuffer blob = ByteBuffer.wrap("hello world".getBytes());
         when(imageData.getBlob()).thenReturn(blob);
-        ImageTransformDefinition transformDefinition = mock(ImageTransformDefinition.class);
+        ImageTransformDefinition transformDefinition = new ImageTransformDefinition("foo", 1L);
 
         try {
             UUID uuid = fileTransformationService.transformImage(imageData, transformDefinition, 128, 128);
@@ -71,7 +71,7 @@ class FileTransformationServiceTest {
         }
         verify(imageData).getId();
         verify(imageData, times(2)).getBlob();
-        verifyNoMoreInteractions(transformDefinition, imageData);
+        verifyNoMoreInteractions(imageData);
     }
 
     @Test
@@ -93,7 +93,7 @@ class FileTransformationServiceTest {
         when(logicalFileIndexService.createSmallFile(any(UUID.class), isNull(), any(), eq("JPG"), any(Instant.class))).thenReturn(mockResult);
 
         //Mock a transform
-        ImageTransformDefinition transformDefinition = mock(ImageTransformDefinition.class);
+        ImageTransformDefinition transformDefinition = new ImageTransformDefinition("foo", 1L);
 
         //Perform test
         UUID uuid = fileTransformationService.transformImage(imageData, transformDefinition, 250, 250);
@@ -103,7 +103,7 @@ class FileTransformationServiceTest {
         verify(imageData).getId();
         verify(imageData).getDeviceId();
         verify(imageData, times(2)).getBlob();
-        verifyNoMoreInteractions(transformDefinition, imageData);
+        verifyNoMoreInteractions(imageData);
     }
 
 

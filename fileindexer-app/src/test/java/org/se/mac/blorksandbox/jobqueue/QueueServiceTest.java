@@ -2,10 +2,9 @@ package org.se.mac.blorksandbox.jobqueue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
-import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
-import org.se.mac.blorksandbox.scanner.job.FileScannerJob;
+import org.se.mac.blorksandbox.spi.QueuedJob;
+import org.se.mac.blorksandbox.scanner.job.DirectoryScannerJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,7 +28,7 @@ class QueueServiceTest {
 
     @Test
     void enqueue() {
-        QueuedJob jobMock = mock(FileScannerJob.class);
+        QueuedJob jobMock = mock(DirectoryScannerJob.class);
         queueService.enqueue(jobMock);
         assertTrue(queueService.isRunning());
         assertEquals(1, queueService.getResult().size());

@@ -7,14 +7,12 @@ import org.se.mac.blorksandbox.analyzer.data.FileHashData;
 import org.se.mac.blorksandbox.analyzer.data.FileMetaData;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
 import org.se.mac.blorksandbox.jobqueue.QueueService;
-import org.se.mac.blorksandbox.jobqueue.job.DummyJob;
-import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
 import org.se.mac.blorksandbox.jobqueue.rest.QueueJobStatus;
+import org.se.mac.blorksandbox.jobqueue.rest.QueuedJobRequestReceipt;
 import org.se.mac.blorksandbox.rest.LogicalFilesSearchResult;
 import org.se.mac.blorksandbox.scanner.ScannerService;
-import org.se.mac.blorksandbox.scanner.job.FileHashAnalyzerJob;
-import org.se.mac.blorksandbox.scanner.job.FileScannerJob;
 import org.se.mac.blorksandbox.scanner.rest.*;
+import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -47,34 +46,57 @@ public class BlorkRestController {
     @Autowired
     private FileTransformationService fileTransformationService;
 
-    @GetMapping("queue/enqueue")
-    public ScanEnqueueReceipt enqueueDummyJob() {
-        logger.debug("Enqueuing dummyjob...");
-        QueuedJob scanJob = new DummyJob();
-        queueService.enqueue(scanJob);
-        return new ScanEnqueueReceipt(scanJob.getId(), "Job was enqueued");
+    @Autowired
+    private QueueJobRepository queueJobRepository;
+
+    /**
+     * Query and return all enquqable job definitions
+     *
+     * @return List of all job definition titles
+     */
+    @GetMapping("queue/jobs")
+    public ResponseEntity<List<String>> findAllJobsTitles() {
+        logger.debug("Fetching all job definitions...");
+        List<String> titles = queueJobRepository.findAllTitles();
+        return ResponseEntity.ok(titles);
     }
 
+    /**
+     * Return status for all enqueued job tasks
+     *
+     * @return Status for all enqueued job tasks
+     */
     @GetMapping(value = "queue/status", produces = MediaType.APPLICATION_JSON_VALUE)
     public QueueJobStatus queueQueueJobStatus() {
         logger.debug("Retrieving job data from queue...");
         return new QueueJobStatus(queueService.getResult());
     }
 
-    @PostMapping(value = "scan/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ScanEnqueueReceipt pollScan(@RequestBody ScanEnqueueRequest scanEnqueueRequest) {
+    /**
+     * Enqueue a new job task
+     *
+     * @param request Request data
+     * @return Acknowledge of enqueued job task
+     */
+    @PostMapping(value = "queue/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public QueuedJobRequestReceipt enqueue(@RequestBody ScanEnqueueRequest request) {
         logger.debug("Enqueuing job...");
-        QueuedJob scanJob = new FileScannerJob(scanEnqueueRequest.getDeviceIdAsUUID(), scanEnqueueRequest.getPath(), scanEnqueueRequest.getUrlType(), scannerService);
-        queueService.enqueue(scanJob);
-        return new ScanEnqueueReceipt(scanJob.getId(), "Scanner job was enqueued");
-    }
+        Optional<? extends Class<? extends QueuedJob>> def = queueJobRepository.lookupByTitle(request.jobTitle());
+        if (def.isEmpty()) {
+            return new QueuedJobRequestReceipt(0L, "Job definition " + request.jobTitle() + " could not be found.");
+        } else {
+            try {
+                QueuedJob scanJob = def.get().getDeclaredConstructor().newInstance();
+                scanJob.setProperties(null, request.properties());
+                queueService.enqueue(scanJob);
+                return new QueuedJobRequestReceipt(scanJob.getId(), "Job of type '" + request.jobTitle() + "' was enqueued");
 
-    @PostMapping(value = "imgash/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ScanEnqueueReceipt pollImageHashGeneration(@RequestBody ScanEnqueueRequest scanEnqueueRequest) {
-        logger.debug("Enqueuing job...");
-        QueuedJob scanJob = new FileHashAnalyzerJob(scanEnqueueRequest.getDeviceIdAsUUID(), scanEnqueueRequest.getPath(), scanEnqueueRequest.getUrlType(), scannerService);
-        queueService.enqueue(scanJob);
-        return new ScanEnqueueReceipt(scanJob.getId(), "Scanner job was enqueued");
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
+                logger.error("Unable to enqueue job", e);
+                return new QueuedJobRequestReceipt(0L, "Job definition " + request.jobTitle() + " could not be queued." + e.getLocalizedMessage());
+            }
+        }
     }
 
     @GetMapping("scan/list")
@@ -108,14 +130,14 @@ public class BlorkRestController {
     public String compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
         logger.debug("Retrieving hashes from index...");
         Iterable<UUID> ids =
-                Stream.of(compareHashPairRequest.getIdA(), compareHashPairRequest.getIdB()).map(UUID::fromString).toList();
+                Stream.of(compareHashPairRequest.idA(), compareHashPairRequest.idB()).map(UUID::fromString).toList();
 
         int result = fileIndexService.getFileHashComparison(ids);
         return String.valueOf(result);
     }
 
     @GetMapping(value = "common/device/list", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<LogicalDeviceInfo>> devices() {
+    public ResponseEntity<List<LogicalDeviceInfo>> findAllJobsDevices() {
         logger.debug("Retrieved request for a list of all available devices...");
         return ResponseEntity.ok(fileIndexService.getAllDevices().stream()
                 .map(deviceData -> transformDeviceData().apply(deviceData))

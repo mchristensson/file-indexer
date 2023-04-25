@@ -1,16 +1,11 @@
 package org.se.mac.blorksandbox.jobqueue.job;
 
 import org.junit.jupiter.api.Test;
-import org.se.mac.blorksandbox.scanner.ScannerService;
-import org.se.mac.blorksandbox.scanner.job.FileHashAnalyzerJob;
-import org.se.mac.blorksandbox.scanner.model.UrlType;
 
-import java.util.UUID;
 import java.util.concurrent.Callable;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyNoInteractions;
 
 class DummyJobTest {
 

@@ -1,7 +1,7 @@
 package org.se.mac.blorksandbox.jobqueue;
 
 import jakarta.annotation.PreDestroy;
-import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
+import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

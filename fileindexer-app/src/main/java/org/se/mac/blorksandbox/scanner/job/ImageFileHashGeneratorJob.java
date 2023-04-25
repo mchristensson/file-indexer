@@ -1,23 +1,17 @@
 package org.se.mac.blorksandbox.scanner.job;
 
-import org.se.mac.blorksandbox.jobqueue.job.QueuedJob;
-import org.se.mac.blorksandbox.scanner.ScannerService;
-import org.se.mac.blorksandbox.scanner.function.UriBuilder;
-import org.se.mac.blorksandbox.scanner.model.UrlType;
+import org.se.mac.blorksandbox.jobqueue.job.EnqueableJob;
+import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 
-public class FileHashAnalyzerJob extends FileScannerJob {
-    private static final Logger logger = LoggerFactory.getLogger(FileHashAnalyzerJob.class);
+@EnqueableJob(title = "Image File Hash Generator")
+public class ImageFileHashGeneratorJob extends DirectoryScannerJob {
 
-    public FileHashAnalyzerJob(UUID deviceId, String devicePath, UrlType urlType, ScannerService service) {
-        super(deviceId, devicePath, urlType, service);
-    }
+    private static final Logger logger = LoggerFactory.getLogger(ImageFileHashGeneratorJob.class);
 
     @Override
     public Callable<Integer> getTask() {

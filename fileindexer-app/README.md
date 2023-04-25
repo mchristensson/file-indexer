@@ -3,7 +3,7 @@ The file indexer is a simple test application with the following components
 * Cassandra database for data storage in backend
   * Present tables for dedicated usage
   * Remotely connected (i.e. Docker container) through configuration in application.properties.
-* Queue engine that performs pre-defined tasks of type (_see `org.se.mac.blorksandbox.jobqueue.job.QueuedJob`_)
+* Queue engine that performs pre-defined tasks of type (_see `org.se.mac.blorksandbox.spi.QueuedJob`_)
   * Scheduled cleanup of completed tasks 
   * Is a _Executor Service_ with single job processing
 * REST-api for communcation with the application functions

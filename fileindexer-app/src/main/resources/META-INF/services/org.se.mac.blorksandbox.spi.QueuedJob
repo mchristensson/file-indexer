@@ -1,0 +1,3 @@
+org.se.mac.blorksandbox.scanner.job.DirectoryScannerJob
+org.se.mac.blorksandbox.scanner.job.ImageFileHashGeneratorJob
+org.se.mac.blorksandbox.jobqueue.job.DummyJob
