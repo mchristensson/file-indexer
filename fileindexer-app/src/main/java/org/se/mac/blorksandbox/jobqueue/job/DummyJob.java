@@ -3,7 +3,6 @@ package org.se.mac.blorksandbox.jobqueue.job;
 import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -54,7 +53,7 @@ public class DummyJob implements QueuedJob {
     }
 
     @Override
-    public void setProperties(ApplicationContext ctx, Map<String, String> properties) {
+    public void setProperties(Map<String, String> properties) {
     }
 
 }

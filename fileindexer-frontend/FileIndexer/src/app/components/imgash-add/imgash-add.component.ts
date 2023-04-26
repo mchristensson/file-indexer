@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { DefaultapiserviceService } from '../../services/defaultapiservice.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { scan , Subscription, switchMap, startWith , interval } from 'rxjs';
-import { ImgHashData } from 'src/app/models/indexedentry.model';
+import { EnqueuedTask } from 'src/app/models/indexedentry.model';
 
 @Component({
   selector: 'app-imgash-add',
-  templateUrl: './imgash-add.component.html',
-  styleUrls: ['./imgash-add.component.css']
+  templateUrl: './imgash-add.component.html'
 })
 export class ImgashAddComponent {
 
@@ -17,6 +16,7 @@ export class ImgashAddComponent {
   deviceIds = [ "7f800e14-47f0-4ca3-8010-499bd70cd569"];
 
   createImageAnalysisJobForm = this.formBuilder.group({
+    taskTitle: 'foo',
     path: '',
     type: '',
     deviceId: ''
@@ -24,7 +24,9 @@ export class ImgashAddComponent {
 
   enqueueImageAnalysisJob(): void {
     console.log("Skickar data... ", this.createImageAnalysisJobForm.value);
-    this.apiService.imgAnalysisEnqueue(this.createImageAnalysisJobForm.value)
+    var arg = new EnqueuedTask();
+    arg.jobTitle = this.createImageAnalysisJobForm.value.taskTitle;
+    this.apiService.taskEnqueue(arg)
     .subscribe(scanEnqueueReceipt => {
       this.createImageAnalysisJobForm.reset();
     });

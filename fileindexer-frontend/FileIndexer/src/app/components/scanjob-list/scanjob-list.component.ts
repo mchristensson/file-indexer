@@ -6,7 +6,7 @@ import { DefaultapiserviceService } from '../../services/defaultapiservice.servi
 @Component({
   selector: 'app-scanjob-list',
   templateUrl: './scanjob-list.component.html',
-  styleUrls: ['./scanjob-list.component.css']
+  styleUrls: ['./scanjob-list.component.css', '../common-list-styles.css']
 })
 export class ScanjobListComponent {
   

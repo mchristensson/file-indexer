@@ -1,24 +1,28 @@
 <div class="formcontainer">
-    <h1>Add job</h1>
+    <h1>Create task</h1>
 
     <form [formGroup]="createScanJobForm" (submit)="enqueueScanJob()">
         
         <span>
+            <label for="title">Type</label>
+            <select formControlName="taskTitle">
+                <option *ngFor="let taskTitle of taskList" [ngValue]="taskTitle">{{ taskTitle }}</option>
+            </select>
+        </span>
+        <span>
             <label for="path">path</label>
             <span>
-                <input id="path" type="text" formControlName="path" >
+                <input id="devicePath" type="text" formControlName="devicePath" >
             </span>
         </span>
-
         <span>
-            <label for="type">device type</label>
+            <label for="urlType">url type</label>
             <span>
-                <select formControlName="type">
+                <select formControlName="urlType">
                     <option *ngFor="let urlTypeVal of urlTypes" [ngValue]="urlTypeVal">{{ urlTypeVal }}</option>
                 </select>
             </span>
         </span>
-        
         <span>
             <label for="deviceId">Device</label>
             <select formControlName="deviceId">

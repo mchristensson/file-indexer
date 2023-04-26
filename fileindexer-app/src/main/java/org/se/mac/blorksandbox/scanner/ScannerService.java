@@ -32,7 +32,7 @@ public class ScannerService {
      * Performs meta-data extraction on a directory on a file-device
      *
      * @param uri      URI targeting the device location to be analyzed
-     * @param deviceId
+     * @param deviceId Unique identifier for the scanned device
      * @return true after successful scan
      * @throws RuntimeException If invalid directory
      */
@@ -41,6 +41,10 @@ public class ScannerService {
         Path path = Paths.get(uri);
         if (!Files.isDirectory(path)) {
             throw new RuntimeException("Not a directory");
+        }
+        logger.debug("Validating device...");
+        if (deviceId == null || !logicalFileIndexService.isDevicePresent(deviceId)) {
+            throw new RuntimeException("Device does not exist");
         }
         scanFolder(deviceId, path, true);
         logger.debug("Inside ScannerService, completed.");
@@ -51,7 +55,7 @@ public class ScannerService {
      * Performs hash analysis on a file
      *
      * @param uri      URI targeting the device location to be analyzed
-     * @param deviceId
+     * @param deviceId Unique identifier for the scanned device
      * @return true after successful scan
      * @throws RuntimeException If invalid directory
      */
@@ -60,6 +64,10 @@ public class ScannerService {
         Path path = Paths.get(uri);
         if (Files.isDirectory(path)) {
             throw new RuntimeException("Is a directory");
+        }
+        logger.debug("Validating device...");
+        if (deviceId == null || !logicalFileIndexService.isDevicePresent(deviceId)) {
+            throw new RuntimeException("Device does not exist");
         }
         generateHashForFile(deviceId, path);
         logger.debug("Inside ScannerService, completed.");
@@ -71,7 +79,7 @@ public class ScannerService {
      *
      * @param deviceId  Unique identifier for the scanned device
      * @param path      Path known to be a directory
-     * @param recursive Control flag whether to include sub-directories
+     * @param recursive Control flag whether to include subdirectories
      */
     private void scanFolder(UUID deviceId, final Path path, final boolean recursive) {
         try {

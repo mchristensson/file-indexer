@@ -10,6 +10,7 @@ import { ScanjobListComponent } from './components/scanjob-list/scanjob-list.com
 import { SearchinindexComponent } from './components/searchinindex/searchinindex.component';
 import { ImgashListComponent } from './components/imgash-list/imgash-list.component';
 import { ImgashAddComponent } from './components/imgash-add/imgash-add.component';
+import { DeviceAddComponent } from './components/device-add/device-add.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ImgashAddComponent } from './components/imgash-add/imgash-add.component
     ScanjobListComponent,
     SearchinindexComponent,
     ImgashListComponent,
-    ImgashAddComponent
+    ImgashAddComponent,
+    DeviceAddComponent
   ],
   imports: [
     BrowserModule,

@@ -95,7 +95,7 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         }
 
         if (dic.getClass().isAssignableFrom(ExifThumbnailDirectory.class)) {
-            logger.warn("Non supported ExifDescriptorBase");
+            logger.trace("Non supported ExifDescriptorBase");
         }
 
         if (dic.getClass().isAssignableFrom(IptcDirectory.class)) {
@@ -103,7 +103,7 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         }
 
         if (dic.getClass().isAssignableFrom(PhotoshopDirectory.class)) {
-            logger.warn("Non supported PhotoshopDirectory");
+            logger.trace("Non supported PhotoshopDirectory");
         }
 
         if (dic.getClass().isAssignableFrom(JpegDirectory.class)) {
@@ -115,7 +115,7 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
             map.computeIfAbsent(FILE_NAME, f -> dic.getString(FileSystemDirectory.TAG_FILE_NAME));
             map.computeIfAbsent(FILE_SIZE, f -> dic.getString(FileSystemDirectory.TAG_FILE_SIZE));
         } else {
-            logger.debug("Not assignable from FileSystemDirectory");
+            logger.trace("Not assignable from FileSystemDirectory");
         }
 
         if (dic.getClass().isAssignableFrom(FileTypeDirectory.class)) {

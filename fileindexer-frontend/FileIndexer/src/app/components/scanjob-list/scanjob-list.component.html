@@ -1,8 +1,10 @@
+<app-scanjob-add></app-scanjob-add>
+<app-device-add></app-device-add>    
 
 <h2>Tasks</h2>
-<app-scanjob-add></app-scanjob-add>
+<h3 class="table-caption">Number of entries: {{scanJobStatusData? scanJobStatusData.length : 0}}. Retrival date: {{scanJobStatusDataTs | date: 'HH:mm:ss (z)' }}</h3>
 
-<table>
+<table class="table-joblist-data">
     <thead>
         <tr>
             <th data-type="numeric">#</th>
@@ -18,4 +20,3 @@
         </tr>
     </tbody>
 </table>
-<h4>Retrival date: {{scanJobStatusDataTs | date: 'HH:mm:ss (z)' }}</h4>

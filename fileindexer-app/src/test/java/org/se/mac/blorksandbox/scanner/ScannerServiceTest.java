@@ -24,7 +24,6 @@ import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -69,7 +68,7 @@ class ScannerServiceTest {
     }
 
     @Test
-    void scan_whenNonexistingFileArg_expectException() throws URISyntaxException, InterruptedException {
+    void scan_whenNonexistingFileArg_expectException() throws URISyntaxException {
         try {
             scannerService.scan(new URI("file:///apa"), UUID.randomUUID());
             fail("Exception expected");
@@ -79,9 +78,23 @@ class ScannerServiceTest {
     }
 
     @Test
-    void scan_whenTestDirectoryArg_expectOk() throws InterruptedException {
+    void scan_whenDeviceNotPresent_expectException() {
         File f = new File("./test-filestructure");
-        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
+        try {
+            scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("Device does not exist"));
+        }
+        verify(logicalFileIndexService).isDevicePresent(any(UUID.class));
+    }
+
+    @Test
+    void scan_whenTestDirectoryArg_expectOk() {
+        File f = new File("./test-filestructure");
+        UUID deviceId = UUID.randomUUID();
+        when(logicalFileIndexService.isDevicePresent(deviceId)).thenReturn(true);
+        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), deviceId);
         assertTrue(result);
         verify(logicalFileIndexService, times(709))
                 .createFileMetaData(
@@ -91,10 +104,11 @@ class ScannerServiceTest {
                         anyMap(),
                         anyLong()
                 );
+        verify(logicalFileIndexService).isDevicePresent(deviceId);
     }
 
     @Test
-    void scan_whenSingleExifFileArg_expectException() throws InterruptedException {
+    void scan_whenSingleExifFileArg_expectException() {
         try {
             File f = new File("./test-filestructure/exif-org/nikon-e950.jpg");
             scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
@@ -105,12 +119,15 @@ class ScannerServiceTest {
     }
 
     @Test
-    void scan_whenExifDriectoryArg_expectOk() throws InterruptedException {
+    void scan_whenExifDriectoryArg_expectOk() {
         File f = new File("./test-filestructure/single-exif-org");
-        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), UUID.randomUUID());
+        UUID deviceId = UUID.randomUUID();
+        when(logicalFileIndexService.isDevicePresent(deviceId)).thenReturn(true);
+        boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), deviceId);
         assertTrue(result);
 
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
+
         //noinspection unchecked
         verify(logicalFileIndexService)
                 .createFileMetaData(
@@ -120,11 +137,12 @@ class ScannerServiceTest {
                         argumentsCaptured.capture(),
                         anyLong()
                 );
-        var foo = argumentsCaptured.getValue();
+        verify(logicalFileIndexService).isDevicePresent(deviceId);
+
         assert argumentsCaptured.getValue().containsKey("File Size");
         assert argumentsCaptured.getValue().containsKey("File Name");
-
     }
+
 
     @Test
     void generateImageHash_whenNullArgs_expectException() {
@@ -177,18 +195,11 @@ class ScannerServiceTest {
         } catch (Exception e) {
             assertEquals(RuntimeException.class, e.getClass());
         }
+        verify(logicalFileIndexService).isDevicePresent(any(UUID.class));
     }
 
     @Test
     void generateImageHash_whenArgs_expect() throws IOException {
-
-        /*
-        public SmallFileData createSmallFile(     @Validated UUID deviceId,
-    Instant timestamp,
-    String devicePath,
-    ByteBuffer data,
-    String contentType )
-         */
         SmallFileData smallFileDataMock = mock(SmallFileData.class);
         when(smallFileDataMock.getId()).thenReturn(UUID.randomUUID());
         when(logicalFileIndexService.createSmallFile(
@@ -213,18 +224,13 @@ class ScannerServiceTest {
         }
         URI uri = targetFile.toURI();
         UUID deviceId = UUID.randomUUID();
-
+        when(logicalFileIndexService.isDevicePresent(deviceId)).thenReturn(true);
         boolean result = scannerService.generateImageHash(uri, deviceId);
 
         assertTrue(result);
-        verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class),
-                anyString(), anyString(), anyLong());
-
-        //logicalFileIndexService.createSmallFile(deviceId, path, byteBuffer, outputFileFormat);
+        verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class), anyString(), anyString(), anyLong());
         verify(logicalFileIndexService).createSmallFile(eq(deviceId), eq(targetPath), anyString(), eq("JPG"));
-        /*
-        verify(logicalFileIndexService).updateFileHashData(eq(fileHashDataMock), any(Consumer.class), any(UUID.class));*/
-//        verify(smallFileDataMock).getId();
+        verify(logicalFileIndexService).isDevicePresent(deviceId);
         verifyNoMoreInteractions(smallFileDataMock, fileHashDataMock);
     }
 

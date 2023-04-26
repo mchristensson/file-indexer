@@ -1,0 +1,24 @@
+<div class="formcontainer">
+    <h1>Register Device</h1>
+
+    <form [formGroup]="createDeviceForm" (submit)="createDevice()">
+        
+        <span>
+            <label for="path">Title</label>
+            <span>
+                <input id="title" type="text" formControlName="title" >
+            </span>
+        </span>
+        <span>
+            <label for="path">Device path</label>
+            <span>
+                <input id="devicePath" type="text" formControlName="devicePath" >
+            </span>
+        </span>
+   
+        <span>
+            <button class="button" type="submit">Register</button>
+        </span>
+        
+    </form>
+</div>

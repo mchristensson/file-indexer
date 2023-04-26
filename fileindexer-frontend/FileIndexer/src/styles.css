@@ -72,3 +72,93 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Default common form CSS begin
+ */
+ .formcontainer {
+  max-width: 500px;
+padding: 20px 12px 10px 20px;
+  border: 1px solid #C2C2C2;
+  border-radius: 3px;
+box-shadow: 1px 1px 4px #EBEBEB;
+  margin-bottom: 10px;
+}
+
+.formcontainer h1 {
+  font-size: 1em;
+  border-bottom: 1px solid #C2C2C2;
+  margin-bottom: 10px;
+}
+
+.formcontainer span {
+  display: block;
+  margin: 0px 0px 15px 0px;
+}
+
+.formcontainer span > label {
+min-width: 100px;
+float: left;
+padding-top: 8px;
+padding-right: 5px;
+  font-weight: 600;
+}
+
+.formcontainer span > input, select, button {
+min-width: 150px;
+  box-sizing: border-box;
+border: 1px solid #C2C2C2;
+box-shadow: 1px 1px 4px #EBEBEB;
+border-radius: 3px;
+padding: 3px;
+outline: none;
+}
+/*
+* Default common form CSS End
+*/
+
+/*
+* Sidepanel flex layout Begin
+*/
+.flex-container { 
+  display:flex; 
+  margin:auto;
+  justify-content: space-between;
+}
+
+.main { 
+  flex:3 
+}
+
+.sidebar {   
+  flex:1; 
+  min-width: 300px;
+padding: 5px 12px 10px 20px;
+  border: none;
+  border-radius: 3px;
+
+  margin-bottom: 10px;
+  margin-left: 20px;
+  min-height: 250px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li .details-key {
+  font-weight: 700;
+}
+.sidebar li .details-value {
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.sidebar h1 {
+  font-size: 1em;
+  border-bottom: 1px solid #C2C2C2;
+  margin-bottom: 10px;
+}
+/*
+* Sidepanel flex layout End
+*/

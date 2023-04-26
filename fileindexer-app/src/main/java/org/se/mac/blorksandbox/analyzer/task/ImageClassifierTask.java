@@ -77,25 +77,7 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
                 0, 1,
                 1, 0
         });
-        /*
-        masks.add(new int[]{
-                1, 0, 1,
-                0, 1, 0,
-                0, 0, 1
-        });
-        masks.add(new int[]{
-                0, 1, 0,
-                1, 0, 1,
-                0, 1, 0});
-        masks.add(new int[]{
-                0, 1, 0,
-                1, 1, 1,
-                0, 0, 0});
-        masks.add(new int[]{
-                0, 0, 0,
-                0, 0, 1,
-                0, 0, 1});
-*/
+
 
         //Define functions to apply
         GenerateConvValueFunction convValueFunction = new GenerateConvValueFunction(masks);

@@ -1,26 +1,36 @@
-<app-imgash-add></app-imgash-add>
+<div class="flex-container">
+    <div class="main">
+        <h2>Images</h2>
+        <h3 class="table-caption">Number of entries: {{imgHashData? imgHashData.length : 0}}</h3>
+        
+        <table class="table-imagelist-data">
+            <thead>
+                <tr>
+                    <th data-type="numeric">#</th>
+                    <th data-type="numeric">Checksum</th>
+                    <th data-type="numeric">Small file Id</th>
+                    <th data-type="numeric">Device Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let imgHashDataEntry of imgHashData" (click)="fetchImage(imgHashDataEntry.properties.smallfiledataid)">
+                    <td><i class="fa fa-hashtag" style="font-size:12px;" title="{{ imgHashDataEntry.id }}"></i></td>
+                    <td class="cell-monospaced">{{ imgHashDataEntry.properties.checksum }}</td>
+                    <td>{{ imgHashDataEntry.properties.smallfiledataid }}</td>
+                    <td>{{ imgHashDataEntry.devicePath }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
 
-<h2>Images</h2>
-<table>
-    <thead>
-        <tr>
-            <th data-type="numeric">#</th>
-            <th data-type="numeric">Checksum</th>
-            <th data-type="numeric">Small file Id</th>
-            <th data-type="numeric">Device Path</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let imgHashDataEntry of imgHashData" (click)="fetchImage(imgHashDataEntry.properties.smallfiledataid)">
-            <td><i class="fa fa-hashtag" style="font-size:12px;" title="{{ imgHashDataEntry.id }}"></i></td>
-            <td><span class="font-monospaced">{{ imgHashDataEntry.properties.checksum }}</span></td>
-            <td>{{ imgHashDataEntry.properties.smallfiledataid }}</td>
-            <td>{{ imgHashDataEntry.devicePath }}</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="sidebar" *ngIf="selectedImage">
+        <div class="imgash-img-details-container">
+            <h1>Details</h1>
+            <img [src]="selectedImage" *ngIf="selectedImage" class="selected-image">
+        </div>
+        
+        <button class="button" type="button" (click)="transformImage()">Transform Image</button>
+    </div>
 
-<div class="imgash-img-details-container">
-    <h1>Image details</h1>
-    <img [src]="selectedImage" *ngIf="selectedImage" class="selected-image">
 </div>

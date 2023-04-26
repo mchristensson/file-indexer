@@ -1,14 +1,16 @@
 package org.se.mac.blorksandbox.spi;
 
 import org.se.mac.blorksandbox.jobqueue.job.EnqueableJob;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
 @EnqueableJob
-public interface QueuedJob {
+public interface QueuedJob extends ApplicationContextAware {
 
     int JOB_STATUS_ERROR = -1;
     int JOB_STATUS_DONE = 1;
@@ -29,7 +31,8 @@ public interface QueuedJob {
         return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
-    void setProperties(ApplicationContext ctx, Map<String, String> properties);
+    void setProperties(Map<String, String> properties);
 
+    default void setApplicationContext(ApplicationContext applicationContext) throws BeansException {}
 }
 

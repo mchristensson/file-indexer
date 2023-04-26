@@ -19,19 +19,137 @@ import static org.mockito.Mockito.*;
 class FileHashAnalyzerJobTest {
 
     @Test
-    void getTask_whenCostructed_expectCallable() {
-        UUID deviceId = UUID.randomUUID();
-        String devicePath = "bar";
-        UrlType urlType = UrlType.WIN_DRIVE_LETTER;
+    void getTask_whenDeviceIdNotSet_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            assertTrue(e.getMessage().contains("Invalid device ID"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenDeviceIdEmpty_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, "");
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            assertTrue(e.getMessage().contains("Invalid device ID"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenDevicePathNotSet_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("Invalid device path"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenDevicePathEmpty_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.DEVICE_PATH, "");
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            assertTrue(e.getMessage().contains("Invalid device path"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenDeviceUrlTypeNotSet_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("Invalid url type"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenDeviceUrlTypeEmpty_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        map.put(DirectoryScannerJob.URL_TYPE, "");
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            assertTrue(e.getMessage().contains("Invocation requires a valid applicationcontext"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenApplicationContextNotSet_expectException() {
+        ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
+        Map<String, String> map = new HashMap<>();
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
+        ApplicationContext ctxMock = mock(ApplicationContext.class);
+        try {
+            job.setProperties(map);
+            fail("Exception expected");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("Invocation requires a valid applicationcontext"));
+        }
+        verifyNoMoreInteractions(ctxMock);
+    }
+
+    @Test
+    void getTask_whenConstructed_expectCallable() {
         ScannerService serviceMock = mock(ScannerService.class);
         ImageFileHashGeneratorJob job = new ImageFileHashGeneratorJob();
         Map<String, String> map = new HashMap<>();
-        map.put(DirectoryScannerJob.DEVICE_ID, deviceId.toString());
-        map.put(DirectoryScannerJob.DEVICE_PATH, devicePath);
-        map.put(DirectoryScannerJob.URL_TYPE, urlType.toString());
+        map.put(DirectoryScannerJob.DEVICE_ID, UUID.randomUUID().toString());
+        map.put(DirectoryScannerJob.DEVICE_PATH, "bar");
+        map.put(DirectoryScannerJob.URL_TYPE, UrlType.WIN_DRIVE_LETTER.toString());
         ApplicationContext ctxMock = mock(ApplicationContext.class);
         when(ctxMock.getBean(ScannerService.class)).thenReturn(serviceMock);
-        job.setProperties(ctxMock, map);
+        job.setApplicationContext(ctxMock);
+        job.setProperties(map);
 
         Callable<Integer> task = job.getTask();
         assertNotNull(task);

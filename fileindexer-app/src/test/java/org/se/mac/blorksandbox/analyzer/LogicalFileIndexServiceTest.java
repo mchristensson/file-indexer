@@ -164,7 +164,7 @@ class LogicalFileIndexServiceTest {
         }
 
         verify(fileHashRepository).findAllById(anyCollection());
-        verify(mock1).getHash();
+        //verify(mock1).getHash();
         verifyNoMoreInteractions(mock1);
     }
 

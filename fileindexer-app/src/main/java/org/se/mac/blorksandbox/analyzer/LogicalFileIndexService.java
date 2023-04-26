@@ -59,13 +59,21 @@ public class LogicalFileIndexService {
         return result;
     }
 
+    public boolean isDevicePresent(UUID deviceId) {
+        return deviceRepository.findById(deviceId).isPresent();
+    }
+
     public Optional<SmallFileData> getSmallFileById(UUID id) {
         return smallFileDataRepository.findById(id);
     }
 
     public int getFileHashComparison(Iterable<UUID> ids) {
-        Iterator<FileHashData> iter = fileHashRepository.findAllById(ids).iterator();
-        return ImageHashGeneratorTask.hammingDistance(iter.next().getHash(), iter.next().getHash());
+        List<FileHashData> result = new ArrayList<>();
+        fileHashRepository.findAllById(ids).iterator().forEachRemaining(result::add);
+        if (result.size() < 2) {
+            throw new NoSuchElementException("Not enough data for comparison (expected at least 2, actual was '"+result.size()+"')");
+        }
+        return ImageHashGeneratorTask.hammingDistance(result.get(0).getHash(), result.get(1).getHash());
     }
 
     /**

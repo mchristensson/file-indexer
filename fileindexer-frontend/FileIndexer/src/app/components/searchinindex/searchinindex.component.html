@@ -1,7 +1,9 @@
-<h2>Indexed data</h2>
 <div class="flex-container">
     <div class="main">
-        <table>
+        <h2>Indexed data</h2>
+        <h3 class="table-caption">Number of entries: {{scannedData? scannedData.length : 0}}</h3>
+
+        <table class="table-indexed-data">
             <thead>
                 <tr>
                     <th>#</th>
@@ -31,7 +33,9 @@
                     <span class="details-key">{{ entry.key}}:</span>
                     <span class="details-value">{{entry.value}}</span>
                 </li>
+                
             </ul>
+            <button class="button" type="button" (click)="createAnalysisTask()">Perform analysis</button>
         </div>
     </div>
 

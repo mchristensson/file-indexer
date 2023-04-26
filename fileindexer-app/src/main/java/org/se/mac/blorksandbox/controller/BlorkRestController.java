@@ -16,6 +16,7 @@ import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,9 @@ public class BlorkRestController {
 
     @Autowired
     private QueueJobRepository queueJobRepository;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * Query and return all enquqable job definitions
@@ -87,7 +91,8 @@ public class BlorkRestController {
         } else {
             try {
                 QueuedJob scanJob = def.get().getDeclaredConstructor().newInstance();
-                scanJob.setProperties(null, request.properties());
+                scanJob.setApplicationContext(applicationContext);
+                scanJob.setProperties(request.settings());
                 queueService.enqueue(scanJob);
                 return new QueuedJobRequestReceipt(scanJob.getId(), "Job of type '" + request.jobTitle() + "' was enqueued");
 
@@ -127,13 +132,15 @@ public class BlorkRestController {
     }
 
     @PostMapping(value = "imgash/compare", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
+    public ResponseEntity<CompareHashPairResponse> compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
         logger.debug("Retrieving hashes from index...");
-        Iterable<UUID> ids =
-                Stream.of(compareHashPairRequest.idA(), compareHashPairRequest.idB()).map(UUID::fromString).toList();
-
-        int result = fileIndexService.getFileHashComparison(ids);
-        return String.valueOf(result);
+        try {
+            Iterable<UUID> ids =
+                    Stream.of(compareHashPairRequest.idA(), compareHashPairRequest.idB()).map(UUID::fromString).toList();
+            return ResponseEntity.ok(new CompareHashPairResponse(fileIndexService.getFileHashComparison(ids), null, null));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new CompareHashPairResponse(null, null, e.getLocalizedMessage()));
+        }
     }
 
     @GetMapping(value = "common/device/list", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -158,22 +165,28 @@ public class BlorkRestController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device could not be created"));
     }
 
+    /**
+     * Transform an image on-the-fly (synchronous)
+     *
+     * @param request Tranform request
+     * @return ID of the resulting image-entity
+     */
     @PostMapping(value = "imgash/transform", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> transformImage(@RequestBody final TransformImageRequest transformImageRequest) {
-        logger.debug("Retrieved request for tranformation of image... [request={}]", transformImageRequest);
+    public ResponseEntity<String> transformImage(@RequestBody final TransformImageRequest request) {
+        logger.debug("Retrieved request for tranformation of image... [request={}]", request);
 
         //Search for image
-        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(transformImageRequest.imageId()));
+        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(request.imageId()));
         try {
             if (image.isPresent()) {
                 UUID uuid = this.fileTransformationService.transformImage(
                         image.get(),
-                        transformImageRequest.transformation(),
-                        transformImageRequest.imageWidth(),
-                        transformImageRequest.imageHeight());
+                        request.transformation(),
+                        request.imageWidth(),
+                        request.imageHeight());
                 return ResponseEntity.ok(uuid.toString());
             } else {
-                logger.warn("Image could not be found [id={}]", transformImageRequest.imageId());
+                logger.warn("Image could not be found [id={}]", request.imageId());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image could not be found");
             }
 

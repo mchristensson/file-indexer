@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { Injectable } from '@angular/core';
 import { Observable, map, switchMap, Subscriber } from 'rxjs';
-import { ScanJobStatusDataEntry, EqueueJobReceipt, ScannedDataEntry, ImgHashData, LogicalDevice } from '../models/indexedentry.model';
+import { ScanJobStatusDataEntry, EqueueJobReceipt, ScannedDataEntry, ImgHashData, LogicalDevice, EnqueuedTask, ImageTransformInstruction} from '../models/indexedentry.model';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DefaultapiserviceService {
 
   constructor(private _client: HttpClient) { }
 
-  scanEnqueue(requestData): Observable<EqueueJobReceipt> {
+  taskEnqueue(requestData: EnqueuedTask): Observable<EqueueJobReceipt> {
 
     var httpOpts = {
       headers: new HttpHeaders({
@@ -20,7 +20,32 @@ export class DefaultapiserviceService {
       })
     }
     return this._client
-    .post<EqueueJobReceipt>("http://localhost:8081/api/scan/enqueue", requestData, httpOpts);
+    .post<EqueueJobReceipt>("http://localhost:8081/api/queue/enqueue", requestData, httpOpts);
+
+  }
+
+  imageTransform(requestData: ImageTransformInstruction) {
+    var httpOpts = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Basic ' + btoa('bob:bob')
+      }),
+      responseType : 'text' as 'json' //required when returnning 
+    }
+    return this._client
+    .post<any>("http://localhost:8081/api/imgash/transform", requestData, httpOpts);
+  }
+
+  createDevice(requestData: Partial<{ title: string; devicePath: string; }>): Observable<any> {
+    var httpOpts = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Basic ' + btoa('bob:bob')
+      }),
+      responseType : 'text' as 'json' //required when returnning 
+    }
+    return this._client
+    .post<any>("http://localhost:8081/api/common/device/add", requestData, httpOpts);
 
   }
 
@@ -34,6 +59,18 @@ export class DefaultapiserviceService {
     return this._client
     .get<LogicalDevice[]>("http://localhost:8081/api/common/device/list", httpOpts);
     
+  }
+
+  getTaskList(): Observable<String[]> {
+    var httpOpts = {
+      headers: new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : 'Basic ' + btoa('bob:bob')
+      }),
+      //responseType : 'text' as 'json' //required when returnning 
+    }
+    return this._client
+    .get<String[]>("http://localhost:8081/api/queue/jobs", httpOpts);
   }
 
   getQueueJobStatus(): Observable<{data:ScanJobStatusDataEntry[], timestamp: number}> {
@@ -104,16 +141,4 @@ export class DefaultapiserviceService {
   }
 
 
-  imgAnalysisEnqueue(requestData): Observable<EqueueJobReceipt> {
-
-    var httpOpts = {
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Basic ' + btoa('bob:bob')
-      })
-    }
-    return this._client
-    .post<EqueueJobReceipt>("http://localhost:8081/api/imgash/enqueue", requestData, httpOpts);
-
-  }
 }
