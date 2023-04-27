@@ -1,28 +1,35 @@
 package org.se.mac.blorksandbox.analyzer.image;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class GenerateConvValueFunction extends ConvUtil implements Function<BufferedImage, BufferedImage>, SaveImageToDiskSupport {
+/**
+ * Utility function for convolution of a {@link java.awt.image.BufferedImage}.
+ */
+public class GenerateConvValueFunction extends ConvUtil implements Function<BufferedImage,
+        BufferedImage>, SaveImageToDiskSupport {
 
     private static final Logger logger = LoggerFactory.getLogger(GenerateConvValueFunction.class);
 
     private final Iterable<int[]> masks;
 
+    /**
+     * Default constructor.
+     *
+     * @param masks Convolution masks to apply.
+     */
     public GenerateConvValueFunction(Iterable<int[]> masks) {
         this.masks = masks;
     }
 
     /**
-     * Checks that that mask is ok
+     * Checks that that mask is ok.
      */
     private void validateMasks() {
         int maxWidth = 2;
@@ -48,18 +55,23 @@ public class GenerateConvValueFunction extends ConvUtil implements Function<Buff
         for (int[] mask : masks) {
             logger.debug("Processing mask... [values={}]", Arrays.toString(mask));
 
-            float[] maskOutput = getStatsFloat(bufferedImage.getColorModel(), bufferedImage.getRaster(), mask);
-            logger.debug("MaxPoolingOutput: [mask={}, max_pooling.output={}]", Arrays.toString(mask), Arrays.toString(maskOutput));
+            float[] maskOutput = getStatsFloat(bufferedImage.getColorModel(),
+                    bufferedImage.getRaster(), mask);
+            logger.debug("MaxPoolingOutput: [mask={}, max_pooling.output={}]",
+                    Arrays.toString(mask), Arrays.toString(maskOutput));
 
         }
         return bufferedImage;
     }
 
     private float[] getStatsFloat(ColorModel colorModel, WritableRaster rasterInput, int[] mask) {
-        logger.debug("Input Image size: [w={}, h={}]", rasterInput.getWidth(), rasterInput.getHeight());
-        float[] output = averageByMask((DataBufferByte) rasterInput.getDataBuffer(), rasterInput.getWidth(), rasterInput.getHeight(), mask);
+        logger.debug("Input Image size: [w={}, h={}]", rasterInput.getWidth(),
+                rasterInput.getHeight());
+        float[] output = averageByMask((DataBufferByte) rasterInput.getDataBuffer(),
+                rasterInput.getWidth(), rasterInput.getHeight(), mask);
 
-        return maxPooling(output, (int) (rasterInput.getWidth() / Math.sqrt(mask.length)), (int) (rasterInput.getHeight() / Math.sqrt(mask.length)), 2, 1, 1);
+        return maxPooling(output, (int) (rasterInput.getWidth() / Math.sqrt(mask.length)),
+                (int) (rasterInput.getHeight() / Math.sqrt(mask.length)), 2, 1, 1);
     }
 
 

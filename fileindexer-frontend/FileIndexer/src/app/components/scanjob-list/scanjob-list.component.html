@@ -1,5 +1,15 @@
-<app-scanjob-add></app-scanjob-add>
-<app-device-add></app-device-add>    
+<div>
+<button (click)="modalformService.reveal('modal-1')">Create task...</button>
+<app-modalform id="modal-1" style="display: none">
+    <app-scanjob-add></app-scanjob-add>
+    <button (click)="modalformService.close()">Close</button>
+</app-modalform>
+<button (click)="modalformService.reveal('modal-2')">Create device...</button>
+<app-modalform id="modal-2" style="display: none">
+    <app-device-add></app-device-add> 
+    <button (click)="modalformService.close()">Close</button>
+</app-modalform>
+</div>
 
 <h2>Tasks</h2>
 <h3 class="table-caption">Number of entries: {{scanJobStatusData? scanJobStatusData.length : 0}}. Retrival date: {{scanJobStatusDataTs | date: 'HH:mm:ss (z)' }}</h3>

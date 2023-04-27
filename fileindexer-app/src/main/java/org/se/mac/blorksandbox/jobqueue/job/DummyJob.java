@@ -1,18 +1,17 @@
 package org.se.mac.blorksandbox.jobqueue.job;
 
-import org.se.mac.blorksandbox.spi.QueuedJob;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.random.RandomGenerator;
+import org.se.mac.blorksandbox.spi.QueuedJob;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Job that does not do anything other than sleeping for a short while
+ * Job that does not do anything other than sleeping for a short while.
  */
 @EnqueableJob(title = "DevNull job")
 public class DummyJob implements QueuedJob {

@@ -1,12 +1,14 @@
 package org.se.mac.blorksandbox.analyzer.data;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+/**
+ * Entity representing a physical device holding logical files.
+ */
 @Table("logicaldevice")
 public class DeviceData {
 
@@ -17,7 +19,17 @@ public class DeviceData {
     private String title;
     private Map<String, String> properties;
 
-    public DeviceData(UUID id, String basePath, String title, Instant updated_date, Map<String, String> properties) {
+    /**
+     * Default constructor.
+     *
+     * @param id           Identifier for the entity
+     * @param basePath     Device path (when applicable)
+     * @param title        Device title
+     * @param updated_date Creation/Update timestmp
+     * @param properties   Custom properties for this entity
+     */
+    public DeviceData(UUID id, String basePath, String title, Instant updated_date, Map<String,
+            String> properties) {
         this.id = id;
         this.basePath = basePath;
         this.title = title;

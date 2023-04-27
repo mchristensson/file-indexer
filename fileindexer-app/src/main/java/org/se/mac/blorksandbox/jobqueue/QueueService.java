@@ -1,11 +1,6 @@
 package org.se.mac.blorksandbox.jobqueue;
 
 import jakarta.annotation.PreDestroy;
-import org.se.mac.blorksandbox.spi.QueuedJob;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +8,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import org.se.mac.blorksandbox.spi.QueuedJob;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
- * Queue engine that processes tasks
+ * Queue engine that processes tasks.
  */
 @Service
 public class QueueService {
@@ -29,11 +28,19 @@ public class QueueService {
 
     private ScheduledExecutorService executorService;
 
+    /**
+     * Default constructor.
+     */
     public QueueService() {
         this(Executors.newScheduledThreadPool(2));
     }
 
-    QueueService(ScheduledExecutorService executorService) {
+    /**
+     * Overloaded constructor.
+     *
+     * @param executorService Executor service
+     */
+    public QueueService(ScheduledExecutorService executorService) {
         this.executorService = executorService;
         this.result = new HashMap<>();
         initCleanupActivity();
@@ -58,11 +65,12 @@ public class QueueService {
             keys.forEach(result::remove);
             logger.info("Cleaned up {} of {}", dt, t);
         };
-        executorService.scheduleAtFixedRate(cleanup, CLEANUP_DELAY, CLEANUP_PERIOD, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(cleanup, CLEANUP_DELAY, CLEANUP_PERIOD,
+                TimeUnit.SECONDS);
     }
 
     /**
-     * Enqueues a job
+     * Enqueues a job.
      *
      * @param job Job object to enqueue
      */
@@ -87,6 +95,7 @@ public class QueueService {
     public boolean isRunning() {
         return !executorService.isShutdown();
     }
+
     public Map<Long, Integer> getResult() {
         return new HashMap<>(this.result);
     }

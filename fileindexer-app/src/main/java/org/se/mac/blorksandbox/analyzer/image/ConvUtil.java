@@ -1,11 +1,12 @@
 package org.se.mac.blorksandbox.analyzer.image;
 
+import java.awt.image.DataBufferByte;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.image.DataBufferByte;
-import java.util.Arrays;
-
+/**
+ * Utility for transforming and extracting data from {@link java.awt.image.BufferedImage}.
+ */
 public class ConvUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ConvUtil.class);
@@ -34,20 +35,18 @@ public class ConvUtil {
     }
 
     /**
-     * Extracts a subset (window) of a byte-array (treated as a 2d-array
+     * Extracts a subset (window) of a byte-array (treated as a 2d-array.
      *
      * @param dataBuffer Data input source to extract from
      * @param w          2d-array horizontal bound
      * @param h          2d-array vertical bound
      * @param mask       mask definition to extract and filter data through
-     * @return
-     * @see #averageByMask(int[], int[]) for more details on computation of the extracted window data.
+     * @return average
+     * @see #averageByMask(int[], int[]) for more details on computation of the extracted window
+     * data.
      */
     public static float[] averageByMask(DataBufferByte dataBuffer, int w, int h, int[] mask) {
-        assert mask != null &&
-                (w * h) > 0 &&
-                mask.length > 1 &&
-                mask.length <= (w * h);
+        assert mask != null && (w * h) > 0 && mask.length > 1 && mask.length <= (w * h);
         int maskEdge = (int) Math.sqrt(mask.length);
         float[] outputBytes = new float[w * h / mask.length];
         int bytesPointer = 0;
@@ -56,9 +55,9 @@ public class ConvUtil {
                 //Extract pixels matching the mask
                 int[] pixels = new int[mask.length];
                 int pixelsPointer = 0;
-                for (int maskYOffset = 0; maskYOffset < maskEdge; maskYOffset++) {
-                    for (int maskXOffset = 0; maskXOffset < maskEdge; maskXOffset++) {
-                        int p = dataBuffer.getElem(row * (h + maskYOffset) + (col + maskXOffset));
+                for (int maskyoffset = 0; maskyoffset < maskEdge; maskyoffset++) {
+                    for (int maskxoffset = 0; maskxoffset < maskEdge; maskxoffset++) {
+                        int p = dataBuffer.getElem(row * (h + maskyoffset) + (col + maskxoffset));
                         pixels[pixelsPointer++] = p;
                     }
                 }
@@ -75,7 +74,7 @@ public class ConvUtil {
     }
 
     /**
-     * Extracts a window of data from an array assumed representing 2D data
+     * Extracts a window of data from an array assumed representing 2D data.
      *
      * @param input        Input data to extract from
      * @param x            horizontal coordinate in the 2D data
@@ -86,7 +85,8 @@ public class ConvUtil {
      * @param maxY         Max vertical index
      * @return An output array with the selected data (assumed representing 2D data)
      */
-    public static float[] getPixels(float[] input, int x, int y, int windowWidth, int windowHeight, int maxX, int maxY) {
+    public static float[] getPixels(float[] input, int x, int y, int windowWidth,
+                                    int windowHeight, int maxX, int maxY) {
         if (input.length == 2) {
             return input;
         }
@@ -110,13 +110,14 @@ public class ConvUtil {
     }
 
     /**
-     * Performs maxPooling
+     * Performs maxPooling.
      *
      * @param input      Input data
      * @param w          2D array width
      * @param h          2D array height
      * @param maskLength mask size
-     * @return An array of all max-values for each masking iteration. If the input size or bounds is less than 2x2 the input is returned without processing.
+     * @return An array of all max-values for each masking iteration. If the input size or bounds
+     * is less than 2x2 the input is returned without processing.
      */
     public static float[] maxPooling(float[] input, int w, int h, int maskLength) {
         int s = w * h / maskLength;
@@ -150,12 +151,14 @@ public class ConvUtil {
      * @param maskLength mask size
      * @param minX       Horizontal lower threshold value (non-inclusive) to continue process
      * @param minY       Vertical lower threshold value (non-inclusive) to continue process
-     * @return An array of all max-values for each masking iteration. If the input size or bounds is less than 2x2 the input is returned without processing.
+     * @return An array of all max-values for each masking iteration. If the input size or bounds
+     * is less than 2x2 the input is returned without processing.
      * @see #maxPooling(float[], int, int, int, int, int)
      */
-    protected static float[] maxPooling(float[] input, int w, int h, int maskLength, int minX, int minY) {
-        int wi = w ;
-        int hi = h ;
+    protected static float[] maxPooling(float[] input, int w, int h, int maskLength, int minX,
+                                        int minY) {
+        int wi = w;
+        int hi = h;
         byte divisor = 1;
         do {
             input = maxPooling(input, wi, hi, maskLength);

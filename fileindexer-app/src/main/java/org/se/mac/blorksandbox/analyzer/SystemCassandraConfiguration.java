@@ -1,5 +1,7 @@
 package org.se.mac.blorksandbox.analyzer;
 
+import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanClassLoaderAware;
@@ -14,13 +16,15 @@ import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 import org.springframework.data.cassandra.core.cql.session.init.KeyspacePopulator;
 import org.springframework.data.cassandra.core.cql.session.init.ResourceKeyspacePopulator;
 
-import java.util.List;
-import java.util.Objects;
-
+/**
+ * Configuration for datasource connection.
+ */
 @Configuration
 public class SystemCassandraConfiguration extends AbstractCassandraConfiguration implements BeanClassLoaderAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(SystemCassandraConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            SystemCassandraConfiguration.class);
+
     @Value("${spring.data.cassandra.keyspace-name}")
     private String keyspaceName;
     @Value("${spring.data.cassandra.contact-points}")
@@ -56,9 +60,8 @@ public class SystemCassandraConfiguration extends AbstractCassandraConfiguration
 
     @Override
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(getKeyspaceName())
-                .ifNotExists()
-                .with(KeyspaceOption.DURABLE_WRITES, true)
+        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(
+                        getKeyspaceName()).ifNotExists().with(KeyspaceOption.DURABLE_WRITES, true)
                 .withSimpleReplication(1);
         return List.of(specification);
     }
@@ -70,11 +73,13 @@ public class SystemCassandraConfiguration extends AbstractCassandraConfiguration
 
     @Override
     protected KeyspacePopulator keyspacePopulator() {
-        return new ResourceKeyspacePopulator(new ClassPathResource("org/se/mac/fileindexer/schema/db-schema.cql"));
+        return new ResourceKeyspacePopulator(
+                new ClassPathResource("org/se/mac/fileindexer/schema" + "/db-schema.cql"));
     }
 
     @Override
     protected KeyspacePopulator keyspaceCleaner() {
-        return new ResourceKeyspacePopulator(new ClassPathResource("org/se/mac/fileindexer/schema/drop-create-schema.cql"));
+        return new ResourceKeyspacePopulator(
+                new ClassPathResource("org/se/mac/fileindexer/schema" + "/drop-create-schema.cql"));
     }
 }

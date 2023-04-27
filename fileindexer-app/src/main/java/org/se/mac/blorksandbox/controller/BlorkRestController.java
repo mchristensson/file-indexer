@@ -1,5 +1,11 @@
 package org.se.mac.blorksandbox.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.se.mac.blorksandbox.analyzer.FileTransformationService;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.DeviceData;
@@ -22,13 +28,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+/**
+ * Rest end-points.
+ */
 @RestController
 @RequestMapping(value = "api", method = {RequestMethod.GET, RequestMethod.POST})
 public class BlorkRestController {
@@ -54,7 +56,7 @@ public class BlorkRestController {
     private ApplicationContext applicationContext;
 
     /**
-     * Query and return all enquqable job definitions
+     * Query and return all enquqable job definitions.
      *
      * @return List of all job definition titles
      */
@@ -66,7 +68,7 @@ public class BlorkRestController {
     }
 
     /**
-     * Return status for all enqueued job tasks
+     * Return status for all enqueued job tasks.
      *
      * @return Status for all enqueued job tasks
      */
@@ -77,7 +79,7 @@ public class BlorkRestController {
     }
 
     /**
-     * Enqueue a new job task
+     * Enqueue a new job task.
      *
      * @param request Request data
      * @return Acknowledge of enqueued job task
@@ -85,45 +87,62 @@ public class BlorkRestController {
     @PostMapping(value = "queue/enqueue", consumes = MediaType.APPLICATION_JSON_VALUE)
     public QueuedJobRequestReceipt enqueue(@RequestBody ScanEnqueueRequest request) {
         logger.debug("Enqueuing job...");
-        Optional<? extends Class<? extends QueuedJob>> def = queueJobRepository.lookupByTitle(request.jobTitle());
+        Optional<? extends Class<? extends QueuedJob>> def = queueJobRepository.lookupByTitle(
+                request.jobTitle());
         if (def.isEmpty()) {
-            return new QueuedJobRequestReceipt(0L, "Job definition " + request.jobTitle() + " could not be found.");
+            return new QueuedJobRequestReceipt(0L,
+                    "Job definition " + request.jobTitle() + " " + "could not be found.");
         } else {
             try {
                 QueuedJob scanJob = def.get().getDeclaredConstructor().newInstance();
                 scanJob.setApplicationContext(applicationContext);
                 scanJob.setProperties(request.settings());
                 queueService.enqueue(scanJob);
-                return new QueuedJobRequestReceipt(scanJob.getId(), "Job of type '" + request.jobTitle() + "' was enqueued");
+                return new QueuedJobRequestReceipt(scanJob.getId(),
+                        "Job of type '" + request.jobTitle() + "' was enqueued");
 
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
                 logger.error("Unable to enqueue job", e);
-                return new QueuedJobRequestReceipt(0L, "Job definition " + request.jobTitle() + " could not be queued." + e.getLocalizedMessage());
+                return new QueuedJobRequestReceipt(0L,
+                        String.format("Job definition %s  could not be queued. Cause: %s",
+                                request.jobTitle(), e.getLocalizedMessage()));
             }
         }
     }
 
+    /**
+     * Finds all file meta-data entities from repository.
+     *
+     * @return All file meta-data entities
+     */
     @GetMapping("scan/list")
     public LogicalFilesSearchResult listLogicalFiles() {
         logger.debug("Retrieving files from index...");
-        final List<LogicalFileValue> names =
-                fileIndexService.getAllFiles().stream()
-                        .filter(Objects::nonNull)
-                        .map(transformLogicalFile()).toList();
+        final List<LogicalFileValue> names = fileIndexService.getAllFiles().stream()
+                .filter(Objects::nonNull).map(transformLogicalFile()).toList();
         return new LogicalFilesSearchResult(names.toArray(new LogicalFileValue[0]));
     }
 
+    /**
+     * Finds all file-hash entities from repository.
+     *
+     * @return All file-hash entities
+     */
     @GetMapping("imgash/list")
     public LogicalFilesSearchResult listImageHash() {
         logger.debug("Retrieving hashes from index...");
-        final List<LogicalFileValue> names =
-                fileIndexService.getAllFileHashes().stream()
-                        .filter(Objects::nonNull)
-                        .map(transformFileHash()).toList();
+        final List<LogicalFileValue> names = fileIndexService.getAllFileHashes().stream()
+                .filter(Objects::nonNull).map(transformFileHash()).toList();
         return new LogicalFilesSearchResult(names.toArray(new LogicalFileValue[0]));
     }
 
+    /**
+     * Searches for and returns the binary content of an image.
+     *
+     * @param id Image id representing the image entity to be returned
+     * @return binary content of an image
+     */
     @GetMapping(value = "imgash/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] imageById(@RequestParam(name = "id") String id) {
         logger.debug("Retrieving image from id... [id={}]", id);
@@ -131,18 +150,33 @@ public class BlorkRestController {
         return image.map(smallFileData -> smallFileData.getBlob().array()).orElse(null);
     }
 
+    /**
+     * Calculate the hamming distance between two images.
+     *
+     * @param request Image Ids representing the image entities to be used in the calculation
+     * @return The hamming distance
+     */
     @PostMapping(value = "imgash/compare", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CompareHashPairResponse> compareImageHash(@RequestBody CompareHashPairRequest compareHashPairRequest) {
+    public ResponseEntity<CompareHashPairResponse> compareImageHash(
+            @RequestBody CompareHashPairRequest request) {
         logger.debug("Retrieving hashes from index...");
         try {
-            Iterable<UUID> ids =
-                    Stream.of(compareHashPairRequest.idA(), compareHashPairRequest.idB()).map(UUID::fromString).toList();
-            return ResponseEntity.ok(new CompareHashPairResponse(fileIndexService.getFileHashComparison(ids), null, null));
+            Iterable<UUID> ids = Stream.of(request.idA(), request.idB()).map(UUID::fromString)
+                    .toList();
+            return ResponseEntity.ok(
+                    new CompareHashPairResponse(fileIndexService.getFileHashComparison(ids), null,
+                            null));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(new CompareHashPairResponse(null, null, e.getLocalizedMessage()));
+            return ResponseEntity.internalServerError()
+                    .body(new CompareHashPairResponse(null, null, e.getLocalizedMessage()));
         }
     }
 
+    /**
+     * Searches for and returns all the device entities.
+     *
+     * @return All device entities
+     */
     @GetMapping(value = "common/device/list", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LogicalDeviceInfo>> findAllJobsDevices() {
         logger.debug("Retrieved request for a list of all available devices...");
@@ -152,7 +186,7 @@ public class BlorkRestController {
     }
 
     /**
-     * Create a new device in the corresponding repository
+     * Create a new device in the corresponding repository.
      *
      * @param deviceInfo Data about the device to create
      * @return Id of the newly created Device
@@ -160,13 +194,16 @@ public class BlorkRestController {
     @PostMapping(value = "common/device/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addDevice(@RequestBody LogicalDeviceInfo deviceInfo) {
         logger.debug("Retrieved request for adding a new device... [deviceInfo={}]", deviceInfo);
-        return Optional.of(fileIndexService.createDevice(deviceInfo.devicePath(), deviceInfo.title(), deviceInfo.properties()))
+        return Optional.of(
+                        fileIndexService.createDevice(deviceInfo.devicePath(), deviceInfo.title(),
+                                deviceInfo.properties()))
                 .map(logicalDeviceInfo -> ResponseEntity.ok(logicalDeviceInfo.getId().toString()))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Device could not be created"));
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Device could not be created"));
     }
 
     /**
-     * Transform an image on-the-fly (synchronous)
+     * Transform an image on-the-fly (synchronous).
      *
      * @param request Tranform request
      * @return ID of the resulting image-entity
@@ -176,18 +213,17 @@ public class BlorkRestController {
         logger.debug("Retrieved request for tranformation of image... [request={}]", request);
 
         //Search for image
-        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(request.imageId()));
+        Optional<SmallFileData> image = fileIndexService.getSmallFileById(
+                UUID.fromString(request.imageId()));
         try {
             if (image.isPresent()) {
-                UUID uuid = this.fileTransformationService.transformImage(
-                        image.get(),
-                        request.transformation(),
-                        request.imageWidth(),
-                        request.imageHeight());
+                UUID uuid = this.fileTransformationService.transformImage(image.get(),
+                        request.transformation(), request.imageWidth(), request.imageHeight());
                 return ResponseEntity.ok(uuid.toString());
             } else {
                 logger.warn("Image could not be found [id={}]", request.imageId());
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image could not be found");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Image could not be " + "found");
             }
 
         } catch (IOException e) {
@@ -199,8 +235,7 @@ public class BlorkRestController {
 
     private static Function<FileMetaData, LogicalFileValue> transformLogicalFile() {
         return f -> {
-            return new LogicalFileValue(
-                    f.getId().toString(), // String id,
+            return new LogicalFileValue(f.getId().toString(), // String id,
                     f.getDevicePath(), // String devicePath,
                     f.getUpdated_date(), // Date date,
                     f.getScanTime(), // long scanTime,
@@ -217,8 +252,7 @@ public class BlorkRestController {
             data.put("checksum", f.getHash());
             data.put("smallfiledataid", f.getSmallFileDataId().toString());
 
-            return new LogicalFileValue(
-                    f.getId().toString(), // String id,
+            return new LogicalFileValue(f.getId().toString(), // String id,
                     f.getDevicePath(), // String devicePath,
                     f.getUpdated_date(), // Date date,
                     f.getScanTime(), // long scanTime,
@@ -229,11 +263,7 @@ public class BlorkRestController {
     }
 
     private Function<DeviceData, LogicalDeviceInfo> transformDeviceData() {
-        return f -> new LogicalDeviceInfo(
-                f.getId().toString(),
-                f.getBasePath(),
-                f.getTitle(),
-                f.getUpdated_date(),
-                f.getProperties());
+        return f -> new LogicalDeviceInfo(f.getId().toString(), f.getBasePath(), f.getTitle(),
+                f.getUpdated_date(), f.getProperties());
     }
 }

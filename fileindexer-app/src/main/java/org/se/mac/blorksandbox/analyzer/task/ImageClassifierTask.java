@@ -1,19 +1,18 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
-import org.se.mac.blorksandbox.analyzer.image.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.awt.image.BufferedImage;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-
+import org.se.mac.blorksandbox.analyzer.image.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Testing functionality mentioned in https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
+ * Testing functionality mentioned in
+ * <a href="https://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html">...</a>.
  */
 public class ImageClassifierTask extends AbstractImageAnalyzerTask {
 
@@ -33,19 +32,22 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         }
     };
 
-    protected void setOutputScaledFileName(String outputFileName) {
-        this.outputScaledFileName = outputFileName;
-    }
-
     /**
+     * Default constructor.
+     *
      * @param procId           Process identifier for this task
      * @param outputFileFormat Output file format (the saved file)
-     * @param maxPixels        When scaling the image this value will be the maximum edge length (width OR height)
+     * @param maxPixels        When scaling the image this value will be the maximum edge length
+     *                         (width OR height)
      */
     public ImageClassifierTask(String procId, String outputFileFormat, int maxPixels) {
         super(procId);
         this.outputFileFormat = outputFileFormat;
         this.maxPixels = maxPixels;
+    }
+
+    protected void setOutputScaledFileName(String outputFileName) {
+        this.outputScaledFileName = outputFileName;
     }
 
     @Override
@@ -56,43 +58,30 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         setOutputFileName(p.getFileName().toString());
         setOutputScaledFileName(p.getFileName().toString() + ".scaled." + outputFileFormat);
 
-        //Load image
-        BufferedImage image = getImage(p);
-
         //Define masks
         List<int[]> masks = new ArrayList<>();
-        masks.add(new int[]{
-                1, 0,
-                0, 1
-        });
-        masks.add(new int[]{
-                0, 1,
-                1, 1
-        });
-        masks.add(new int[]{
-                1, 0,
-                1, 0
-        });
-        masks.add(new int[]{
-                0, 1,
-                1, 0
-        });
+        masks.add(new int[]{1, 0, 0, 1});
+        masks.add(new int[]{0, 1, 1, 1});
+        masks.add(new int[]{1, 0, 1, 0});
+        masks.add(new int[]{0, 1, 1, 0});
 
 
         //Define functions to apply
         GenerateConvValueFunction convValueFunction = new GenerateConvValueFunction(masks);
-        SaveFileFunction saveFileFunction = new SaveFileFunction(outputFileUrlSupplier, outputFileFormat);
-        SaveFileFunction saveScaledFileFunction = new SaveFileFunction(outputScaledFileUrlSupplier, outputFileFormat);
+        SaveFileFunction saveFileFunction = new SaveFileFunction(outputFileUrlSupplier,
+                outputFileFormat);
+        SaveFileFunction saveScaledFileFunction = new SaveFileFunction(outputScaledFileUrlSupplier,
+                outputFileFormat);
         ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false);
         ContrastFunction contrastFunction = new ContrastFunction();
         ColormodeFunction colormodeFunction = new ColormodeFunction();
-        colormodeFunction
-                .andThen(contrastFunction)
-                .andThen(scaleFunction)
-                .andThen(saveScaledFileFunction)
-                .andThen(convValueFunction)
-                .andThen(saveFileFunction)
-                .apply(image);
+
+        //Load image
+        BufferedImage image = getImage(p);
+
+        colormodeFunction.andThen(contrastFunction).andThen(scaleFunction)
+                .andThen(saveScaledFileFunction).andThen(convValueFunction)
+                .andThen(saveFileFunction).apply(image);
         logger.debug("Saved to file... [outputfile={}]", outputFileUrlSupplier.get());
 
         if (doAfter != null) {

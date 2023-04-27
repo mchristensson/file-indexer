@@ -1,12 +1,13 @@
 package org.se.mac.blorksandbox.analyzer.data;
 
+import java.time.Instant;
+import java.util.UUID;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.time.Instant;
-import java.util.Map;
-import java.util.UUID;
-
+/**
+ * Entity representing a file's hash value.
+ */
 @Table
 public class FileHashData {
 
@@ -19,7 +20,18 @@ public class FileHashData {
     private String hash;
     private UUID smallFileDataId;
 
-    public FileHashData(UUID id, Instant updated_date, UUID deviceId, String devicePath, String hash, long scanTime) {
+    /**
+     * Default constructor.
+     *
+     * @param id           Identifier for the entity
+     * @param updated_date Creation/Update timestmp
+     * @param deviceId     ID representing the distinct device where this file was indexed.
+     * @param devicePath   Device path where this file was indexed.
+     * @param hash         Hash value representing the file
+     * @param scanTime     Duration for precoessing the hash value
+     */
+    public FileHashData(UUID id, Instant updated_date, UUID deviceId, String devicePath,
+                        String hash, long scanTime) {
         this.id = id;
         this.updated_date = updated_date;
         this.scanTime = scanTime;

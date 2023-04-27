@@ -3,6 +3,11 @@ package org.se.mac.blorksandbox.analyzer.task;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
+/**
+ * Task for analysizing/processing a file.
+ *
+ * @param <R> Output type
+ */
 public interface FileAnalyzerTask<R> {
 
     /**

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { map, timestamp, Subscription, interval, startWith, switchMap } from 'rxjs';
 import { ScanJobStatusDataEntry } from 'src/app/models/indexedentry.model';
 import { DefaultapiserviceService } from '../../services/defaultapiservice.service';
+import { ModalformService } from 'src/app/services/modalform.service';
 
 @Component({
   selector: 'app-scanjob-list',
@@ -14,8 +15,7 @@ export class ScanjobListComponent {
   scanJobStatusDataTs: Date;
   scanJobStatusDataSubscriptionTi: Subscription;
 
-  constructor(private apiService: DefaultapiserviceService) {}
-  
+  constructor(private apiService: DefaultapiserviceService, protected modalformService: ModalformService) {}
  
   ngOnInit() {
     this.scanJobStatusDataSubscriptionTi = interval(5000).pipe(

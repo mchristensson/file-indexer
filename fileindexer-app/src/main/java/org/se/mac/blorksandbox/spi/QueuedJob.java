@@ -1,14 +1,16 @@
 package org.se.mac.blorksandbox.spi;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Callable;
 import org.se.mac.blorksandbox.jobqueue.job.EnqueableJob;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-
+/**
+ * Defines a stateful task with an implementable function.
+ */
 @EnqueableJob
 public interface QueuedJob extends ApplicationContextAware {
 
@@ -23,7 +25,7 @@ public interface QueuedJob extends ApplicationContextAware {
     Long getId();
 
     /**
-     * Generates a uniquie identifier (UUID) and provides it as long
+     * Generates a uniquie identifier (UUID) and provides it as long.
      *
      * @return Identifier
      */
@@ -33,6 +35,8 @@ public interface QueuedJob extends ApplicationContextAware {
 
     void setProperties(Map<String, String> properties);
 
-    default void setApplicationContext(ApplicationContext applicationContext) throws BeansException {}
+    default void setApplicationContext(ApplicationContext applicationContext)
+            throws BeansException {
+    }
 }
 

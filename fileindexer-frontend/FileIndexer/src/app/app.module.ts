@@ -11,6 +11,7 @@ import { SearchinindexComponent } from './components/searchinindex/searchinindex
 import { ImgashListComponent } from './components/imgash-list/imgash-list.component';
 import { ImgashAddComponent } from './components/imgash-add/imgash-add.component';
 import { DeviceAddComponent } from './components/device-add/device-add.component';
+import { ModalformComponent } from './components/modalform/modalform.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DeviceAddComponent } from './components/device-add/device-add.component
     SearchinindexComponent,
     ImgashListComponent,
     ImgashAddComponent,
-    DeviceAddComponent
+    DeviceAddComponent,
+    ModalformComponent
   ],
   imports: [
     BrowserModule,

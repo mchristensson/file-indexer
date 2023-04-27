@@ -14,6 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * General configuration for the application in terms of authentication mechanism and web-app
+ * filtering settings.
+ */
 @Configuration
 public class ApplicationConfig {
 
@@ -24,25 +28,22 @@ public class ApplicationConfig {
 
     /**
      * Custom implementation of the handler for incoming REST-calls.
-     * Utilized by the Spring AuthenticationProvider
+     * Utilized by the Spring AuthenticationProvider.
      *
      * @return A service reference
      */
     @Bean
     public UserDetailsService userDetailsService() {
         var svc = new InMemoryUserDetailsManager();
-        UserDetails user = User.builder()
-                .username("bob")
-                .password("bob")
-                .authorities("manager")
-                .build();
+        UserDetails user =
+                User.builder().username("bob").password("bob").authorities("manager").build();
         svc.createUser(user);
         return svc;
     }
 
     /**
      * Defines the password-encoder that verifies passwords
-     * Utilized by the Spring AuthenticationProvider
+     * Utilized by the Spring AuthenticationProvider.
      *
      * @return A passwordencoder mechanism
      */
@@ -51,6 +52,13 @@ public class ApplicationConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    /**
+     * Filtering method fo CSRF (deprecated).
+     *
+     * @param http HttpSecurity instance
+     * @return Builder for filter-chain
+     * @throws Exception If {@link HttpSecurity} fails in any way.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         logger.debug("Setting up filterchain for Spring CSRF");

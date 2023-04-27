@@ -1,6 +1,8 @@
 package org.se.mac.blorksandbox.jobqueue.rest;
 
-//TODO: Makes this a record instead
+/**
+ * Data carrier for the ack-value from backend when enqueuing a task.
+ */
 public class QueuedJobRequestReceipt {
 
     private final long id;
@@ -10,6 +12,13 @@ public class QueuedJobRequestReceipt {
     public QueuedJobRequestReceipt(long id) {
         this.id = id;
     }
+
+    /**
+     * Default constructor.
+     *
+     * @param id      ID for the task
+     * @param message Custom message
+     */
     public QueuedJobRequestReceipt(long id, String message) {
         this.id = id;
         this.message = message;

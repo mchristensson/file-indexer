@@ -11,9 +11,6 @@ import com.drew.metadata.iptc.IptcDirectory;
 import com.drew.metadata.jpeg.JpegDirectory;
 import com.drew.metadata.photoshop.PhotoshopDirectory;
 import com.drew.metadata.png.PngDirectory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,11 +18,16 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
+/**
+ * Task that extracts meta-data from files - Image files specifically.
+ */
 public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageAnalyzerTask.class);
@@ -54,7 +56,8 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
 
     }
 
-    private Map<String, String> getMetaDataMap(File file) throws ImageProcessingException, IOException {
+    private Map<String, String> getMetaDataMap(File file) throws ImageProcessingException,
+            IOException {
         Metadata md = getMetaData(file);
         Map<String, String> map = getMetaDataMap(md.getDirectories());
         map.putIfAbsent(FILE_NAME, file.getName());
@@ -72,6 +75,26 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         return map;
     }
 
+    /**
+     * Extracts meta-data from a file.
+     *
+     * @param file Input file to extract from
+     * @return Meta data instance
+     * @throws ImageProcessingException If image could not be read
+     * @throws IOException              If file could not be read.
+     */
+    private Metadata getMetaData(File file) throws ImageProcessingException, IOException {
+        InputStream in = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(in);
+        return ImageMetadataReader.readMetadata(bis);
+    }
+
+    /**
+     * Collects meta-data from a {@link Directory} instance to a {@link Map}.
+     *
+     * @param map Map to collect to
+     * @param dic Map to collect from
+     */
     private void getMetaData(final Map<String, String> map, Directory dic) {
 
         if (dic.getClass().isAssignableFrom(PngDirectory.class)) {
@@ -119,7 +142,8 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         }
 
         if (dic.getClass().isAssignableFrom(FileTypeDirectory.class)) {
-            map.computeIfAbsent(MIME_TYPE, f -> dic.getString(FileTypeDirectory.TAG_DETECTED_FILE_MIME_TYPE));
+            map.computeIfAbsent(MIME_TYPE,
+                    f -> dic.getString(FileTypeDirectory.TAG_DETECTED_FILE_MIME_TYPE));
         }
     }
 
@@ -127,9 +151,9 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         return f -> {
             String s = dic.getString(ExifDirectoryBase.TAG_DATETIME);
             if (s != null && !"".equals(s.trim())) {
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss");
-                return LocalDateTime
-                        .parse(s.trim(), dateTimeFormatter)
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
+                        "yyyy:MM:dd " + "HH:mm:ss");
+                return LocalDateTime.parse(s.trim(), dateTimeFormatter)
                         .format(DateTimeFormatter.ISO_DATE_TIME);
             }
             return null;
@@ -155,10 +179,10 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
             }
 
             if (s != null && !"".equals(s.trim())) {
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss");
-                return LocalDateTime
-                        .parse(s.trim(), dateTimeFormatter)
-                        .atOffset(n > -1? ZoneOffset.ofHours(2) : ZoneOffset.UTC )
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
+                        "yyyy:MM:dd " + "HH:mm:ss");
+                return LocalDateTime.parse(s.trim(), dateTimeFormatter)
+                        .atOffset(n > -1 ? ZoneOffset.ofHours(2) : ZoneOffset.UTC)
                         .format(DateTimeFormatter.ISO_DATE_TIME);
             }
             return null;
@@ -166,36 +190,35 @@ public class ImageAnalyzerTask implements FileAnalyzerTask<Map<String, String>> 
         };
     }
 
+    /**
+     * Function merging date and time values into a date-time representation.
+     *
+     * @param dic {@link Directory instance}
+     * @return date-time representation (can be null)
+     */
     public static Function<String, String> computeItpcDateTime(Directory dic) {
         return f -> {
             String a = dic.getString(IptcDirectory.TAG_DATE_CREATED);
             String b = dic.getString(IptcDirectory.TAG_TIME_CREATED);
             if (a == null && null == b) {
                 return null;
-            } else if (b == null || "".equals(b.trim())) {
+            } else if (a != null && (b == null || "".equals(b.trim()))) {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-                return LocalDate
-                        .parse((a).trim(), dateTimeFormatter)
+                return LocalDate.parse(a.trim(), dateTimeFormatter)
                         .format(DateTimeFormatter.ISO_DATE);
             } else if (a == null || "".equals(a.trim())) {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HHmmssZ");
-                return LocalTime
-                        .parse((b).trim(), dateTimeFormatter)
+                return LocalTime.parse((b).trim(), dateTimeFormatter)
                         .format(DateTimeFormatter.ISO_TIME);
             } else {
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd HHmmssZ");
-                return ZonedDateTime
-                        .parse((a + " " + b).trim(), dateTimeFormatter)
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
+                        "yyyyMMdd " + "HHmmssZ");
+                return ZonedDateTime.parse((a + " " + b).trim(), dateTimeFormatter)
                         .format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
             }
         };
     }
 
-    private Metadata getMetaData(File file) throws ImageProcessingException, IOException {
-        InputStream in = new FileInputStream(file);
-        BufferedInputStream bis = new BufferedInputStream(in);
-        return ImageMetadataReader.readMetadata(bis);
-    }
 
 }
 

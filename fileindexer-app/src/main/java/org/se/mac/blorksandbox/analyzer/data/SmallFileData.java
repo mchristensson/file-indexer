@@ -1,12 +1,14 @@
 package org.se.mac.blorksandbox.analyzer.data;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
 import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.util.UUID;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+/**
+ * Entity representing a file with small binary content enclosed.
+ */
 @Table
 public class SmallFileData {
 
@@ -18,7 +20,18 @@ public class SmallFileData {
     private ByteBuffer blob;
     private String contentType;
 
-    public SmallFileData(UUID id, Instant updated_date, UUID deviceId, String devicePath, ByteBuffer blob, String contentType) {
+    /**
+     * Default constructor.
+     *
+     * @param id           Identifier for the entity
+     * @param updated_date Creation/Update timestamp
+     * @param deviceId     ID representing the distinct device where this file was indexed.
+     * @param devicePath   Device path where this file was indexed.
+     * @param blob         File's binary content
+     * @param contentType  File content-type
+     */
+    public SmallFileData(UUID id, Instant updated_date, UUID deviceId, String devicePath,
+                         ByteBuffer blob, String contentType) {
         this.id = id;
         this.updated_date = updated_date;
         this.deviceId = deviceId;

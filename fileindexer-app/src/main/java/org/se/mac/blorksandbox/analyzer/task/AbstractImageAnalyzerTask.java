@@ -1,9 +1,5 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +8,13 @@ import java.nio.file.Path;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import javax.imageio.ImageIO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Task for analysizing/processing an image.
+ */
 public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<String> {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractImageAnalyzerTask.class);
@@ -23,9 +25,16 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
     private String procId;
 
     public AbstractImageAnalyzerTask(String procId) {
-        this.procId = procId == null? UUID.randomUUID().toString() : procId;
+        this.procId = procId == null ? UUID.randomUUID().toString() : procId;
     }
 
+    /**
+     * Reads a {@link BufferedImage} from disk.
+     *
+     * @param p Path to read from.
+     * @return Instance of {@link BufferedImage}
+     * @throws IOException If file could not be read
+     */
     public static BufferedImage getImage(Path p) throws IOException {
         File f = p.toFile();
         if (!f.exists()) {
@@ -57,6 +66,11 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
     };
 
 
+    /**
+     * Deletes a file from disk.
+     *
+     * @param outputFileUrlSupplier Url supplier describing the location of the file
+     */
     protected void deleteFile(Supplier<String> outputFileUrlSupplier) {
         logger.debug("Try to delete the file");
         File f = new File(outputFileUrlSupplier.get());
@@ -93,7 +107,7 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
     }
 
     /**
-     * Hash from two String with null check
+     * Hash from two String with null check.
      *
      * @param a first value
      * @param b second value
@@ -108,11 +122,6 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
         } else {
             return -1;
         }
-    }
-
-    public AbstractImageAnalyzerTask setDebugMode(boolean debugMode) {
-        this.debugMode = debugMode;
-        return this;
     }
 
     public boolean isDebugMode() {

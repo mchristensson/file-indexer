@@ -1,5 +1,10 @@
 package org.se.mac.blorksandbox.controller;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 import org.se.mac.blorksandbox.jobqueue.job.EnqueableJob;
 import org.se.mac.blorksandbox.spi.QueuedJob;
 import org.slf4j.Logger;
@@ -8,18 +13,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ServiceLoader;
-import java.util.stream.Collectors;
-
 /**
  * Library of all available jobs.
  * The library is pre-loaded at initialization of this {@link Component} at startup.
  *
- * <p>
- * The job implementation must fulfill the following in our to be available:
+ * <p>The job implementation must fulfill the following in our to be available:
  * <ul>
  * <li>Listed in {@code /resources/META-INF/services/org.se.mac.blorksandbox.spi.QueuedJob}</li>
  * <li>Implementing {@link QueuedJob}</li>
@@ -49,13 +47,10 @@ public class QueueJobRepository {
         if (Objects.isNull(title)) {
             return Optional.empty();
         }
-        return this.loader.stream()
-                .filter(queuedJob -> {
-                    EnqueableJob an = queuedJob.type().getAnnotation(EnqueableJob.class);
-                    return (an != null && an.title().equalsIgnoreCase(title));
-                })
-                .map(ServiceLoader.Provider::type)
-                .findFirst();
+        return this.loader.stream().filter(queuedJob -> {
+            EnqueableJob an = queuedJob.type().getAnnotation(EnqueableJob.class);
+            return (an != null && an.title().equalsIgnoreCase(title));
+        }).map(ServiceLoader.Provider::type).findFirst();
     }
 
     /**
@@ -66,13 +61,10 @@ public class QueueJobRepository {
     @Cacheable(value = "jobqueueimpl")
     public List<String> findAllTitles() {
         logger.trace("findAll...");
-        return this.loader.stream()
-                .map(queuedJob -> {
-                    EnqueableJob an = queuedJob.type().getAnnotation(EnqueableJob.class);
-                    return (an != null && !"".equals(an.title())) ? an.title() : null;
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        return this.loader.stream().map(queuedJob -> {
+            EnqueableJob an = queuedJob.type().getAnnotation(EnqueableJob.class);
+            return (an != null && !"".equals(an.title())) ? an.title() : null;
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
 }

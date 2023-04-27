@@ -1,12 +1,14 @@
 package org.se.mac.blorksandbox.analyzer.data;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
 import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+/**
+ *  Entity representing a file's meta-data.
+ */
 @Table
 public class FileMetaData {
 
@@ -18,7 +20,18 @@ public class FileMetaData {
     private long scanTime;
     private Map<String, String> properties;
 
-    public FileMetaData(UUID id, Instant updated_date, UUID deviceId, String devicePath, Map<String, String> properties, long scanTime) {
+    /**
+     * Default constructor.
+     *
+     * @param id           Identifier for the entity
+     * @param updated_date Creation/Update timestamp
+     * @param deviceId     ID representing the distinct device where this file was indexed.
+     * @param devicePath   Device path where this file was indexed.
+     * @param properties   Custom properties for this entity
+     * @param scanTime     Duration for processing the file's meta-data
+     */
+    public FileMetaData(UUID id, Instant updated_date, UUID deviceId, String devicePath,
+                        Map<String, String> properties, long scanTime) {
         this.id = id;
         this.updated_date = updated_date;
         this.scanTime = scanTime;

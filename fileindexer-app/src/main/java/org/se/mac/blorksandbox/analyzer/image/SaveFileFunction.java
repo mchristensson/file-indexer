@@ -1,20 +1,26 @@
 package org.se.mac.blorksandbox.analyzer.image;
 
+import java.awt.image.BufferedImage;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-public class SaveFileFunction implements Function<BufferedImage, BufferedImage>, SaveImageToDiskSupport {
+/**
+ * Modifier for {@link BufferedImage} that save the file and the pipe the image further.
+ */
+public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
+        SaveImageToDiskSupport {
     private static final Logger logger = LoggerFactory.getLogger(SaveFileFunction.class);
     private Supplier<String> outputPathSupplier;
     private final String outputFileFormat;
 
+    /**
+     * Default constructor.
+     *
+     * @param outputPathSupplier Suppler for where to store the output file
+     * @param outputFileFormat   Output file format (i.e. JPG)
+     */
     public SaveFileFunction(Supplier<String> outputPathSupplier, String outputFileFormat) {
         this.outputFileFormat = outputFileFormat;
         this.outputPathSupplier = outputPathSupplier;
@@ -22,7 +28,8 @@ public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
 
     @Override
     public BufferedImage apply(BufferedImage bufferedImage) {
-        logger.debug("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(), outputFileFormat);
+        logger.debug("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(),
+                outputFileFormat);
         saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
         return bufferedImage;
     }

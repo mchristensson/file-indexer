@@ -93,9 +93,29 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+					<inputEncoding>UTF-8</inputEncoding>
+					<consoleOutput>false</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<failOnViolation>false</failOnViolation>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
-
 
 </project>

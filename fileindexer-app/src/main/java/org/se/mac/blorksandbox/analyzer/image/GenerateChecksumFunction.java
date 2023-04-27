@@ -1,17 +1,16 @@
 package org.se.mac.blorksandbox.analyzer.image;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.DataBuffer;
 import java.awt.image.WritableRaster;
 import java.math.BigInteger;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Generates a bhash checksum from an image
+ * Modifier tha produces a bhash checksum from an image.
  */
 public class GenerateChecksumFunction implements Function<BufferedImage, String> {
 
@@ -32,29 +31,47 @@ public class GenerateChecksumFunction implements Function<BufferedImage, String>
         }
         int[] rgbArray = new int[w * h];
         logger.debug("Generating checksum... [w={}, h={}, wxh={}]", w, h, rgbArray.length);
-        int avg = getRGB(bufferedImage.getColorModel(), bufferedImage.getRaster(), w, h, rgbArray);
+        int avg = getPixels(bufferedImage.getColorModel(), bufferedImage.getRaster(), w, h, rgbArray);
         return createChecksum(rgbArray, avg);
     }
 
+    /**
+     * Finds a checksum representation of the input values.
+     *
+     * @param vals      Input values
+     * @param threshold Threshold vale
+     * @return Checksum representation
+     */
     public String createChecksum(final int[] vals, final int threshold) {
         byte[] output = new byte[(vals.length - (vals.length % 8)) / 8];
         for (int b = 0; b < output.length; b++) {
-            byte bNext = 0;
+            byte nextByte = 0;
             int offset = b * 8;
             for (int j = offset; j < (8 + offset) && (j < vals.length); j++) {
-                bNext <<= 1; // shift-left
+                nextByte <<= 1; // shift-left
                 if (vals[j] > threshold) {
-                    bNext |= 1; // bitwise or
+                    nextByte |= 1; // bitwise or
                 }
             }
-            output[b] = bNext;
+            output[b] = nextByte;
         }
-        BigInteger val =  new BigInteger(1, output);
+        BigInteger val = new BigInteger(1, output);
         logger.debug("Generated unsigned long [long={}]", val);
-        return String.format("%0" + (output.length << 1) + "x",val);
+        return String.format("%0" + (output.length << 1) + "x", val);
     }
 
-    public int getRGB(ColorModel colorModel, WritableRaster raster, int w, int h, final int[] rgbArray) {
+    /**
+     * Extracts pixel average value from image and builds output array.
+     *
+     * @param colorModel Color model that applies
+     * @param raster     Image pixel data
+     * @param w          Image width
+     * @param h          Image height
+     * @param rgbArray   output array
+     * @return Calculated pixel average value
+     */
+    public int getPixels(ColorModel colorModel, WritableRaster raster, int w, int h,
+                         final int[] rgbArray) {
         int off;
         Object data;
         int nbands = raster.getNumBands();
@@ -65,18 +82,14 @@ public class GenerateChecksumFunction implements Function<BufferedImage, String>
             case DataBuffer.TYPE_INT -> new int[nbands];
             case DataBuffer.TYPE_FLOAT -> new float[nbands];
             case DataBuffer.TYPE_DOUBLE -> new double[nbands];
-            default -> throw new IllegalArgumentException("Unknown data buffer type: " +
-                    dataType);
+            default -> throw new IllegalArgumentException("Unknown data buffer type: " + dataType);
         };
 
         int sum = 0;
         for (int y = 0; y < h; y++) {
             off = y * w;
             for (int x = 0; x < w; x++) {
-                int val =
-                        colorModel.getRGB(raster.getDataElements(x,
-                                y,
-                                data)) & 0xff;
+                int val = colorModel.getRGB(raster.getDataElements(x, y, data)) & 0xff;
                 rgbArray[off++] = val;
                 sum += val;
             }
