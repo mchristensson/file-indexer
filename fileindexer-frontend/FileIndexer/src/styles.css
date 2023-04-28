@@ -60,9 +60,9 @@ select {
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+    scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -73,67 +73,23 @@ select {
   }
 }
 
-/*
- * Default common form CSS begin
- */
- .formcontainer {
-  max-width: 500px;
-padding: 20px 12px 10px 20px;
-  border: 1px solid #C2C2C2;
-  border-radius: 3px;
-box-shadow: 1px 1px 4px #EBEBEB;
-  margin-bottom: 10px;
-}
-
-.formcontainer h1 {
-  font-size: 1em;
-  border-bottom: 1px solid #C2C2C2;
-  margin-bottom: 10px;
-}
-
-.formcontainer span {
-  display: block;
-  margin: 0px 0px 15px 0px;
-}
-
-.formcontainer span > label {
-min-width: 100px;
-float: left;
-padding-top: 8px;
-padding-right: 5px;
-  font-weight: 600;
-}
-
-.formcontainer span > input, select, button {
-min-width: 150px;
-  box-sizing: border-box;
-border: 1px solid #C2C2C2;
-box-shadow: 1px 1px 4px #EBEBEB;
-border-radius: 3px;
-padding: 3px;
-outline: none;
-}
-/*
-* Default common form CSS End
-*/
 
 /*
 * Sidepanel flex layout Begin
 */
-.flex-container { 
-  display:flex; 
-  margin:auto;
-  justify-content: space-between;
+.flex-container {
+  display: flex;
+  margin: auto;
 }
 
-.main { 
-  flex:3 
+.main {
+  flex: 3
 }
 
-.sidebar {   
-  flex:1; 
+.sidebar {
+  flex: 1;
   min-width: 300px;
-padding: 5px 12px 10px 20px;
+  padding: 5px 12px 10px 20px;
   border: none;
   border-radius: 3px;
 
@@ -149,6 +105,7 @@ padding: 5px 12px 10px 20px;
 .sidebar li .details-key {
   font-weight: 700;
 }
+
 .sidebar li .details-value {
   font-weight: normal;
   margin-left: 10px;
@@ -159,6 +116,28 @@ padding: 5px 12px 10px 20px;
   border-bottom: 1px solid #C2C2C2;
   margin-bottom: 10px;
 }
+
 /*
 * Sidepanel flex layout End
 */
+
+.page-toolbar-container {
+  background-color: transparent;
+  display: block;
+  overflow-y: hidden;
+  border-radius: 1px;
+}
+
+.page-toolbar-container>button {
+  margin: 3px;
+  padding-inline: 20px;
+  padding-block: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: none;
+  background-color: #7b8d96;
+  color: white;
+  box-shadow: 1px 1px 4px #EBEBEB;
+  border-radius: 8px;
+  outline: none;
+}

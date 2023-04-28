@@ -90,8 +90,10 @@ public class BlorkRestController {
         Optional<? extends Class<? extends QueuedJob>> def = queueJobRepository.lookupByTitle(
                 request.jobTitle());
         if (def.isEmpty()) {
-            return new QueuedJobRequestReceipt(0L,
+            QueuedJobRequestReceipt result = new QueuedJobRequestReceipt(0L, null);
+            result.setErrorMessage(
                     "Job definition " + request.jobTitle() + " " + "could not be found.");
+            return result;
         } else {
             try {
                 QueuedJob scanJob = def.get().getDeclaredConstructor().newInstance();
@@ -146,8 +148,21 @@ public class BlorkRestController {
     @GetMapping(value = "imgash/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] imageById(@RequestParam(name = "id") String id) {
         logger.debug("Retrieving image from id... [id={}]", id);
-        Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(id));
-        return image.map(smallFileData -> smallFileData.getBlob().array()).orElse(null);
+        if (id == null) {
+            return null;
+        }
+        try {
+            Optional<SmallFileData> image = fileIndexService.getSmallFileById(UUID.fromString(id));
+
+            return image.map(smallFileData -> {
+                if (smallFileData.hasData()) {
+                    return smallFileData.getBlob().array();
+                }
+                return null;
+            }).orElse(null);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /**
@@ -250,7 +265,9 @@ public class BlorkRestController {
 
             Map<String, String> data = new HashMap<>();
             data.put("checksum", f.getHash());
-            data.put("smallfiledataid", f.getSmallFileDataId().toString());
+            if (f.getSmallFileDataId() != null) {
+                data.put("smallfiledataid", f.getSmallFileDataId().toString());
+            }
 
             return new LogicalFileValue(f.getId().toString(), // String id,
                     f.getDevicePath(), // String devicePath,

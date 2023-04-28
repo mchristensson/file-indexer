@@ -2,14 +2,17 @@ import { Component } from '@angular/core';
 import { DefaultapiserviceService } from '../../services/defaultapiservice.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EnqueuedTask, EnqueuedTaskInstruction } from 'src/app/models/indexedentry.model';
+import { ModalformService } from 'src/app/services/modalform.service';
 
 @Component({
   selector: 'app-scanjob-add',
-  templateUrl: './scanjob-add.component.html'
+  templateUrl: './scanjob-add.component.html',
+  styleUrls: ['../common-form-styles.css']
 })
 export class ScanjobAddComponent {
 
-  constructor(private apiService: DefaultapiserviceService, private formBuilder: FormBuilder) {}
+  constructor(private apiService: DefaultapiserviceService, private formBuilder: FormBuilder, 
+    private modalformService: ModalformService) {}
   
   urlTypes = ["UNIX",  "WIN"];
   deviceIds: any[];
@@ -49,7 +52,11 @@ export class ScanjobAddComponent {
     .subscribe(scanEnqueueReceipt => {
       console.log("Result: ", scanEnqueueReceipt)
       this.createScanJobForm.reset();
+      this.modalformService.close();
     });  
   }
 
+  cancel(): void {
+    this.modalformService.close();
+  }
 }

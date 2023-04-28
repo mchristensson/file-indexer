@@ -36,7 +36,7 @@ export class DefaultapiserviceService {
     .post<any>("http://localhost:8081/api/imgash/transform", requestData, httpOpts);
   }
 
-  createDevice(requestData: Partial<{ title: string; devicePath: string; }>): Observable<any> {
+  createDevice(requestData: Partial<{ title: string; devicePath: string; }>): Observable<string> {
     var httpOpts = {
       headers: new HttpHeaders({
         'Content-Type' : 'application/json',
@@ -45,7 +45,7 @@ export class DefaultapiserviceService {
       responseType : 'text' as 'json' //required when returnning 
     }
     return this._client
-    .post<any>("http://localhost:8081/api/common/device/add", requestData, httpOpts);
+    .post<string>("http://localhost:8081/api/common/device/add", requestData, httpOpts);
 
   }
 

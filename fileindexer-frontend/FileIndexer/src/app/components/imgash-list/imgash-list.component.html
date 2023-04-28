@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let imgHashDataEntry of imgHashData" (click)="fetchImage(imgHashDataEntry.properties.smallfiledataid)">
-                    <td><i class="fa fa-hashtag" style="font-size:12px;" title="{{ imgHashDataEntry.id }}"></i></td>
+                    <td><i class="fa fa-hashtag" style="font-size:0.8em;" title="{{ imgHashDataEntry.id }}"></i></td>
                     <td class="cell-monospaced">{{ imgHashDataEntry.properties.checksum }}</td>
                     <td>{{ imgHashDataEntry.properties.smallfiledataid }}</td>
                     <td>{{ imgHashDataEntry.devicePath }}</td>
@@ -25,12 +25,14 @@
     </div>
 
     <div class="sidebar" *ngIf="selectedImage">
+        
         <div class="imgash-img-details-container">
             <h1>Details</h1>
             <img [src]="selectedImage" *ngIf="selectedImage" class="selected-image">
+            <button type="button" (click)="transformImage()">Transform Image</button>
         </div>
         
-        <button class="button" type="button" (click)="transformImage()">Transform Image</button>
+       
     </div>
 
 </div>

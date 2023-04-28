@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { DefaultapiserviceService } from '../../services/defaultapiservice.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { scan , Subscription, switchMap, startWith , interval } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 import { EnqueuedTask } from 'src/app/models/indexedentry.model';
 
 @Component({
   selector: 'app-imgash-add',
-  templateUrl: './imgash-add.component.html'
+  templateUrl: './imgash-add.component.html',
+  styleUrls: ['../common-form-styles.css']
 })
 export class ImgashAddComponent {
 

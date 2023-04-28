@@ -71,4 +71,9 @@ public class SmallFileData {
     public void setBlob(ByteBuffer blob) {
         this.blob = blob;
     }
+
+    public boolean hasData() {
+        return this.blob != null;
+    }
+
 }

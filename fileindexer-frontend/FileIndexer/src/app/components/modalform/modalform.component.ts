@@ -4,7 +4,8 @@ import { ModalformService } from '../../services/modalform.service';
 @Component({
   selector: 'app-modalform',
   templateUrl: './modalform.component.html',
-  styleUrls: ['./modalform.component.css']
+  styleUrls: ['./modalform.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom //Inherit css from the component wrapper (through the ng-content tag)
 })
 export class ModalformComponent implements OnInit, OnDestroy {
 
@@ -14,6 +15,7 @@ export class ModalformComponent implements OnInit, OnDestroy {
 
   constructor(private modalformService: ModalformService , formElementRef: ElementRef) {
     this.formElement = formElementRef.nativeElement;
+
   }
 
   ngOnInit() {

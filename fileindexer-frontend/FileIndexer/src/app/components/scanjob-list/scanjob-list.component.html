@@ -1,18 +1,17 @@
-<div>
-<button (click)="modalformService.reveal('modal-1')">Create task...</button>
-<app-modalform id="modal-1" style="display: none">
-    <app-scanjob-add></app-scanjob-add>
-    <button (click)="modalformService.close()">Close</button>
-</app-modalform>
-<button (click)="modalformService.reveal('modal-2')">Create device...</button>
-<app-modalform id="modal-2" style="display: none">
-    <app-device-add></app-device-add> 
-    <button (click)="modalformService.close()">Close</button>
-</app-modalform>
+<div class="page-toolbar-container">
+    <button (click)="modalformService.reveal('modal-1')">Create task...</button>
+    <app-modalform id="modal-1" style="display: none">
+        <app-scanjob-add></app-scanjob-add>
+    </app-modalform>
+    <button (click)="modalformService.reveal('modal-2')">Create device...</button>
+    <app-modalform id="modal-2" style="display: none">
+        <app-device-add></app-device-add>
+    </app-modalform>
 </div>
 
 <h2>Tasks</h2>
-<h3 class="table-caption">Number of entries: {{scanJobStatusData? scanJobStatusData.length : 0}}. Retrival date: {{scanJobStatusDataTs | date: 'HH:mm:ss (z)' }}</h3>
+<h3 class="table-caption">Number of entries: {{scanJobStatusData? scanJobStatusData.length : 0}}. Retrival date:
+    {{scanJobStatusDataTs | date: 'HH:mm:ss (z)' }}</h3>
 
 <table class="table-joblist-data">
     <thead>
@@ -24,7 +23,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let job of scanJobStatusData">
-            <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ job.id }}"></i></td>
+            <td><i class="fa fa-hashtag" style="font-size:0.8em;" title="{{ job.id }}"></i></td>
             <td>{{ job.status }}</td>
             <td>{{ job.errorMessage }}</td>
         </tr>

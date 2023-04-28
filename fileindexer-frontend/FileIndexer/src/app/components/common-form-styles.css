@@ -1,0 +1,56 @@
+ .formcontainer {
+   max-width: 500px;
+   padding: 20px 12px 10px 20px;
+   border: none;
+
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 14px;
+   color: #333;
+   box-sizing: content-box;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+
+ .formcontainer h1 {
+   font-size: 1em;
+   border-bottom: 1px solid #C2C2C2;
+   margin-bottom: 10px;
+ }
+
+ .formcontainer span {
+   display: block;
+   margin: 0px 0px 15px 0px;
+ }
+
+ .formcontainer span>label {
+   min-width: 100px;
+   float: left;
+   padding-top: 8px;
+   padding-right: 5px;
+   font-weight: 600;
+ }
+
+ .formcontainer span>input,
+ select,
+ button {
+   min-width: 150px;
+   box-sizing: border-box;
+   border: 1px solid #C2C2C2;
+   box-shadow: 1px 1px 4px #EBEBEB;
+   border-radius: 3px;
+   padding: 3px;
+   outline: none;
+   position: right;
+ }
+
+ .form-buttons-row {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   margin-top: 35px;
+   padding: 5px;
+ }
+
+ .form-buttons-row button[type=submit] {
+   background-color: rgb(226, 226, 226);
+ }

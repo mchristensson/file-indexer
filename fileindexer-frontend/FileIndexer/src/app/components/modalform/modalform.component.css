@@ -1,7 +1,23 @@
-.modalform-body {
+.modalform-container {
     background-color: rgba(0, 0, 0, .35);
     position: fixed;
     inset: 0;
     z-index: 999;
+}
+
+.modalform-body {
+
+    background-color: white;
+    min-width: 400px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 5px;
+
+    box-shadow: 1px 1px 4px #8d8d8d;
+    margin-bottom: 10px;
+
 }
 

@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let scanData of scannedData" (click)="setSelected(scanData)">
-                    <td><i class="fa fa-hashtag" style="font-size:16px;" title="{{ scanData.id }}"></i></td>
+                    <td><i class="fa fa-hashtag" style="font-size:0.8em;" title="{{ scanData.id }}"></i></td>
                     <td>{{ scanData.date | date:'fullDate'  }}</td>
                     <td>{{ scanData.devicePath }}</td>
                     <td>{{ scanData.scanTime }}</td>
@@ -35,7 +35,7 @@
                 </li>
                 
             </ul>
-            <button class="button" type="button" (click)="createAnalysisTask()">Perform analysis</button>
+            <button type="button" (click)="createAnalysisTask()">Perform analysis</button>
         </div>
     </div>
 

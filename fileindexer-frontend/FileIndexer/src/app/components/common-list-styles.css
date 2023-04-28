@@ -7,7 +7,6 @@ table {
 .table-caption {
   margin-bottom: 1em;
   padding: 0.5em;
-  background-color: #e7e7e7;
   font-size: 0.8em;
 }
 
@@ -25,6 +24,7 @@ th,
 td {
   padding: 0.5rem;
   overflow: hidden;
+  background-color: white;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -44,6 +44,8 @@ td {
 }
 
 .imgash-img-details-container {
+  position: sticky;
+  top: 100;
   min-width: 100px;
 padding: 5px 12px 10px 20px;
   border: 1px solid #C2C2C2;

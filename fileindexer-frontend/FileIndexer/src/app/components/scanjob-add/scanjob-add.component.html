@@ -1,4 +1,6 @@
 <div class="formcontainer">
+    
+    <i class="fa fa-hashtag" style="font-size:0.8em;" title="close"></i>
     <h1>Create task</h1>
 
     <form [formGroup]="createScanJobForm" (submit)="enqueueScanJob()">
@@ -30,9 +32,10 @@
             </select>
         </span>
    
-        <span>
+        <div class="form-buttons-row">
+            <button  type="button" (click)="cancel()">Cancel</button>
             <button class="button" type="submit">Save</button>
-        </span>
+        </div>
         
     </form>
 </div>
