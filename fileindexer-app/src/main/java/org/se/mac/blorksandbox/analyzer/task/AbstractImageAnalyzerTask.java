@@ -11,8 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Task for analysizing/processing an image.
  */
-public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<String>,
-        SaveImageToDiskSupport {
+public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<String> {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractImageAnalyzerTask.class);
 
@@ -34,10 +33,7 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
         if (debugMode) {
             return ("./target/output_" + procId + "_" + this.outputFileName);
         } else {
-            String tmpDir = System.getProperty("java.io.tmpdir");
-            String sep = FileSystems.getDefault().getSeparator();
-            tmpDir += tmpDir.endsWith(sep) ? "" : sep;
-            return (tmpDir + getProcId() + sep + this.outputFileName);
+            return SaveImageToDiskSupport.getTmpOutputPath(getProcId(), this.outputFileName);
         }
     };
 

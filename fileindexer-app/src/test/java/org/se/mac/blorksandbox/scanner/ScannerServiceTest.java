@@ -1,5 +1,14 @@
 package org.se.mac.blorksandbox.scanner;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
+import java.nio.file.Path;
+import java.time.Instant;
+import java.util.Map;
+import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -7,23 +16,12 @@ import org.mockito.ArgumentMatchers;
 import org.se.mac.blorksandbox.analyzer.LogicalFileIndexService;
 import org.se.mac.blorksandbox.analyzer.data.FileHashData;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
+import org.se.mac.blorksandbox.analyzer.image.SaveImageToDiskSupport;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.Instant;
-import java.util.Map;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyMap;
@@ -96,14 +94,8 @@ class ScannerServiceTest {
         when(logicalFileIndexService.isDevicePresent(deviceId)).thenReturn(true);
         boolean result = scannerService.scan(f.getAbsoluteFile().toURI(), deviceId);
         assertTrue(result);
-        verify(logicalFileIndexService, times(709))
-                .createFileMetaData(
-                        any(UUID.class),
-                        any(Instant.class),
-                        anyString(),
-                        anyMap(),
-                        anyLong()
-                );
+        verify(logicalFileIndexService, times(709)).createFileMetaData(any(UUID.class),
+                any(Instant.class), anyString(), anyMap(), anyLong());
         verify(logicalFileIndexService).isDevicePresent(deviceId);
     }
 
@@ -129,14 +121,9 @@ class ScannerServiceTest {
         ArgumentCaptor<Map> argumentsCaptured = ArgumentCaptor.forClass(Map.class);
 
         //noinspection unchecked
-        verify(logicalFileIndexService)
-                .createFileMetaData(
-                        any(UUID.class),
-                        any(Instant.class),
-                        ArgumentMatchers.contains("sony-powershota5.jpg"),
-                        argumentsCaptured.capture(),
-                        anyLong()
-                );
+        verify(logicalFileIndexService).createFileMetaData(any(UUID.class), any(Instant.class),
+                ArgumentMatchers.contains("sony-powershota5.jpg"), argumentsCaptured.capture(),
+                anyLong());
         verify(logicalFileIndexService).isDevicePresent(deviceId);
 
         assert argumentsCaptured.getValue().containsKey("File Size");
@@ -202,34 +189,27 @@ class ScannerServiceTest {
     void generateImageHash_whenArgs_expect() throws IOException {
         SmallFileData smallFileDataMock = mock(SmallFileData.class);
         when(smallFileDataMock.getId()).thenReturn(UUID.randomUUID());
-        when(logicalFileIndexService.createSmallFile(
-                any(UUID.class),
-                anyString(), any(ByteBuffer.class), anyString(), any(Instant.class)
-        )).thenReturn(smallFileDataMock);
+        when(logicalFileIndexService.createSmallFile(any(UUID.class), anyString(),
+                any(ByteBuffer.class), anyString(), any(Instant.class))).thenReturn(
+                smallFileDataMock);
 
         FileHashData fileHashDataMock = mock(FileHashData.class);
-        when(logicalFileIndexService.createFileHash(
-                any(UUID.class),
-                any(Instant.class),
-                anyString(),
-                anyString(), anyLong())).thenReturn(fileHashDataMock);
+        when(logicalFileIndexService.createFileHash(any(UUID.class), any(Instant.class),
+                anyString(), anyString(), anyLong())).thenReturn(fileHashDataMock);
 
-        File tmpdir = new File(System.getProperty("java.io.tmpdir"));
-        Path targetPath = Path.of(tmpdir.getPath(), "foo.png");
-        File targetFile = targetPath.toFile();
-        targetFile.deleteOnExit();
-        try (InputStream is = getClass().getResourceAsStream("/images/misc/dice-2.png")) {
-            System.out.println("Copy file to " + targetPath);
-            Files.copy(is, targetPath);
-        }
-        URI uri = targetFile.toURI();
+
+        Path targetPath = SaveImageToDiskSupport.copyToTmp(
+                getClass().getResourceAsStream("/images/misc/dice-2.png"), "foo.png", true);
+
         UUID deviceId = UUID.randomUUID();
         when(logicalFileIndexService.isDevicePresent(deviceId)).thenReturn(true);
-        boolean result = scannerService.generateImageHash(uri, deviceId);
+        boolean result = scannerService.generateImageHash(targetPath.toUri(), deviceId);
 
         assertTrue(result);
-        verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class), anyString(), anyString(), anyLong());
-        verify(logicalFileIndexService).createSmallFile(eq(deviceId), eq(targetPath), anyString(), eq("JPG"));
+        verify(logicalFileIndexService).createFileHash(eq(deviceId), any(Instant.class),
+                anyString(), anyString(), anyLong());
+        verify(logicalFileIndexService).createSmallFile(eq(deviceId), eq(targetPath), anyString(),
+                eq("JPG"));
         verify(logicalFileIndexService).isDevicePresent(deviceId);
         verifyNoMoreInteractions(smallFileDataMock, fileHashDataMock);
     }

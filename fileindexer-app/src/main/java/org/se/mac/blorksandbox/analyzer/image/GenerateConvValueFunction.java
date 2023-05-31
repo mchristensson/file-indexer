@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * Utility function for convolution of a {@link java.awt.image.BufferedImage}.
  */
 public class GenerateConvValueFunction extends ConvUtil implements Function<BufferedImage,
-        BufferedImage>, SaveImageToDiskSupport {
+        BufferedImage> {
 
     private static final Logger logger = LoggerFactory.getLogger(GenerateConvValueFunction.class);
 

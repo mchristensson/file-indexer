@@ -39,7 +39,7 @@ public class ImageHashGeneratorTask extends AbstractImageAnalyzerTask {
     public String apply(Path p) throws Exception {
         logger.debug("Reading from file... {}", p);
         setOutputFileName(p.getFileName().toString());
-        BufferedImage image = readImageFromDisk(p);
+        BufferedImage image = SaveImageToDiskSupport.readImageFromDisk(p);
 
         String[] formatNames = ImageIO.getReaderFormatNames();
         logger.debug("Available format names: {}", formatNames);
@@ -48,7 +48,7 @@ public class ImageHashGeneratorTask extends AbstractImageAnalyzerTask {
                 checksumThreshold);
         SaveFileFunction saveFileFunction = new SaveFileFunction(outputFileUrlSupplier,
                 outputFileFormat);
-        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, BufferedImage.TYPE_BYTE_GRAY);
+        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false, BufferedImage.TYPE_BYTE_GRAY);
         ContrastFunction contrastFunction = new ContrastFunction();
         ColormodeFunction colormodeFunction = new ColormodeFunction(BufferedImage.TYPE_BYTE_GRAY);
         String checksum = colormodeFunction.andThen(contrastFunction).andThen(scaleFunction)
@@ -59,7 +59,7 @@ public class ImageHashGeneratorTask extends AbstractImageAnalyzerTask {
         if (doAfter != null) {
             doAfter.accept(this.outputFileUrlSupplier.get());
         }
-        //this.deleteFile(this.outputFileUrlSupplier);
+        SaveImageToDiskSupport.deleteFile(this.outputFileUrlSupplier);
 
         return checksum;
     }

@@ -9,8 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Modifier for {@link BufferedImage} that save the file and the pipe the image further.
  */
-public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
-        SaveImageToDiskSupport {
+public class SaveFileFunction implements Function<BufferedImage, BufferedImage>{
     private static final Logger logger = LoggerFactory.getLogger(SaveFileFunction.class);
     private final Supplier<String> outputPathSupplier;
     private final String outputFileFormat;
@@ -30,7 +29,7 @@ public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
     public BufferedImage apply(BufferedImage bufferedImage) {
         logger.trace("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(),
                 outputFileFormat);
-        saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
+        SaveImageToDiskSupport.saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
         return bufferedImage;
     }
 

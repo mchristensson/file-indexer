@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 import org.se.mac.blorksandbox.scanner.model.UrlType;
 
 /**
- * Builds up a URI from a local {@link java.nio.file.Path} (as string) and a {@link UrlType}.
+ * Builds up a URI from a local path (as string) and a {@link UrlType}.
  */
 public class UriBuilder implements BiFunction<String, UrlType, URI> {
 

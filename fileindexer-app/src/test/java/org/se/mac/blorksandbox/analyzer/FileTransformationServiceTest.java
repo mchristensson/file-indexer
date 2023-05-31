@@ -3,6 +3,7 @@ package org.se.mac.blorksandbox.analyzer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.se.mac.blorksandbox.analyzer.data.SmallFileData;
+import org.se.mac.blorksandbox.analyzer.image.SaveImageToDiskSupport;
 import org.se.mac.blorksandbox.analyzer.repository.LogicalFileRepositoryImpl;
 import org.se.mac.blorksandbox.scanner.rest.ImageTransformDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ class FileTransformationServiceTest {
         //Use a test image as byte data for the input SmallFileData mock
         Path testFile1 = Path.of("src/test/resources/images/misc/10-krona.png");
         BufferedImage d = ImageIO.read(testFile1.toFile());
-        byte[] imageBytes = FileTransformationService.getBytes(d);
+        byte[] imageBytes = SaveImageToDiskSupport.getBytes(d);
         ByteBuffer bytebuffer = ByteBuffer.wrap(Arrays.copyOf(imageBytes, imageBytes.length));
         SmallFileData imageData = mock(SmallFileData.class);
         when(imageData.getId()).thenReturn(UUID.randomUUID());

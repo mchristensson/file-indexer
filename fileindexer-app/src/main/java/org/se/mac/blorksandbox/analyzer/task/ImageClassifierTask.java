@@ -1,7 +1,6 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
 import java.awt.image.BufferedImage;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +24,7 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         if (isDebugMode()) {
             return ("./target/output_" + getProcId() + "_" + this.outputScaledFileName);
         } else {
-            String tmpDir = System.getProperty("java.io.tmpdir");
-            String sep = FileSystems.getDefault().getSeparator();
-            tmpDir += tmpDir.endsWith(sep) ? "" : sep;
-            return (tmpDir + getProcId() + sep + this.outputScaledFileName);
+            return SaveImageToDiskSupport.getTmpOutputPath(getProcId(), this.outputScaledFileName);
         }
     };
 
@@ -72,12 +68,12 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
                 outputFileFormat);
         SaveFileFunction saveScaledFileFunction = new SaveFileFunction(outputScaledFileUrlSupplier,
                 outputFileFormat);
-        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, BufferedImage.TYPE_CUSTOM);
+        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false, BufferedImage.TYPE_CUSTOM);
         ContrastFunction contrastFunction = new ContrastFunction();
         ColormodeFunction colormodeFunction = new ColormodeFunction(BufferedImage.TYPE_BYTE_GRAY);
 
         //Load image
-        BufferedImage image = readImageFromDisk(p);
+        BufferedImage image = SaveImageToDiskSupport.readImageFromDisk(p);
 
         colormodeFunction.andThen(contrastFunction).andThen(scaleFunction)
                 .andThen(saveScaledFileFunction).andThen(convValueFunction)
@@ -87,7 +83,7 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
         if (doAfter != null) {
             doAfter.accept(this.outputFileUrlSupplier.get());
         }
-        //this.deleteFile(this.outputFileUrlSupplier);
+        SaveImageToDiskSupport.deleteFile(this.outputFileUrlSupplier);
 
         return "Hello world";
     }
