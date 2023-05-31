@@ -2,9 +2,9 @@
 echo "Taking down composition"
 docker compose down
 echo "Removing images..."
-docker image rm fileindexerapp
-docker image rm fileindexerreverseproxy
-docker image rm fileindexerindex
+docker image rm 'fileindexer-fileindexerapp'
+docker image rm 'fileindexer-fileindexerreverseproxy'
+docker image rm 'fileindexer-fileindexerindex'
 
 echo "Running script that builds the fileindexer-app"
 CUR_DIR=$(pwd)

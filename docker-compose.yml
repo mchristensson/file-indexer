@@ -22,8 +22,9 @@ services:
     build: ./fileindexer-reverse-proxy
     container_name: fileindexerreverseproxy
     hostname: fileindexerreverseproxy
+    restart: always
     ports:
-      - "8081:80"
+      - 8081:80
     networks:
       - fileindexer-network
   
