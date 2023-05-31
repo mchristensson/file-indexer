@@ -1,21 +1,18 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import javax.imageio.ImageIO;
+import org.se.mac.blorksandbox.analyzer.image.SaveImageToDiskSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Task for analysizing/processing an image.
  */
-public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<String> {
+public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<String>,
+        SaveImageToDiskSupport {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractImageAnalyzerTask.class);
 
@@ -26,27 +23,6 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
 
     public AbstractImageAnalyzerTask(String procId) {
         this.procId = procId == null ? UUID.randomUUID().toString() : procId;
-    }
-
-    /**
-     * Reads a {@link BufferedImage} from disk.
-     *
-     * @param p Path to read from.
-     * @return Instance of {@link BufferedImage}
-     * @throws IOException If file could not be read
-     */
-    public static BufferedImage getImage(Path p) throws IOException {
-        File f = p.toFile();
-        if (!f.exists()) {
-            throw new IOException("File does not exist");
-        } else if (!f.canRead()) {
-            throw new IOException("Cannot read from file");
-        }
-        BufferedImage image = ImageIO.read(f);
-        if (image == null) {
-            throw new IOException("Invalid file content");
-        }
-        return image;
     }
 
     @Override
@@ -65,26 +41,6 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
         }
     };
 
-
-    /**
-     * Deletes a file from disk.
-     *
-     * @param outputFileUrlSupplier Url supplier describing the location of the file
-     */
-    protected void deleteFile(Supplier<String> outputFileUrlSupplier) {
-        logger.debug("Try to delete the file");
-        File f = new File(outputFileUrlSupplier.get());
-        if (!f.exists()) {
-            logger.warn("File does not exist");
-        } else if (f.isDirectory()) {
-            logger.warn("File is a directory");
-        } else if (f.delete()) {
-            logger.info("File deleted");
-        } else {
-            logger.error("File could not be deleted");
-        }
-    }
-
     /**
      * Hash from each image and count the number of bit positions that are different.
      *
@@ -102,7 +58,7 @@ public abstract class AbstractImageAnalyzerTask implements FileAnalyzerTask<Stri
         }
 
         // Return the number of differing bits
-        logger.debug("Hammin distance... [a={}, b={}, distance={}]", a, b, dist);
+        logger.trace("Hamming distance... [a={}, b={}, distance={}]", a, b, dist);
         return dist;
     }
 

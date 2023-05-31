@@ -45,11 +45,9 @@ public class ContrastFunction implements Function<BufferedImage, BufferedImage> 
     public static int bandPassFilter(int v, float fc, float dfc, float gain, boolean attenuates,
                                      int ncolors) {
         if (v > 0) {
-
             if (ncolors > -1) {
                 v = posterize(v, ncolors);
             }
-
             float affection;
             if (v > fc + dfc || v < (fc - dfc)) { // Area D
                 affection = attenuates ? 0f : 1f;

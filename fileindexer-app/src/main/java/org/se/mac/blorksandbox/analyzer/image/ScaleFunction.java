@@ -12,18 +12,18 @@ import org.slf4j.LoggerFactory;
 public class ScaleFunction implements Function<BufferedImage, BufferedImage> {
 
     private static final Logger logger = LoggerFactory.getLogger(ScaleFunction.class);
+    private final int targetColorMode;
     private int maxPixels;
-    private boolean grayscale;
 
     /**
      * Default constructor.
      *
-     * @param maxPixels The maximum/expected edge length of the width/height
-     * @param grayscale Whether to convert to grayscale (true) or not (false)
+     * @param maxPixels       The maximum/expected edge length of the width/height
+     * @param targetColorMode
      */
-    public ScaleFunction(int maxPixels, boolean grayscale) {
+    public ScaleFunction(int maxPixels, int targetColorMode) {
         this.maxPixels = maxPixels;
-        this.grayscale = grayscale;
+        this.targetColorMode = targetColorMode;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class ScaleFunction implements Function<BufferedImage, BufferedImage> {
         int w0 = image.getWidth();
         int h1 = 1;
         int w1 = 1;
-        logger.debug("Original Size [width={}, height={}, type={}, grayscale={}]", w0, h0,
-                image.getType(), grayscale);
+        logger.trace("Original Size [width={}, height={}, type={}, targetColorMode={}]", w0, h0,
+                image.getType(), targetColorMode);
         if (h0 >= w0) {
             //Limit Height primarily
             h1 = maxPixels;
@@ -43,10 +43,10 @@ public class ScaleFunction implements Function<BufferedImage, BufferedImage> {
             h1 = h0 * maxPixels / w0;
             w1 = maxPixels;
         }
-        logger.debug("     New Size [width={}, height={}]", w1, h1);
+        logger.trace("Target image size [width={}, height={}]", w1, h1);
 
-        BufferedImage scaled = new BufferedImage(w1, h1, grayscale ?
-                BufferedImage.TYPE_BYTE_GRAY : image.getType());
+        BufferedImage scaled = new BufferedImage(w1, h1, targetColorMode != BufferedImage.TYPE_CUSTOM ?
+                targetColorMode : image.getType());
         Graphics2D graphics2D = scaled.createGraphics();
         graphics2D.drawImage(image, 0, 0, w1, h1, null);
         graphics2D.dispose();

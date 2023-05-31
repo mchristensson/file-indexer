@@ -48,7 +48,7 @@ public class FileTransformationService {
         //TODO: Implement support for transforming file according to arg for transformDefinition
 
         ContrastFunction contrastFunction = new ContrastFunction();
-        ColormodeFunction colormodeFunction = new ColormodeFunction();
+        ColormodeFunction colormodeFunction = new ColormodeFunction(BufferedImage.TYPE_BYTE_GRAY);
         BufferedImage outputImage = colormodeFunction.andThen(contrastFunction).apply(image);
 
         String outputFileFormat = "JPG";

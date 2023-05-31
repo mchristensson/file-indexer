@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
         SaveImageToDiskSupport {
     private static final Logger logger = LoggerFactory.getLogger(SaveFileFunction.class);
-    private Supplier<String> outputPathSupplier;
+    private final Supplier<String> outputPathSupplier;
     private final String outputFileFormat;
 
     /**
@@ -28,7 +28,7 @@ public class SaveFileFunction implements Function<BufferedImage, BufferedImage>,
 
     @Override
     public BufferedImage apply(BufferedImage bufferedImage) {
-        logger.debug("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(),
+        logger.trace("Saving file... [outputPath={}, format={}]", outputPathSupplier.get(),
                 outputFileFormat);
         saveToLocalDisk(bufferedImage, outputPathSupplier.get(), outputFileFormat);
         return bufferedImage;

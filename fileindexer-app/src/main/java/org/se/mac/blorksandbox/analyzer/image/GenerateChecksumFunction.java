@@ -30,7 +30,7 @@ public class GenerateChecksumFunction implements Function<BufferedImage, String>
             return null;
         }
         int[] rgbArray = new int[w * h];
-        logger.debug("Generating checksum... [w={}, h={}, wxh={}]", w, h, rgbArray.length);
+        logger.trace("Generating checksum... [w={}, h={}, wxh={}]", w, h, rgbArray.length);
         int avg = getPixels(bufferedImage.getColorModel(), bufferedImage.getRaster(), w, h, rgbArray);
         return createChecksum(rgbArray, avg);
     }

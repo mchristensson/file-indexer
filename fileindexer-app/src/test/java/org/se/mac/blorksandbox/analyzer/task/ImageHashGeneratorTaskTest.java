@@ -1,15 +1,14 @@
 package org.se.mac.blorksandbox.analyzer.task;
 
+import java.nio.file.Path;
+import java.util.UUID;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.se.mac.blorksandbox.analyzer.image.ContrastFunction;
-
-import java.nio.file.Path;
-import java.util.UUID;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,7 +54,7 @@ class ImageHashGeneratorTaskTest {
     void posterize_when2ColorsExpectedColor_expectColor() {
         int input = 60;
         int nColors = 2;
-        int output = ContrastFunction.posterize(input,nColors);
+        int output = ContrastFunction.posterize(input, nColors);
         assertEquals(0, output);
     }
 
@@ -63,7 +62,7 @@ class ImageHashGeneratorTaskTest {
     void posterize_when4ColorsExpectedColor_expectColor() {
         int input = 60;
         int nColors = 4;
-        int output = ContrastFunction.posterize(input,nColors);
+        int output = ContrastFunction.posterize(input, nColors);
         assertEquals(0, output);
     }
 
@@ -71,7 +70,7 @@ class ImageHashGeneratorTaskTest {
     void posterize_when8ColorsExpectedColor_expectColor() {
         int input = 60;
         int nColors = 8;
-        int output = ContrastFunction.posterize(input,nColors);
+        int output = ContrastFunction.posterize(input, nColors);
         assertEquals(32, output);
     }
 
@@ -79,7 +78,7 @@ class ImageHashGeneratorTaskTest {
     void posterize_when16ColorsExpectedColor_expectColor() {
         int input = 60;
         int nColors = 16;
-        int output = ContrastFunction.posterize(input,nColors);
+        int output = ContrastFunction.posterize(input, nColors);
         assertEquals(48, output);
     }
 
@@ -103,11 +102,11 @@ class ImageHashGeneratorTaskTest {
         long r3 = Long.parseUnsignedLong(result3, 16);
 
         int diffR1R2 = ImageHashGeneratorTask.hammingDistance(r1, r2);
-        assertEquals(1,diffR1R2, "Invalid difference value between images");
+        assertEquals(1, diffR1R2, "Invalid difference value between images");
         int diffR1R3 = ImageHashGeneratorTask.hammingDistance(r1, r3);
-        assertEquals(2,diffR1R3, "Invalid difference value between images");
+        assertEquals(2, diffR1R3, "Invalid difference value between images");
         int diffR2R3 = ImageHashGeneratorTask.hammingDistance(r2, r3);
-        assertEquals(1,diffR2R3, "Invalid difference value between images");
+        assertEquals(1, diffR2R3, "Invalid difference value between images");
     }
 
     @Test
@@ -130,11 +129,11 @@ class ImageHashGeneratorTaskTest {
         long r3 = Long.parseUnsignedLong(result3, 16);
 
         int diffR1R2 = ImageHashGeneratorTask.hammingDistance(r1, r2);
-        assertEquals(13,diffR1R2, "Invalid difference value between images");
+        assertEquals(13, diffR1R2, "Invalid difference value between images");
         int diffR1R3 = ImageHashGeneratorTask.hammingDistance(r1, r3);
-        assertEquals(22,diffR1R3, "Invalid difference value between images");
+        assertEquals(22, diffR1R3, "Invalid difference value between images");
         int diffR2R3 = ImageHashGeneratorTask.hammingDistance(r2, r3);
-        assertEquals(13,diffR2R3, "Invalid difference value between images");
+        assertEquals(13, diffR2R3, "Invalid difference value between images");
     }
 
     @ParameterizedTest
@@ -156,8 +155,7 @@ class ImageHashGeneratorTaskTest {
     @Test
     void passfilter_whenFc200Dfc0_expectTriangel() {
         float fc = 200f;
-        int[] data = IntStream.range(0, 255)
-                .filter(x -> x % 20 == 0).toArray();
+        int[] data = IntStream.range(0, 255).filter(x -> x % 20 == 0).toArray();
 
         int[] output = IntStream.of(data)
                 .map(input -> ContrastFunction.bandPassFilter(input, fc, 0, 1f, true, -1))
@@ -183,11 +181,11 @@ class ImageHashGeneratorTaskTest {
     void passfilter_whenFc100Dfc20_expectBump() {
         float fc = 100f;
         float dfc = 20f;
-        int[] data = IntStream.range(0, 255)
-                .filter(x -> x % 20 == 0).toArray();
+        int[] data = IntStream.range(0, 255).filter(x -> x % 20 == 0).toArray();
 
         int[] output = IntStream.of(data)
-                .map(input -> ContrastFunction.bandPassFilter(input, fc, dfc, 1f, true, -1)).toArray();
+                .map(input -> ContrastFunction.bandPassFilter(input, fc, dfc, 1f, true, -1))
+                .toArray();
 
         assertEquals(0, output[0]);
         assertEquals(0, output[1]);

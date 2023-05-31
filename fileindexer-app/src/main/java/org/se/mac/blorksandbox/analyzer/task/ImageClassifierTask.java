@@ -72,12 +72,12 @@ public class ImageClassifierTask extends AbstractImageAnalyzerTask {
                 outputFileFormat);
         SaveFileFunction saveScaledFileFunction = new SaveFileFunction(outputScaledFileUrlSupplier,
                 outputFileFormat);
-        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, false);
+        ScaleFunction scaleFunction = new ScaleFunction(maxPixels, BufferedImage.TYPE_CUSTOM);
         ContrastFunction contrastFunction = new ContrastFunction();
-        ColormodeFunction colormodeFunction = new ColormodeFunction();
+        ColormodeFunction colormodeFunction = new ColormodeFunction(BufferedImage.TYPE_BYTE_GRAY);
 
         //Load image
-        BufferedImage image = getImage(p);
+        BufferedImage image = readImageFromDisk(p);
 
         colormodeFunction.andThen(contrastFunction).andThen(scaleFunction)
                 .andThen(saveScaledFileFunction).andThen(convValueFunction)
